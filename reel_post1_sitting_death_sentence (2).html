@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Long Game — The Sitting Death Sentence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Barlow+Condensed:wght@400;700;800;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0D0D0D; --green: #00FF85; --gold: #FFD166;
+    --red: #FF4D6D; --white: #FFFFFF; --greige: #E8E0D5; --grey: #777;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:#0a0a0a; display:flex; flex-direction:column; align-items:center; justify-content:flex-start; min-height:100vh; font-family:'Barlow Condensed',sans-serif; padding:24px 16px 40px; gap:16px; }
+  .reel-frame { width:360px; height:640px; background:var(--black); position:relative; overflow:hidden; border-radius:18px; box-shadow:0 0 0 1px rgba(255,255,255,0.06), 0 0 60px rgba(255,77,109,0.12), 0 40px 80px rgba(0,0,0,0.6); flex-shrink:0; }
+  .reel-frame::before { content:''; position:absolute; inset:0; background-image:linear-gradient(rgba(255,255,255,0.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.018) 1px,transparent 1px); background-size:32px 32px; pointer-events:none; z-index:1; }
+  .segments { position:absolute; top:12px; left:10px; right:10px; display:flex; gap:3px; z-index:50; }
+  .seg { flex:1; height:2px; background:rgba(255,255,255,0.18); border-radius:2px; overflow:hidden; }
+  .seg-fill { height:100%; background:var(--white); width:0%; }
+  .seg.done .seg-fill { width:100%; }
+  .acct-header { position:absolute; top:28px; left:14px; display:flex; align-items:center; gap:8px; z-index:50; }
+  .acct-avatar { width:28px; height:28px; border-radius:50%; background:var(--green); display:flex; align-items:center; justify-content:center; font-weight:900; font-size:10px; color:var(--black); }
+  .acct-name { font-size:12px; font-weight:700; color:var(--white); letter-spacing:0.04em; }
+  .acct-follow { font-size:11px; color:var(--green); font-weight:700; margin-left:6px; }
+  .scene { position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; padding:80px 28px 80px; opacity:0; pointer-events:none; z-index:2; }
+  .scene.active { opacity:1; pointer-events:all; }
+  .bottom-bar { position:absolute; bottom:0; left:0; right:0; padding:12px 16px 16px; background:linear-gradient(transparent,rgba(0,0,0,0.7)); z-index:40; }
+  .caption-text { font-family:'DM Mono',monospace; font-size:11px; color:rgba(255,255,255,0.7); line-height:1.4; }
+  .anim-up { opacity:0; transform:translateY(16px); transition:opacity 0.35s ease, transform 0.35s ease; }
+  .anim-left { opacity:0; transform:translateX(-20px); transition:opacity 0.35s ease, transform 0.35s ease; }
+  .anim-scale { opacity:0; transform:scale(0.75); transition:opacity 0.4s cubic-bezier(0.34,1.56,0.64,1), transform 0.4s cubic-bezier(0.34,1.56,0.64,1); }
+  .anim-fade { opacity:0; transition:opacity 0.4s ease; }
+  .scene.active .anim-up { opacity:1; transform:translateY(0); }
+  .scene.active .anim-left { opacity:1; transform:translateX(0); }
+  .scene.active .anim-scale { opacity:1; transform:scale(1); }
+  .scene.active .anim-fade { opacity:1; }
+  .d1{transition-delay:0.1s!important} .d2{transition-delay:0.25s!important} .d3{transition-delay:0.4s!important} .d4{transition-delay:0.55s!important} .d5{transition-delay:0.7s!important} .d6{transition-delay:0.85s!important} .d7{transition-delay:1.0s!important}
+  .line-reveal { width:0; height:2px; background:var(--green); transition:width 0.7s ease; }
+  .scene.active .line-reveal { width:100%; }
+  .line-reveal-red { width:0; height:2px; background:var(--red); transition:width 0.7s ease 0.3s; }
+  .scene.active .line-reveal-red { width:100%; }
+  .tag { font-size:10px; font-weight:700; letter-spacing:0.25em; text-transform:uppercase; color:var(--green); margin-bottom:12px; }
+  .tag.red { color:var(--red); }
+  .tag.gold { color:var(--gold); }
+  .h-giant { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:88px; color:var(--white); line-height:0.85; letter-spacing:-0.03em; text-transform:uppercase; }
+  .h-huge { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:64px; color:var(--white); line-height:0.88; letter-spacing:-0.02em; text-transform:uppercase; }
+  .h-large { font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:44px; color:var(--white); line-height:0.9; letter-spacing:-0.01em; text-transform:uppercase; }
+  .italic-sub { font-family:'Playfair Display',serif; font-style:italic; font-size:18px; color:var(--greige); line-height:1.4; }
+  .body-mono { font-family:'DM Mono',monospace; font-size:12px; color:var(--grey); line-height:1.6; }
+  .body-mono.bright { color:var(--greige); }
+  .num-red { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:140px; color:var(--red); line-height:0.8; letter-spacing:-0.04em; }
+  .source-stamp { font-family:'DM Mono',monospace; font-size:9px; color:rgba(0,255,133,0.5); letter-spacing:0.08em; margin-top:8px; }
+  .data-block { border-left:2px solid var(--red); padding-left:12px; margin:8px 0; }
+  .data-block.green { border-color:var(--green); }
+  .data-label { font-size:9px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--red); margin-bottom:3px; }
+  .data-label.green { color:var(--green); }
+  .data-value { font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:32px; color:var(--white); line-height:1; }
+  .data-desc { font-family:'DM Mono',monospace; font-size:11px; color:var(--greige); line-height:1.5; margin-top:2px; }
+  .list-item { display:flex; gap:10px; align-items:flex-start; margin-bottom:10px; }
+  .list-dot { width:6px; height:6px; border-radius:50%; background:var(--red); flex-shrink:0; margin-top:5px; }
+  .list-dot.green { background:var(--green); }
+  .list-text { font-family:'DM Mono',monospace; font-size:12px; color:var(--greige); line-height:1.5; }
+  .list-text strong { color:var(--white); font-weight:500; }
+  .bg-glow-red { position:absolute; inset:0; background:radial-gradient(ellipse at 50% 50%,rgba(255,77,109,0.09) 0%,transparent 65%); pointer-events:none; }
+  .bg-glow-green { position:absolute; inset:0; background:radial-gradient(ellipse at 50% 60%,rgba(0,255,133,0.07) 0%,transparent 65%); pointer-events:none; }
+  .cta-box { border:1.5px solid var(--green); padding:14px 16px; margin-top:12px; display:flex; align-items:center; justify-content:space-between; }
+  .cta-box-text { font-size:13px; font-weight:700; color:var(--green); letter-spacing:0.1em; text-transform:uppercase; }
+  .controls-wrap { width:360px; display:flex; flex-direction:column; gap:12px; }
+  .controls-row { display:flex; gap:8px; align-items:center; }
+  .btn { flex:1; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); color:rgba(255,255,255,0.7); font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:13px; letter-spacing:0.1em; text-transform:uppercase; padding:11px 16px; cursor:pointer; border-radius:6px; transition:all 0.2s; text-align:center; }
+  .btn:hover { background:rgba(255,255,255,0.1); color:white; }
+  .btn.green-btn { background:var(--green); color:var(--black); border-color:var(--green); flex:2; }
+  .scene-info { display:flex; justify-content:space-between; }
+  .scene-num { font-family:'DM Mono',monospace; font-size:11px; color:rgba(255,255,255,0.35); }
+  .vo-script-box { background:rgba(0,255,133,0.04); border:1px solid rgba(0,255,133,0.15); border-radius:8px; padding:14px 16px; }
+  .vo-script-label { font-size:9px; font-weight:700; color:var(--green); letter-spacing:0.2em; text-transform:uppercase; margin-bottom:8px; }
+  .vo-script-text { font-family:'DM Mono',monospace; font-size:11px; color:rgba(255,255,255,0.6); line-height:1.7; }
+  .vo-script-text em { color:var(--green); font-style:normal; }
+  .info-note { font-family:'DM Mono',monospace; font-size:10px; color:rgba(255,255,255,0.2); text-align:center; line-height:1.6; }
+</style>
+</head>
+<body>
+<div class="reel-frame" id="reel" onclick="nextScene()">
+  <div class="segments" id="segments"></div>
+  <div class="acct-header">
+    <div class="acct-avatar">TLG</div>
+    <div><span class="acct-name">thelonggame</span><span class="acct-follow">• Follow</span></div>
+  </div>
+
+  <!-- S1: HOOK -->
+  <div class="scene active" id="scene1" data-title="Hook" data-duration="3500">
+    <div class="bg-glow-red"></div>
+    <div class="tag red anim-up d1">MOVEMENT SCIENCE</div>
+    <div class="h-huge anim-up d2">SITTING 8<br>HOURS A DAY<br>KILLS YOU</div>
+    <div class="line-reveal-red" style="margin:12px 0;"></div>
+    <div class="italic-sub anim-up d3">Faster than smoking.<br>Your doctor isn't telling you this.</div>
+  </div>
+
+  <!-- S2: THE STAT -->
+  <div class="scene" id="scene2" data-title="The Stat" data-duration="3500">
+    <div class="bg-glow-red"></div>
+    <div class="tag red anim-up d1">ANNALS OF INTERNAL MEDICINE · 2015</div>
+    <div class="num-red anim-scale d2">40%</div>
+    <div class="h-large anim-up d3" style="margin-top:-4px;">Higher death<br>risk</div>
+    <div class="line-reveal-red" style="margin:12px 0;"></div>
+    <div class="body-mono bright anim-up d4">Sitting 11+ hours/day vs 4 hours/day.<br>Even in people who exercise regularly.<br>The Active Couch Potato is real.</div>
+    <div class="source-stamp anim-fade d5">★ Biswas et al., Annals of Internal Medicine 2015</div>
+  </div>
+
+  <!-- S3: WHAT HAPPENS -->
+  <div class="scene" id="scene3" data-title="What Happens" data-duration="3500">
+    <div class="tag red anim-up d1">What prolonged sitting does</div>
+    <div class="list-item anim-left d2"><div class="list-dot"></div><div class="list-text"><strong>Telomere shortening</strong> — sedentary individuals show biological aging equivalent to +8 years</div></div>
+    <div class="list-item anim-left d3"><div class="list-dot"></div><div class="list-text"><strong>Insulin resistance</strong> — glucose metabolism impairs within 3 hours of continuous sitting</div></div>
+    <div class="list-item anim-left d4"><div class="list-dot"></div><div class="list-text"><strong>Lymphatic stagnation</strong> — immune cell circulation requires muscle movement to function</div></div>
+    <div class="list-item anim-left d5"><div class="list-dot"></div><div class="list-text"><strong>Lipoprotein lipase drops 90%</strong> — fat-clearing enzyme nearly shuts off when seated</div></div>
+    <div class="source-stamp anim-fade d6">★ Hamilton et al., Diabetes 2007 · Biswas et al. 2015</div>
+  </div>
+
+  <!-- S4: THE PARADOX -->
+  <div class="scene" id="scene4" data-title="The Paradox" data-duration="3500">
+    <div class="tag red anim-up d1">The Active Couch Potato Problem</div>
+    <div class="h-large anim-up d2" style="margin-bottom:16px;">Exercise does<br>NOT cancel<br>sitting.</div>
+    <div class="data-block anim-left d3">
+      <div class="data-label">The research shows</div>
+      <div class="data-desc">One hour of exercise cannot offset the metabolic damage of 8–10 hours of continuous sitting. Sedentary time is an independent risk factor — not cancelled by gym sessions.</div>
+    </div>
+    <div class="body-mono bright anim-up d4" style="margin-top:12px;">You can be fit and sedentary.<br>Both are true. Both matter.</div>
+    <div class="source-stamp anim-fade d5">★ Katzmarzyk et al., Medicine & Science in Sports & Exercise 2009</div>
+  </div>
+
+  <!-- S5: THE PROTOCOL -->
+  <div class="scene" id="scene5" data-title="The Fix" data-duration="4000">
+    <div class="bg-glow-green"></div>
+    <div class="tag anim-up d1">The 2-minute movement protocol</div>
+    <div class="h-large anim-up d2" style="margin-bottom:16px;">Break Every<br>30 Minutes.</div>
+    <div class="data-block green anim-left d3">
+      <div class="data-label green">What the evidence supports</div>
+      <div class="data-desc">2 minutes of light walking every 30 minutes reduces blood sugar spikes by 30%, restores lipoprotein lipase activity, and measurably reduces all-cause mortality risk.</div>
+    </div>
+    <div class="list-item anim-left d4"><div class="list-dot green"></div><div class="list-text">Set a 30-minute phone alarm</div></div>
+    <div class="list-item anim-left d5"><div class="list-dot green"></div><div class="list-text">Walk to water, walk a call, stand at desk</div></div>
+    <div class="list-item anim-left d6"><div class="list-dot green"></div><div class="list-text">Doesn't need to be intense — light movement is enough</div></div>
+    <div class="source-stamp anim-fade d7">★ Dunstan et al., Diabetes Care 2012</div>
+  </div>
+
+  <!-- S6: STAT PUNCH -->
+  <div class="scene" id="scene6" data-title="Stat Punch" data-duration="3000">
+    <div class="bg-glow-green"></div>
+    <div class="tag anim-up d1">Key Data Point</div>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:110px;color:var(--green);line-height:0.85;letter-spacing:-0.04em;" class="anim-scale d2">30%</div>
+    <div class="h-large anim-up d3" style="margin-top:-4px;">Lower blood<br>sugar</div>
+    <div class="line-reveal" style="margin:12px 0; transition-delay:0.6s;"></div>
+    <div class="body-mono bright anim-up d4">From 2-minute walking breaks every 30 minutes vs uninterrupted sitting. The intervention is almost embarrassingly simple.</div>
+  </div>
+
+  <!-- S7: LOOP HOOK -->
+  <div class="scene" id="scene7" data-title="Loop Hook" data-duration="3000">
+    <div class="tag red anim-up d1">The Question</div>
+    <div class="h-huge anim-up d2" style="margin-bottom:16px;">How Long<br>Did You Sit<br>Today?</div>
+    <div class="line-reveal" style="margin-bottom:12px; transition-delay:0.5s;"></div>
+    <div class="italic-sub anim-up d3">Most people have no idea.<br>Track it once. The number<br>will surprise you.</div>
+  </div>
+
+  <!-- S8: CTA -->
+  <div class="scene" id="scene8" data-title="CTA" data-duration="4000">
+    <div class="bg-glow-green"></div>
+    <div class="anim-up d1" style="margin-bottom:20px;">
+      <div class="italic-sub" style="font-size:22px;color:var(--greige);">the</div>
+      <div class="h-giant" style="font-size:76px;line-height:0.85;">LONG<br>GAME</div>
+      <div class="line-reveal" style="transition-delay:0.5s;"></div>
+      <div class="tag" style="margin-top:8px;margin-bottom:0;">Longevity Science</div>
+    </div>
+    <div class="cta-box anim-up d3"><div class="cta-box-text">→ Save this</div></div>
+    <div class="cta-box anim-up d4" style="border-color:rgba(255,255,255,0.15);margin-top:6px;"><div class="cta-box-text" style="color:rgba(255,255,255,0.5);">→ Follow for more</div></div>
+    <div class="body-mono anim-up d5" style="margin-top:12px;font-size:10px;color:rgba(0,255,133,0.4);">#sittingdisease #longevity #sedentary<br>#movementismedicine #healthspan</div>
+  </div>
+
+  <div class="bottom-bar"><div class="caption-text" id="scene-caption">▶ Tap to advance · Auto Play below</div></div>
+</div>
+
+<div class="controls-wrap">
+  <div class="scene-info">
+    <div class="scene-num" id="sceneNum">Scene 1 of 8</div>
+    <div class="scene-num" id="sceneTitleDisp">Hook</div>
+  </div>
+  <div class="controls-row">
+    <div class="btn" onclick="prevScene()">← Prev</div>
+    <div class="btn green-btn" id="playBtn" onclick="togglePlay()">▶ Auto Play</div>
+    <div class="btn" onclick="nextScene()">Next →</div>
+  </div>
+  <div class="vo-script-box">
+    <div class="vo-script-label">🎙 Voiceover Script</div>
+    <div class="vo-script-text" id="voScript"><em>"Sitting for 8 hours a day is killing you faster than smoking. Your doctor isn't telling you this."</em></div>
+  </div>
+  <div class="info-note">Post 1 · The Sitting Death Sentence · ~32 seconds</div>
+</div>
+
+<script>
+  const SCENES=[
+    {id:'scene1',title:'Hook',duration:3500,vo:'<em>"Sitting for 8 hours a day is killing you faster than smoking. Your doctor isn\'t telling you this."</em>'},
+    {id:'scene2',title:'The Stat',duration:3500,vo:'<em>"A 40 percent higher risk of death. From sitting. Even in people who go to the gym. This is the Active Couch Potato effect."</em>'},
+    {id:'scene3',title:'What Happens',duration:3500,vo:'<em>"Here\'s what\'s actually happening inside your body during prolonged sitting. And none of it is good."</em>'},
+    {id:'scene4',title:'The Paradox',duration:3500,vo:'<em>"One hour of exercise cannot cancel 8 hours of sitting. Sedentary time is an independent risk factor. Both things are true."</em>'},
+    {id:'scene5',title:'The Fix',duration:4000,vo:'<em>"Two minutes of light walking every 30 minutes. That\'s the protocol. It reduces blood sugar spikes by 30 percent and restores the fat-clearing enzymes sitting shuts down."</em>'},
+    {id:'scene6',title:'Stat Punch',duration:3000,vo:'<em>"Thirty percent. Lower blood sugar. From two-minute walking breaks. The intervention is almost embarrassingly simple."</em>'},
+    {id:'scene7',title:'Loop Hook',duration:3000,vo:'<em>"How long did you sit today? Most people have no idea. Track it once. The number will surprise you."</em>'},
+    {id:'scene8',title:'CTA',duration:4000,vo:'<em>"Follow The Long Game for daily longevity science. Save this — set your 30-minute alarm before you close this app."</em>'},
+  ];
+  const CAPTIONS=['🔴 HOOK — fear trigger + specificity','📊 STAT — 40% higher death risk stops scroll','🧬 MECHANISM — builds credibility fast','⚡ PARADOX — most shareable scene','✅ THE FIX — save trigger · actionable protocol','💥 STAT PUNCH — rewatch trigger','🔄 LOOP HOOK — comment driver','📲 CTA — follow + save'];
+  let current=0,playing=false,timer=null,speed=1;
+  const TOTAL=SCENES.length;
+  const segsEl=document.getElementById('segments');
+  SCENES.forEach((_,i)=>{const s=document.createElement('div');s.className='seg';s.id=`seg${i}`;s.innerHTML=`<div class="seg-fill" id="segfill${i}"></div>`;segsEl.appendChild(s);});
+  function showScene(n){SCENES.forEach((s)=>{document.getElementById(s.id).classList.remove('active');});document.getElementById(SCENES[n].id).classList.add('active');SCENES.forEach((_,i)=>{const f=document.getElementById(`segfill${i}`);const sg=document.getElementById(`seg${i}`);sg.classList.remove('done');f.style.transition='none';f.style.width=i<n?'100%':'0%';if(i<n)sg.classList.add('done');});document.getElementById('sceneNum').textContent=`Scene ${n+1} of ${TOTAL}`;document.getElementById('sceneTitleDisp').textContent=SCENES[n].title;document.getElementById('voScript').innerHTML=SCENES[n].vo;document.getElementById('scene-caption').textContent=CAPTIONS[n];current=n;}
+  function animSeg(n,dur){const f=document.getElementById(`segfill${n}`);if(!f)return;f.style.transition='none';f.style.width='0%';requestAnimationFrame(()=>requestAnimationFrame(()=>{f.style.transition=`width ${dur/speed}ms linear`;f.style.width='100%';}));}
+  function nextScene(){if(current<TOTAL-1)showScene(current+1);else showScene(0);}
+  function prevScene(){if(current>0)showScene(current-1);}
+  function togglePlay(){playing?stopPlay():startPlay();}
+  function startPlay(){playing=true;document.getElementById('playBtn').textContent='⏸ Pause';runScene();}
+  function stopPlay(){playing=false;clearTimeout(timer);document.getElementById('playBtn').textContent='▶ Auto Play';}
+  function runScene(){if(!playing)return;const dur=SCENES[current].duration;animSeg(current,dur);timer=setTimeout(()=>{if(!playing)return;if(current<TOTAL-1){showScene(current+1);runScene();}else{showScene(0);runScene();}},dur/speed);}
+  document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();nextScene();}if(e.key==='ArrowLeft'){e.preventDefault();prevScene();}});
+  let tx=0;
+  document.getElementById('reel').addEventListener('touchstart',e=>tx=e.touches[0].clientX);
+  document.getElementById('reel').addEventListener('touchend',e=>{const d=tx-e.changedTouches[0].clientX;if(Math.abs(d)>40)d>0?nextScene():prevScene();});
+  showScene(0);
+</script>
+</body>
+</html>
