@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    @font-face { font-family: 'Barlow Condensed'; font-weight: 700; font-style: normal; src: url('assets/fonts/BarlowCondensed-700.woff2') format('woff2'); }
+    @font-face { font-family: 'Barlow Condensed'; font-weight: 800; font-style: normal; src: url('assets/fonts/BarlowCondensed-800.woff2') format('woff2'); }
+    @font-face { font-family: 'Barlow Condensed'; font-weight: 900; font-style: normal; src: url('assets/fonts/BarlowCondensed-900.woff2') format('woff2'); }
+    @font-face { font-family: 'Playfair Display'; font-weight: 400; font-style: italic; src: url('assets/fonts/PlayfairDisplay-Italic.woff2') format('woff2'); }
+    @font-face { font-family: 'DM Mono'; font-weight: 400; font-style: normal; src: url('assets/fonts/DMMono-400.woff2') format('woff2'); }
+
+    [data-composition-id="SittingReel"] {
+      position: relative;
+      background: #0D0D0D;
+      overflow: hidden;
+    }
+
+    /* All scene containers */
+    .scene {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+    }
+    #s1 { opacity: 1; } /* first scene visible by default */
+
+    /* Shared layout */
+    .scene-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      padding: 0 72px;
+      box-sizing: border-box;
+    }
+
+    /* Glow backgrounds */
+    .glow-bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .glow-red { background: radial-gradient(ellipse 700px 700px at 50% 30%, rgba(255,77,109,0.22) 0%, transparent 65%); }
+    .glow-green { background: radial-gradient(ellipse 700px 700px at 50% 30%, rgba(0,255,133,0.18) 0%, transparent 65%); }
+    .glow-red-top { background: radial-gradient(ellipse 800px 500px at 50% 10%, rgba(255,77,109,0.18) 0%, transparent 65%); }
+    .glow-red-center { background: radial-gradient(ellipse 700px 600px at 60% 40%, rgba(255,77,109,0.14) 0%, transparent 70%); }
+    .glow-red-left { background: radial-gradient(ellipse 700px 500px at 40% 35%, rgba(255,77,109,0.16) 0%, transparent 65%); }
+
+    /* Grid overlay */
+    .grid-overlay {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 80px 80px;
+    }
+
+    /* Content layer */
+    .content-layer {
+      position: absolute;
+      inset: 0;
+      z-index: 10;
+    }
+
+    /* Tags */
+    .tag {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+    }
+
+    /* Dividers */
+    .divider {
+      height: 3px;
+      border-radius: 2px;
+      transform-origin: left center;
+      transform: scaleX(0);
+    }
+
+    /* Data blocks */
+    .data-block {
+      border-radius: 8px;
+      padding: 20px 24px;
+    }
+    .data-block-red { background: rgba(255,77,109,0.08); border-left: 3px solid #FF4D6D; }
+    .data-block-green { background: rgba(0,255,133,0.08); border-left: 3px solid #00FF85; }
+
+    /* Bullet items */
+    .bullet-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 16px;
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+    .bullet-dot-red { width: 8px; height: 8px; border-radius: 50%; background: #FF4D6D; margin-top: 10px; flex-shrink: 0; }
+    .bullet-dot-green { width: 8px; height: 8px; border-radius: 50%; background: #00FF85; margin-top: 10px; flex-shrink: 0; }
+
+    /* Source stamps */
+    .source-stamp {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 16px;
+      color: rgba(255,255,255,0.45);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0;
+    }
+
+    /* CTA boxes */
+    .cta-box {
+      border-radius: 8px;
+      padding: 20px 28px;
+      opacity: 0;
+
+    }
+
+    /* Captions */
+    .caption-chunk {
+      position: absolute;
+      bottom: 140px;
+      left: 40px;
+      right: 40px;
+      display: flex;
+      justify-content: center;
+      z-index: 100;
+      opacity: 0;
+    }
+    .caption-pill {
+      background: rgba(0,0,0,0.55);
+      border-radius: 8px;
+      padding: 12px 24px;
+      max-width: 900px;
+    }
+    .caption-text {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 52px;
+      color: #FFFFFF;
+      line-height: 1.2;
+      text-align: center;
+      display: block;
+      letter-spacing: 0.01em;
+    }
+
+    /* Progress bar */
+    #progress-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 4px;
+      background: #00FF85;
+      width: 0%;
+      z-index: 200;
+    }
+  </style>
+</head>
+<body>
+<div id="stage"
+  data-composition-id="SittingReel"
+  data-start="0"
+  data-duration="99"
+  data-fps="30"
+  data-width="1080"
+  data-height="1920"
+>
+
+  <!-- Background music (volume curve baked into file via ffmpeg) -->
+  <audio id="music" data-start="0" data-duration="99" data-track-index="0" data-volume="1" src="assets/music.wav"></audio>
+
+  <!-- Per-scene voiceover (absolute start times match scene starts) -->
+  <audio id="vo1" data-start="0"  data-duration="10.3" data-track-index="2" data-volume="1" src="assets/vo1.wav"></audio>
+  <audio id="vo2" data-start="11" data-duration="13.4" data-track-index="2" data-volume="1" src="assets/vo2.wav"></audio>
+  <audio id="vo3" data-start="26" data-duration="8.6"  data-track-index="2" data-volume="1" src="assets/vo3.wav"></audio>
+  <audio id="vo4" data-start="35" data-duration="12.3" data-track-index="2" data-volume="1" src="assets/vo4.wav"></audio>
+  <audio id="vo5" data-start="48" data-duration="15.5" data-track-index="2" data-volume="1" src="assets/vo5.wav"></audio>
+  <audio id="vo6" data-start="64" data-duration="12.3" data-track-index="2" data-volume="1" src="assets/vo6.wav"></audio>
+  <audio id="vo7" data-start="77" data-duration="10.2" data-track-index="2" data-volume="1" src="assets/vo7.wav"></audio>
+  <audio id="vo8" data-start="88" data-duration="10.6" data-track-index="2" data-volume="1" src="assets/vo8.wav"></audio>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       SCENE 1 — Hook (0–11s)
+       ═══════════════════════════════════════════════════════════ -->
+  <div id="s1" class="scene clip" data-start="0" data-duration="11" data-track-index="1">
+    <div class="glow-bg glow-red"></div>
+    <div class="grid-overlay"></div>
+    <div class="content-layer">
+      <div class="scene-content">
+        <div id="s1-tag" class="tag" style="font-size:22px;color:#FF4D6D;letter-spacing:0.25em;margin-bottom:28px;">MOVEMENT SCIENCE</div>
+        <div style="margin-bottom:32px;overflow:hidden;">
+          <div id="s1-h1" style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:118px;color:#FFFFFF;line-height:0.95;text-transform:uppercase;letter-spacing:-0.01em;">SITTING 8</div>
+          <div id="s1-h2" style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:118px;color:#FFFFFF;line-height:0.95;text-transform:uppercase;letter-spacing:-0.01em;">HOURS A DAY</div>
+          <div id="s1-h3" style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:118px;color:#FFFFFF;line-height:0.95;text-transform:uppercase;letter-spacing:-0.01em;">KILLS YOU</div>
+        </div>
+        <div id="s1-div" class="divider" style="background:#FF4D6D;margin-bottom:28px;"></div>
+        <div id="s1-sub" style="opacity:0;">
+          <p style="font-family:'Playfair Display',serif;font-style:italic;font-size:34px;color:#E8E0D5;line-height:1.5;margin:0;opacity:0.9;">Faster than smoking.<br>Your doctor isn't telling you this.</p>
+        </div>
+      </div>
+    </div>
+    <!-- Captions: 5 chunks, absolute timing within composition -->
+    <div id="s1c1" class="caption-chunk"><div class="caption-pill"><span class="caption-text">Sitting for 8 hours</span></div></div>
+    <div id="s1c2" class="caption-chunk"><div class="caption-pill"><span class="caption-text">a day is killing you</span></div></div>
+    <div id="s1c3" class="caption-chunk"><div class="caption-pill"><span class="caption-text">faster than smoking.</span></div></div>
+    <div id="s1c4" class="caption-chunk"><div class="caption-pill"><span class="caption-text">Your doctor isn't</span></div></div>
+    <div id="s1c5" class="caption-chunk"><div class="caption-pill"><span class="caption-text">telling you this.</span></div></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       SCENE 2 — The Stat (11–26s)
+       ═══════════════════════════════════════════════════════════ -->
+  <div id="s2" class="scene clip" data-start="11" data-duration="15" data-track-index="1">
+    <div class="glow-bg glow-red"></div>
+    <div class="grid-overlay"></div>
+    <div class="content-layer">
+      <div class="scene-content">
+        <div id="s2-tag" class="tag" style="font-size:18px;color:#FF4D6D;letter-spacing:0.18em;margin-bottom:20px;opacity:0;">ANNALS OF INTERNAL MEDICINE · 2015</div>
+        <div id="s2-num" style="transform-origin:left center;margin-bottom:0;opacity:0;">
+          <span style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:200px;color:#FF4D6D;line-height:0.9;letter-spacing:-0.02em;display:block;">40%</span>
+        </div>
+        <div id="s2-sub" style="margin-bottom:24px;opacity:0;">
+          <span style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:64px;color:#FFFFFF;line-height:1.05;display:block;text-transform:uppercase;">Higher death<br>risk</span>
+        </div>
+        <div id="s2-div" class="divider" style="background:#FF4D6D;margin-bottom:24px;"></div>
+        <div id="s2-body" style="margin-bottom:20px;opacity:0;">
+          <p style="font-family:'DM Mono',monospace;font-size:22px;color:#FFFFFF;line-height:1.6;margin:0;opacity:0.85;">Sitting 11+ hours/day vs 4 hours/day.<br>Even in people who exercise regularly.<br>The Active Couch Potato is real.</p>
+        </div>
+        <div id="s2-src" class="source-stamp">★ Biswas et al., Annals of Internal Medicine 2015</div>
+      </div>
+    </div>
+    <div id="s2c1" class="caption-chunk"><div class="caption-pill"><span class="caption-text">A 40 percent</span></div></div>
+    <div id="s2c2" class="caption-chunk"><div class="caption-pill"><span class="caption-text">higher risk of death.</span></div></div>
+    <div id="s2c3" class="caption-chunk"><div class="caption-pill"><span class="caption-text">From sitting.</span></div></div>
+    <div id="s2c4" class="caption-chunk"><div class="caption-pill"><span class="caption-text">Even in people who go</span></div></div>
+    <div id="s2c5" class="caption-chunk"><div class="caption-pill"><span class="caption-text">to the gym.</span></div></div>
+    <div id="s2c6" class="caption-chunk"><div class="caption-pill"><span class="caption-text">This is the Active Couch Potato effect.</span></div></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       SCENE 3 — What Happens (26–35s)
+       ═══════════════════════════════════════════════════════════ -->
+  <div id="s3" class="scene clip" data-start="26" data-duration="9" data-track-index="1">
+    <div class="glow-bg glow-red-top"></div>
+    <div class="grid-overlay"></div>
+    <div class="content-layer">
+      <div class="scene-content">
+        <div id="s3-tag" class="tag" style="font-size:20px;color:#FF4D6D;letter-spacing:0.15em;margin-bottom:20px;opacity:0;">What prolonged sitting does</div>
+        <div id="s3-head" style="margin-bottom:36px;opacity:0;">
+          <span style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:52px;color:#FFFFFF;line-height:1.1;display:block;text-transform:uppercase;">Inside your body,<br>right now:</span>
+        </div>
+        <div style="width:100%;margin-bottom:28px;">
+          <div class="bullet-item" id="s3b1"><div class="bullet-dot-red"></div><span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:28px;color:#FFFFFF;line-height:1.35;">Telomere shortening — sedentary individuals show biological aging equivalent to +8 years</span></div>
+          <div class="bullet-item" id="s3b2"><div class="bullet-dot-red"></div><span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:28px;color:#FFFFFF;line-height:1.35;">Insulin resistance — glucose metabolism impairs within 3 hours of continuous sitting</span></div>
+          <div class="bullet-item" id="s3b3"><div class="bullet-dot-red"></div><span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:28px;color:#FFFFFF;line-height:1.35;">Lymphatic stagnation — immune cell circulation requires muscle movement to function</span></div>
+          <div class="bullet-item" id="s3b4"><div class="bullet-dot-red"></div><span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:28px;color:#FFFFFF;line-height:1.35;">Lipoprotein lipase drops 90% — fat-clearing enzyme nearly shuts off when seated</span></div>
+        </div>
+        <div id="s3-src" class="source-stamp">★ Hamilton et al., Diabetes 2007 · Biswas et al. 2015</div>
+      </div>
+    </div>
+    <div id="s3c1" class="caption-chunk"><div class="caption-pill"><span class="caption-text">Here's what's actually</span></div></div>
+    <div id="s3c2" class="caption-chunk"><div class="caption-pill"><span class="caption-text">happening inside your body</span></div></div>
+    <div id="s3c3" class="caption-chunk"><div class="caption-pill"><span class="caption-text">during prolonged sitting.</span></div></div>
+    <div id="s3c4" class="caption-chunk"><div class="caption-pill"><span class="caption-text">And none of it is good.</span></div></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       SCENE 4 — The Paradox (35–48s)
+       ═══════════════════════════════════════════════════════════ -->
+  <div id="s4" class="scene clip" data-start="35" data-duration="13" data-track-index="1">
+    <div class="glow-bg glow-red-center"></div>
+    <div class="grid-overlay"></div>
+    <div class="content-layer">
+      <div class="scene-content">
+        <div id="s4-tag" class="tag" style="font-size:20px;color:#FF4D6D;letter-spacing:0.15em;margin-bottom:20px;opacity:0;">The Active Couch Potato Problem</div>
+        <div style="margin-bottom:32px;">
+          <div id="s4-h1" style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:72px;color:#FFFFFF;line-height:1.0;text-transform:uppercase;letter-spacing:-0.01em;opacity:0;">Exercise does</div>
+          <div id="s4-h2" style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:72px;color:#FF4D6D;line-height:1.0;text-transform:uppercase;letter-spacing:-0.01em;opacity:0;">NOT cancel</div>
+          <div id="s4-h3" style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:72px;color:#FFFFFF;line-height:1.0;text-transform:uppercase;letter-spacing:-0.01em;opacity:0;">sitting.</div>
+        </div>
+        <div id="s4-data" class="data-block data-block-red" style="margin-bottom:24px;opacity:0;">
+          <p style="font-family:'DM Mono',monospace;font-size:20px;color:#FFFFFF;line-height:1.6;margin:0;opacity:0.85;">One hour of exercise cannot offset the metabolic damage of 8–10 hours of continuous sitting. Sedentary time is an independent risk factor — not cancelled by gym sessions.</p>
+        </div>
+        <div id="s4-body" style="margin-bottom:20px;opacity:0;">
+          <p style="font-family:'Playfair Display',serif;font-style:italic;font-size:30px;color:#E8E0D5;line-height:1.5;margin:0;opacity:0.9;">You can be fit and sedentary.<br>Both are true. Both matter.</p>
+        </div>
+        <div id="s4-src" class="source-stamp">★ Katzmarzyk et al., Medicine &amp; Science in Sports &amp; Exercise 2009</div>
+      </div>
+    </div>
+    <div id="s4c1" class="caption-chunk"><div class="caption-pill"><span class="caption-text">One hour of exercise</span></div></div>
+    <div id="s4c2" class="caption-chunk"><div class="caption-pill"><span class="caption-text">cannot cancel 8 hours</span></div></div>
+    <div id="s4c3" class="caption-chunk"><div class="caption-pill"><span class="caption-text">of sitting.</span></div></div>
+    <div id="s4c4" class="caption-chunk"><div class="caption-pill"><span class="caption-text">Sedentary time</span></div></div>
+    <div id="s4c5" class="caption-chunk"><div class="caption-pill"><span class="caption-text">is an independent risk factor.</span></div></div>
+    <div id="s4c6" class="caption-chunk"><div class="caption-pill"><span class="caption-text">Both things are true.</span></div></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       SCENE 5 — The Fix (48–64s)
+       ═══════════════════════════════════════════════════════════ -->
+  <div id="s5" class="scene clip" data-start="48" data-duration="16" data-track-index="1">
+    <div class="glow-bg glow-green"></div>
+    <div class="grid-overlay"></div>
+    <div class="content-layer">
+      <div class="scene-content">
+        <div id="s5-tag" class="tag" style="font-size:20px;color:#00FF85;letter-spacing:0.15em;margin-bottom:20px;opacity:0;">The 2-minute movement protocol</div>
+        <div style="margin-bottom:28px;">
+          <div id="s5-h1" style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:76px;color:#FFFFFF;line-height:1.0;text-transform:uppercase;letter-spacing:-0.01em;opacity:0;">Break Every</div>
+          <div id="s5-h2" style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:76px;color:#00FF85;line-height:1.0;text-transform:uppercase;letter-spacing:-0.01em;opacity:0;">30 Minutes.</div>
+        </div>
+        <div id="s5-data" class="data-block data-block-green" style="width:100%;margin-bottom:28px;opacity:0;">
+          <p style="font-family:'DM Mono',monospace;font-size:20px;color:#FFFFFF;line-height:1.6;margin:0;opacity:0.85;">2 minutes of light walking every 30 minutes reduces blood sugar spikes by 30%, restores lipoprotein lipase activity, and measurably reduces all-cause mortality risk.</p>
+        </div>
+        <div style="width:100%;margin-bottom:20px;">
+          <div class="bullet-item" id="s5b1"><div class="bullet-dot-green"></div><span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:28px;color:#FFFFFF;line-height:1.35;">Set a 30-minute phone alarm</span></div>
+          <div class="bullet-item" id="s5b2"><div class="bullet-dot-green"></div><span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:28px;color:#FFFFFF;line-height:1.35;">Walk to water, walk a call, stand at desk</span></div>
+          <div class="bullet-item" id="s5b3"><div class="bullet-dot-green"></div><span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:28px;color:#FFFFFF;line-height:1.35;">Doesn't need to be intense — light movement is enough</span></div>
+        </div>
+        <div id="s5-src" class="source-stamp">★ Dunstan et al., Diabetes Care 2012</div>
+      </div>
+    </div>
+    <div id="s5c1" class="caption-chunk"><div class="caption-pill"><span class="caption-text">Two minutes of light walking</span></div></div>
+    <div id="s5c2" class="caption-chunk"><div class="caption-pill"><span class="caption-text">every 30 minutes.</span></div></div>
+    <div id="s5c3" class="caption-chunk"><div class="caption-pill"><span class="caption-text">That's the protocol.</span></div></div>
+    <div id="s5c4" class="caption-chunk"><div class="caption-pill"><span class="caption-text">It reduces blood sugar spikes</span></div></div>
+    <div id="s5c5" class="caption-chunk"><div class="caption-pill"><span class="caption-text">by 30 percent</span></div></div>
+    <div id="s5c6" class="caption-chunk"><div class="caption-pill"><span class="caption-text">and restores the fat-clearing enzymes</span></div></div>
+    <div id="s5c7" class="caption-chunk"><div class="caption-pill"><span class="caption-text">sitting shuts down.</span></div></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       SCENE 6 — Stat Punch (64–77s)
+       ═══════════════════════════════════════════════════════════ -->
+  <div id="s6" class="scene clip" data-start="64" data-duration="13" data-track-index="1">
+    <div class="glow-bg glow-green"></div>
+    <div class="grid-overlay"></div>
+    <div class="content-layer">
+      <div class="scene-content">
+        <div id="s6-tag" class="tag" style="font-size:22px;color:#00FF85;letter-spacing:0.22em;margin-bottom:20px;opacity:0;">Key Data Point</div>
+        <div id="s6-num" style="transform-origin:left center;margin-bottom:4px;opacity:0;">
+          <span style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:180px;color:#00FF85;line-height:0.88;letter-spacing:-0.02em;display:block;">30%</span>
+        </div>
+        <div id="s6-sub" style="margin-bottom:24px;opacity:0;">
+          <span style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:64px;color:#FFFFFF;line-height:1.05;display:block;text-transform:uppercase;">Lower blood<br>sugar</span>
+        </div>
+        <div id="s6-div" class="divider" style="background:#00FF85;margin-bottom:24px;"></div>
+        <div id="s6-body" style="opacity:0;">
+          <p style="font-family:'DM Mono',monospace;font-size:22px;color:#FFFFFF;line-height:1.6;margin:0;opacity:0.85;">From 2-minute walking breaks every 30 minutes<br>vs uninterrupted sitting. The intervention is<br>almost embarrassingly simple.</p>
+        </div>
+      </div>
+    </div>
+    <div id="s6c1" class="caption-chunk"><div class="caption-pill"><span class="caption-text">Thirty percent.</span></div></div>
+    <div id="s6c2" class="caption-chunk"><div class="caption-pill"><span class="caption-text">Lower blood sugar.</span></div></div>
+    <div id="s6c3" class="caption-chunk"><div class="caption-pill"><span class="caption-text">From two-minute</span></div></div>
+    <div id="s6c4" class="caption-chunk"><div class="caption-pill"><span class="caption-text">walking breaks.</span></div></div>
+    <div id="s6c5" class="caption-chunk"><div class="caption-pill"><span class="caption-text">The intervention is</span></div></div>
+    <div id="s6c6" class="caption-chunk"><div class="caption-pill"><span class="caption-text">almost embarrassingly simple.</span></div></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       SCENE 7 — Loop Hook (77–88s)
+       ═══════════════════════════════════════════════════════════ -->
+  <div id="s7" class="scene clip" data-start="77" data-duration="11" data-track-index="1">
+    <div class="glow-bg glow-red-left"></div>
+    <div class="grid-overlay"></div>
+    <div class="content-layer">
+      <div class="scene-content">
+        <div id="s7-tag" class="tag" style="font-size:22px;color:#FF4D6D;letter-spacing:0.22em;margin-bottom:24px;opacity:0;">The Question</div>
+        <div style="margin-bottom:32px;">
+          <div id="s7-h1" style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:96px;color:#FFFFFF;line-height:0.95;text-transform:uppercase;letter-spacing:-0.01em;opacity:0;">How Long</div>
+          <div id="s7-h2" style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:96px;color:#FFFFFF;line-height:0.95;text-transform:uppercase;letter-spacing:-0.01em;opacity:0;">Did You Sit</div>
+          <div id="s7-h3" style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:96px;color:#00FF85;line-height:0.95;text-transform:uppercase;letter-spacing:-0.01em;opacity:0;">Today?</div>
+        </div>
+        <div id="s7-div" class="divider" style="background:#00FF85;margin-bottom:28px;"></div>
+        <div id="s7-sub" style="opacity:0;">
+          <p style="font-family:'Playfair Display',serif;font-style:italic;font-size:32px;color:#E8E0D5;line-height:1.55;margin:0;opacity:0.88;">Most people have no idea.<br>Track it once. The number<br>will surprise you.</p>
+        </div>
+      </div>
+    </div>
+    <div id="s7c1" class="caption-chunk"><div class="caption-pill"><span class="caption-text">How long did you</span></div></div>
+    <div id="s7c2" class="caption-chunk"><div class="caption-pill"><span class="caption-text">sit today?</span></div></div>
+    <div id="s7c3" class="caption-chunk"><div class="caption-pill"><span class="caption-text">Most people have no idea.</span></div></div>
+    <div id="s7c4" class="caption-chunk"><div class="caption-pill"><span class="caption-text">Track it once.</span></div></div>
+    <div id="s7c5" class="caption-chunk"><div class="caption-pill"><span class="caption-text">The number will</span></div></div>
+    <div id="s7c6" class="caption-chunk"><div class="caption-pill"><span class="caption-text">surprise you.</span></div></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       SCENE 8 — CTA (88–99s)
+       ═══════════════════════════════════════════════════════════ -->
+  <div id="s8" class="scene clip" data-start="88" data-duration="11" data-track-index="1">
+    <div class="glow-bg glow-green"></div>
+    <div class="grid-overlay"></div>
+    <div class="content-layer">
+      <div class="scene-content">
+        <div id="s8-brand" style="margin-bottom:8px;opacity:0;">
+          <span style="font-family:'Playfair Display',serif;font-style:italic;font-size:30px;color:#E8E0D5;display:block;line-height:1.1;opacity:0.8;">the</span>
+          <span style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:108px;color:#FFFFFF;line-height:0.88;display:block;text-transform:uppercase;letter-spacing:-0.01em;">LONG<br>GAME</span>
+        </div>
+        <div id="s8-div" class="divider" style="background:#00FF85;margin-bottom:20px;"></div>
+        <div id="s8-tag" class="tag" style="font-size:22px;color:#00FF85;letter-spacing:0.2em;margin-bottom:36px;opacity:0;">Longevity Science</div>
+        <div id="s8-cta1" class="cta-box" style="width:100%;margin-bottom:16px;border:2px solid #00FF85;">
+          <span style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:36px;color:#00FF85;text-transform:uppercase;letter-spacing:0.05em;">→ Save this</span>
+        </div>
+        <div id="s8-cta2" class="cta-box" style="width:100%;margin-bottom:32px;border:2px solid rgba(255,255,255,0.28);">
+          <span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:36px;color:#FFFFFF;text-transform:uppercase;letter-spacing:0.05em;opacity:0.75;">→ Follow for more</span>
+        </div>
+        <div id="s8-hash" style="opacity:0;">
+          <p style="font-family:'DM Mono',monospace;font-size:16px;color:#00FF85;line-height:1.6;margin:0;opacity:0.65;letter-spacing:0.04em;">#sittingdisease #longevity #sedentary<br>#movementismedicine #healthspan</p>
+        </div>
+      </div>
+    </div>
+    <div id="s8c1" class="caption-chunk"><div class="caption-pill"><span class="caption-text">Follow The Long Game</span></div></div>
+    <div id="s8c2" class="caption-chunk"><div class="caption-pill"><span class="caption-text">for daily longevity science.</span></div></div>
+    <div id="s8c3" class="caption-chunk"><div class="caption-pill"><span class="caption-text">Save this.</span></div></div>
+    <div id="s8c4" class="caption-chunk"><div class="caption-pill"><span class="caption-text">Set your 30-minute alarm</span></div></div>
+    <div id="s8c5" class="caption-chunk"><div class="caption-pill"><span class="caption-text">before you close this app.</span></div></div>
+  </div>
+
+  <!-- Progress bar -->
+  <div id="progress-bar" data-layout-ignore></div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       GSAP TIMELINE
+       ═══════════════════════════════════════════════════════════ -->
+  <script src="assets/gsap.min.js"></script>
+  <script>
+    window.__timelines = window.__timelines || {};
+    const tl = gsap.timeline({ paused: true });
+
+    // Helper: show caption chunk for a time window (fade 0.13s in/out + hard kill)
+    function cap(id, start, end) {
+      tl.to(id, { opacity: 1, duration: 0.13, ease: "none" }, start);
+      tl.to(id, { opacity: 0, duration: 0.13, ease: "none" }, end - 0.13);
+      tl.set(id, { opacity: 0 }, end);
+    }
+
+    // Progress bar (grows full width over entire composition)
+    tl.fromTo("#progress-bar", { width: "0%" }, { width: "100%", duration: 99, ease: "none" }, 0);
+
+    // ─── Scene transitions: each scene fades in over 0.4s ───────────────
+    // S1 has class="clip" so HF runtime makes it visible at t=0.
+    // Scenes 2–8 fade in via GSAP at their start times.
+    [[11,"#s2"],[26,"#s3"],[35,"#s4"],[48,"#s5"],[64,"#s6"],[77,"#s7"],[88,"#s8"]].forEach(([t,id]) => {
+      tl.fromTo(id, { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power2.out" }, t);
+    });
+    // Final scene fades out at the end
+    tl.to("#s8", { opacity: 0, duration: 0.6, ease: "power2.in" }, 98.4);
+
+    // ─── SCENE 1 ─────────────────────────────────────────────────────────
+    tl.from("#s1-tag", { opacity: 0, y: 10, duration: 0.4, ease: "power2.out" }, 0.1);
+    tl.fromTo("#s1-h1", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.7, ease: "back.out(1.2)" }, 0.27);
+    tl.fromTo("#s1-h2", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.7, ease: "back.out(1.2)" }, 0.53);
+    tl.fromTo("#s1-h3", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.7, ease: "back.out(1.2)" }, 0.80);
+    tl.to("#s1-div",   { scaleX: 1, duration: 0.67, ease: "none" }, 1.17);
+    tl.fromTo("#s1-sub", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 1.67);
+    // S1 captions
+    cap("#s1c1", 0,    2.0);
+    cap("#s1c2", 2.0,  4.0);
+    cap("#s1c3", 4.0,  6.03);
+    cap("#s1c4", 6.83, 8.63);
+    cap("#s1c5", 8.63, 10.27);
+
+    // ─── SCENE 2 ─────────────────────────────────────────────────────────
+    tl.fromTo("#s2-tag",  { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.33, ease: "power2.out" }, 11.1);
+    tl.fromTo("#s2-num",  { opacity: 0, scale: 0.5, transformOrigin: "left center" }, { opacity: 1, scale: 1, duration: 0.8, ease: "back.out(1.0)" }, 11.27);
+    tl.fromTo("#s2-sub",  { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.47, ease: "power2.out" }, 12.0);
+    tl.to("#s2-div",      { scaleX: 1, duration: 0.67, ease: "none" }, 12.4);
+    tl.fromTo("#s2-body", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 12.83);
+    tl.to("#s2-src",      { opacity: 1, duration: 0.33, ease: "none" }, 13.4);
+    // S2 captions
+    cap("#s2c1", 11.0,  12.83);
+    cap("#s2c2", 12.83, 14.93);
+    cap("#s2c3", 15.53, 16.73);
+    cap("#s2c4", 17.43, 19.7);
+    cap("#s2c5", 19.7,  21.17);
+    cap("#s2c6", 21.17, 24.37);
+
+    // ─── SCENE 3 ─────────────────────────────────────────────────────────
+    tl.fromTo("#s3-tag",  { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.33, ease: "power2.out" }, 26.1);
+    tl.fromTo("#s3-head", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 26.27);
+    tl.fromTo("#s3b1", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.4, ease: "power3.out" }, 26.8);
+    tl.fromTo("#s3b2", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.4, ease: "power3.out" }, 27.2);
+    tl.fromTo("#s3b3", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.4, ease: "power3.out" }, 27.6);
+    tl.fromTo("#s3b4", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.4, ease: "power3.out" }, 28.0);
+    tl.to("#s3-src", { opacity: 1, duration: 0.33 }, 29.0);
+    // S3 captions
+    cap("#s3c1", 26.0,  27.93);
+    cap("#s3c2", 27.93, 30.37);
+    cap("#s3c3", 30.37, 32.6);
+    cap("#s3c4", 32.6,  34.63);
+
+    // ─── SCENE 4 ─────────────────────────────────────────────────────────
+    tl.fromTo("#s4-tag",  { opacity: 0 }, { opacity: 1, duration: 0.33, ease: "power2.out" }, 35.1);
+    tl.fromTo("#s4-h1", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.7, ease: "back.out(1.2)" }, 35.2);
+    tl.fromTo("#s4-h2", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.7, ease: "back.out(1.2)" }, 35.47);
+    tl.fromTo("#s4-h3", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.7, ease: "back.out(1.2)" }, 35.73);
+    tl.fromTo("#s4-data", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.47, ease: "power2.out" }, 36.27);
+    tl.fromTo("#s4-body", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.47, ease: "power2.out" }, 37.0);
+    tl.to("#s4-src",  { opacity: 1, duration: 0.33 }, 37.73);
+    // S4 captions
+    cap("#s4c1", 35.0,  37.33);
+    cap("#s4c2", 37.33, 39.7);
+    cap("#s4c3", 39.7,  40.87);
+    cap("#s4c4", 40.87, 42.67);
+    cap("#s4c5", 42.67, 45.27);
+    cap("#s4c6", 45.27, 47.3);
+
+    // ─── SCENE 5 ─────────────────────────────────────────────────────────
+    tl.fromTo("#s5-tag",  { opacity: 0 }, { opacity: 1, duration: 0.33, ease: "power2.out" }, 48.1);
+    tl.fromTo("#s5-h1", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.7, ease: "back.out(1.2)" }, 48.27);
+    tl.fromTo("#s5-h2", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.7, ease: "back.out(1.2)" }, 48.53);
+    tl.fromTo("#s5-data", { opacity: 0, x: -24 }, { opacity: 1, x: 0, duration: 0.47, ease: "power2.out" }, 48.93);
+    tl.fromTo("#s5b1", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.4, ease: "power3.out" }, 49.73);
+    tl.fromTo("#s5b2", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.4, ease: "power3.out" }, 50.07);
+    tl.fromTo("#s5b3", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.4, ease: "power3.out" }, 50.4);
+    tl.to("#s5-src",  { opacity: 1, duration: 0.33 }, 51.5);
+    // S5 captions
+    cap("#s5c1", 48.0,  50.23);
+    cap("#s5c2", 50.23, 52.13);
+    cap("#s5c3", 52.13, 54.0);
+    cap("#s5c4", 54.0,  56.63);
+    cap("#s5c5", 56.63, 58.53);
+    cap("#s5c6", 58.53, 61.53);
+    cap("#s5c7", 61.53, 63.47);
+
+    // ─── SCENE 6 ─────────────────────────────────────────────────────────
+    tl.fromTo("#s6-tag",  { opacity: 0 }, { opacity: 1, duration: 0.33, ease: "power2.out" }, 64.1);
+    tl.fromTo("#s6-num", { opacity: 0, scale: 0.4, transformOrigin: "left center" }, { opacity: 1, scale: 1, duration: 0.9, ease: "back.out(1.0)" }, 64.2);
+    tl.fromTo("#s6-sub",  { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 64.8);
+    tl.to("#s6-div",  { scaleX: 1, duration: 0.6, ease: "none" }, 65.2);
+    tl.fromTo("#s6-body", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.47, ease: "power2.out" }, 65.67);
+    // S6 captions (gaps = silence/pause in VO)
+    cap("#s6c1", 64.0,  65.63);
+    cap("#s6c2", 66.23, 68.2);
+    cap("#s6c3", 68.7,  70.17);
+    cap("#s6c4", 70.17, 71.7);
+    cap("#s6c5", 71.7,  73.73);
+    cap("#s6c6", 73.73, 76.27);
+
+    // ─── SCENE 7 ─────────────────────────────────────────────────────────
+    tl.fromTo("#s7-tag",  { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.33, ease: "power2.out" }, 77.1);
+    tl.fromTo("#s7-h1", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.7, ease: "back.out(1.1)" }, 77.27);
+    tl.fromTo("#s7-h2", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.7, ease: "back.out(1.1)" }, 77.6);
+    tl.fromTo("#s7-h3", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.7, ease: "back.out(1.1)" }, 77.93);
+    tl.to("#s7-div",  { scaleX: 1, duration: 0.67, ease: "none" }, 78.33);
+    tl.fromTo("#s7-sub", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.47, ease: "power2.out" }, 78.87);
+    // S7 captions
+    cap("#s7c1", 77.0,  78.87);
+    cap("#s7c2", 78.87, 80.27);
+    cap("#s7c3", 80.27, 82.67);
+    cap("#s7c4", 82.67, 84.13);
+    cap("#s7c5", 84.13, 85.6);
+    cap("#s7c6", 85.6,  87.23);
+
+    // ─── SCENE 8 ─────────────────────────────────────────────────────────
+    tl.fromTo("#s8-brand", { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.7, ease: "back.out(1.0)" }, 88.2);
+    tl.to("#s8-div",   { scaleX: 1, duration: 0.67, ease: "none" }, 88.87);
+    tl.fromTo("#s8-tag",   { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 89.4);
+    tl.fromTo("#s8-cta1",  { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 89.8);
+    tl.fromTo("#s8-cta2",  { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 90.13);
+    tl.fromTo("#s8-hash",  { opacity: 0 }, { opacity: 1, duration: 0.4 }, 90.67);
+    // S8 captions
+    cap("#s8c1", 88.0,  90.1);
+    cap("#s8c2", 90.1,  92.67);
+    cap("#s8c3", 92.67, 93.9);
+    cap("#s8c4", 93.9,  96.43);
+    cap("#s8c5", 96.43, 98.63);
+
+    window.__timelines["SittingReel"] = tl;
+  </script>
+</div>
+</body>
+</html>
