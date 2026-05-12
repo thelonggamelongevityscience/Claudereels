@@ -11,7 +11,6 @@ interface Scene6Props {
 
 export const Scene6StatPunch: React.FC<Scene6Props> = ({ frame }) => {
   const { fps } = useVideoConfig();
-  const DURATION = 90;
 
   // Tag
   const tagOpacity = interpolate(frame, [0, 10], [0, 1], { extrapolateRight: 'clamp' });
@@ -141,9 +140,15 @@ export const Scene6StatPunch: React.FC<Scene6Props> = ({ frame }) => {
       </div>
 
       <Caption
-        text="Thirty percent. Lower blood sugar. From two-minute walking breaks. The intervention is almost embarrassingly simple."
         frame={frame}
-        totalDuration={DURATION}
+        chunks={[
+          { text: 'Thirty percent.',               startFrame: 0,  endFrame: 20 },
+          { text: 'Lower blood sugar.',            startFrame: 20, endFrame: 39 },
+          { text: 'From two-minute',               startFrame: 39, endFrame: 52 },
+          { text: 'walking breaks.',               startFrame: 52, endFrame: 66 },
+          { text: 'The intervention is',           startFrame: 66, endFrame: 77 },
+          { text: 'almost embarrassingly simple.', startFrame: 77, endFrame: 86 },
+        ]}
       />
     </div>
   );

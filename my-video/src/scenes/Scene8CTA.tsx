@@ -11,7 +11,6 @@ interface Scene8Props {
 
 export const Scene8CTA: React.FC<Scene8Props> = ({ frame }) => {
   const { fps } = useVideoConfig();
-  const DURATION = 120;
 
   // Brand name entrance
   const brandSpring = spring({ fps, frame: Math.max(0, frame - 6), config: { damping: 11, stiffness: 70 } });
@@ -203,9 +202,14 @@ export const Scene8CTA: React.FC<Scene8Props> = ({ frame }) => {
       </div>
 
       <Caption
-        text="Follow The Long Game for daily longevity science. Save this — set your 30-minute alarm before you close this app."
         frame={frame}
-        totalDuration={DURATION}
+        chunks={[
+          { text: 'Follow The Long Game',            startFrame: 0,   endFrame: 22 },
+          { text: 'for daily longevity science.',    startFrame: 22,  endFrame: 48 },
+          { text: 'Save this —',                     startFrame: 48,  endFrame: 63 },
+          { text: 'set your 30-minute alarm',        startFrame: 63,  endFrame: 84 },
+          { text: 'before you close this app.',      startFrame: 84,  endFrame: 112 },
+        ]}
       />
     </div>
   );

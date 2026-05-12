@@ -11,7 +11,6 @@ interface Scene1Props {
 
 export const Scene1Hook: React.FC<Scene1Props> = ({ frame }) => {
   const { fps } = useVideoConfig();
-  const DURATION = 105;
 
   // Tag animation
   const tagOpacity = interpolate(frame, [0, 12], [0, 1], { extrapolateRight: 'clamp' });
@@ -145,9 +144,14 @@ export const Scene1Hook: React.FC<Scene1Props> = ({ frame }) => {
       </div>
 
       <Caption
-        text="Sitting for 8 hours a day is killing you faster than smoking. Your doctor isn't telling you this."
         frame={frame}
-        totalDuration={DURATION}
+        chunks={[
+          { text: 'Sitting for 8 hours', startFrame: 0,  endFrame: 26 },
+          { text: 'a day is killing you', startFrame: 26, endFrame: 51 },
+          { text: 'faster than smoking.', startFrame: 51, endFrame: 75 },
+          { text: "Your doctor isn't", startFrame: 75, endFrame: 90 },
+          { text: 'telling you this.', startFrame: 90, endFrame: 102 },
+        ]}
       />
     </div>
   );

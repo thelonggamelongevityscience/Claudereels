@@ -12,7 +12,6 @@ interface Scene4Props {
 
 export const Scene4Paradox: React.FC<Scene4Props> = ({ frame }) => {
   const { fps } = useVideoConfig();
-  const DURATION = 105;
 
   // Tag
   const tagOpacity = interpolate(frame, [0, 10], [0, 1], { extrapolateRight: 'clamp' });
@@ -149,9 +148,15 @@ export const Scene4Paradox: React.FC<Scene4Props> = ({ frame }) => {
       </div>
 
       <Caption
-        text="One hour of exercise cannot cancel 8 hours of sitting. Sedentary time is an independent risk factor. Both things are true."
         frame={frame}
-        totalDuration={DURATION}
+        chunks={[
+          { text: 'One hour of exercise',            startFrame: 0,  endFrame: 22 },
+          { text: 'cannot cancel 8 hours',           startFrame: 22, endFrame: 44 },
+          { text: 'of sitting.',                     startFrame: 44, endFrame: 56 },
+          { text: 'Sedentary time',                  startFrame: 56, endFrame: 67 },
+          { text: 'is an independent risk factor.',  startFrame: 67, endFrame: 85 },
+          { text: 'Both things are true.',           startFrame: 85, endFrame: 102 },
+        ]}
       />
     </div>
   );

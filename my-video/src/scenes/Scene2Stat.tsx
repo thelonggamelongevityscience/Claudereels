@@ -12,7 +12,6 @@ interface Scene2Props {
 
 export const Scene2Stat: React.FC<Scene2Props> = ({ frame }) => {
   const { fps } = useVideoConfig();
-  const DURATION = 105;
 
   // Tag
   const tagOpacity = interpolate(frame, [0, 10], [0, 1], { extrapolateRight: 'clamp' });
@@ -151,9 +150,15 @@ export const Scene2Stat: React.FC<Scene2Props> = ({ frame }) => {
       </div>
 
       <Caption
-        text="A 40% higher risk of death. From sitting. Even in people who go to the gym. This is the Active Couch Potato effect."
         frame={frame}
-        totalDuration={DURATION}
+        chunks={[
+          { text: 'A 40 percent',                        startFrame: 0,  endFrame: 18 },
+          { text: 'higher risk of death.',               startFrame: 18, endFrame: 40 },
+          { text: 'From sitting.',                       startFrame: 40, endFrame: 55 },
+          { text: 'Even in people who go',               startFrame: 55, endFrame: 74 },
+          { text: 'to the gym.',                         startFrame: 74, endFrame: 85 },
+          { text: 'This is the Active Couch Potato effect.', startFrame: 85, endFrame: 102 },
+        ]}
       />
     </div>
   );

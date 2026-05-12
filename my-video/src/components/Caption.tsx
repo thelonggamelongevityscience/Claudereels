@@ -1,53 +1,69 @@
 import React from 'react';
 import { interpolate } from 'remotion';
-import { COLORS, FONTS } from '../constants';
 
-interface CaptionProps {
+export interface CaptionChunk {
   text: string;
-  frame: number;
-  totalDuration: number;
+  startFrame: number;
+  endFrame: number;
 }
 
-export const Caption: React.FC<CaptionProps> = ({ text, frame, totalDuration }) => {
-  const fadeIn = interpolate(frame, [0, 8], [0, 1], { extrapolateRight: 'clamp' });
-  const fadeOut = interpolate(
-    frame,
-    [totalDuration - 12, totalDuration],
-    [1, 0],
-    { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }
-  );
+interface CaptionProps {
+  chunks: CaptionChunk[];
+  frame: number;
+}
+
+export const Caption: React.FC<CaptionProps> = ({ chunks, frame }) => {
+  const active = chunks.find((c) => frame >= c.startFrame && frame < c.endFrame);
+  if (!active) return null;
+
+  const fadeIn = interpolate(frame, [active.startFrame, active.startFrame + 4], [0, 1], {
+    extrapolateLeft: 'clamp',
+    extrapolateRight: 'clamp',
+  });
+  const fadeOut = interpolate(frame, [active.endFrame - 4, active.endFrame], [1, 0], {
+    extrapolateLeft: 'clamp',
+    extrapolateRight: 'clamp',
+  });
   const opacity = Math.min(fadeIn, fadeOut);
 
   return (
     <div
       style={{
         position: 'absolute',
-        bottom: 120,
-        left: 40,
-        right: 40,
+        bottom: 140,
+        left: 0,
+        right: 0,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        zIndex: 100,
         opacity,
-        zIndex: 20,
+        paddingLeft: 40,
+        paddingRight: 40,
       }}
     >
       <div
         style={{
-          backgroundColor: 'rgba(0,0,0,0.72)',
+          backgroundColor: 'rgba(0,0,0,0.55)',
           borderRadius: 8,
-          padding: '14px 20px',
+          padding: '12px 24px',
+          maxWidth: 900,
         }}
       >
-        <p
+        <span
           style={{
-            fontFamily: FONTS.mono,
-            fontSize: 20,
-            color: COLORS.white,
-            lineHeight: 1.5,
-            margin: 0,
+            fontFamily: "'Barlow Condensed', sans-serif",
+            fontWeight: 700,
+            fontSize: 52,
+            color: '#FFFFFF',
+            lineHeight: 1.2,
             textAlign: 'center',
+            display: 'block',
+            letterSpacing: '0.01em',
           }}
         >
-          {text}
-        </p>
+          {active.text}
+        </span>
       </div>
     </div>
   );

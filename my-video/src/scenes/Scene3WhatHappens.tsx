@@ -18,7 +18,6 @@ const bullets = [
 ];
 
 export const Scene3WhatHappens: React.FC<Scene3Props> = ({ frame }) => {
-  const DURATION = 105;
 
   // Tag
   const tagOpacity = interpolate(frame, [0, 10], [0, 1], { extrapolateRight: 'clamp' });
@@ -112,9 +111,13 @@ export const Scene3WhatHappens: React.FC<Scene3Props> = ({ frame }) => {
       </div>
 
       <Caption
-        text="Here's what's actually happening inside your body during prolonged sitting. And none of it is good."
         frame={frame}
-        totalDuration={DURATION}
+        chunks={[
+          { text: "Here's what's actually",          startFrame: 0,  endFrame: 22 },
+          { text: 'happening inside your body',       startFrame: 22, endFrame: 48 },
+          { text: 'during prolonged sitting.',        startFrame: 48, endFrame: 73 },
+          { text: 'And none of it is good.',          startFrame: 73, endFrame: 102 },
+        ]}
       />
     </div>
   );

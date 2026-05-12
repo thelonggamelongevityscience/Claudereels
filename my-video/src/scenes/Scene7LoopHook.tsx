@@ -10,7 +10,6 @@ interface Scene7Props {
 
 export const Scene7LoopHook: React.FC<Scene7Props> = ({ frame }) => {
   const { fps } = useVideoConfig();
-  const DURATION = 90;
 
   // Tag
   const tagOpacity = interpolate(frame, [0, 10], [0, 1], { extrapolateRight: 'clamp' });
@@ -138,9 +137,15 @@ export const Scene7LoopHook: React.FC<Scene7Props> = ({ frame }) => {
       </div>
 
       <Caption
-        text="How long did you sit today? Most people have no idea. Track it once. The number will surprise you."
         frame={frame}
-        totalDuration={DURATION}
+        chunks={[
+          { text: 'How long did you',          startFrame: 0,  endFrame: 18 },
+          { text: 'sit today?',                startFrame: 18, endFrame: 30 },
+          { text: 'Most people have no idea.', startFrame: 30, endFrame: 52 },
+          { text: 'Track it once.',            startFrame: 52, endFrame: 66 },
+          { text: 'The number will',           startFrame: 66, endFrame: 77 },
+          { text: 'surprise you.',             startFrame: 77, endFrame: 86 },
+        ]}
       />
     </div>
   );
