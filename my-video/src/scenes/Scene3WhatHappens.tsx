@@ -113,10 +113,10 @@ export const Scene3WhatHappens: React.FC<Scene3Props> = ({ frame }) => {
       <Caption
         frame={frame}
         chunks={[
-          { text: "Here's what's actually",          startFrame: 0,  endFrame: 22 },
-          { text: 'happening inside your body',       startFrame: 22, endFrame: 48 },
-          { text: 'during prolonged sitting.',        startFrame: 48, endFrame: 73 },
-          { text: 'And none of it is good.',          startFrame: 73, endFrame: 102 },
+          { text: "Here's what's actually",    startFrame: 0,   endFrame: 58  },
+          { text: 'happening inside your body', startFrame: 58,  endFrame: 131 },
+          { text: 'during prolonged sitting.',  startFrame: 131, endFrame: 198 },
+          { text: 'And none of it is good.',    startFrame: 198, endFrame: 259 },
         ]}
       />
     </div>

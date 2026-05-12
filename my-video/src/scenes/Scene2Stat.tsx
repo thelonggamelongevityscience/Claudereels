@@ -152,12 +152,12 @@ export const Scene2Stat: React.FC<Scene2Props> = ({ frame }) => {
       <Caption
         frame={frame}
         chunks={[
-          { text: 'A 40 percent',                        startFrame: 0,  endFrame: 18 },
-          { text: 'higher risk of death.',               startFrame: 18, endFrame: 40 },
-          { text: 'From sitting.',                       startFrame: 40, endFrame: 55 },
-          { text: 'Even in people who go',               startFrame: 55, endFrame: 74 },
-          { text: 'to the gym.',                         startFrame: 74, endFrame: 85 },
-          { text: 'This is the Active Couch Potato effect.', startFrame: 85, endFrame: 102 },
+          { text: 'A 40 percent',                            startFrame: 0,   endFrame: 55  },
+          { text: 'higher risk of death.',                  startFrame: 55,  endFrame: 118 },
+          { text: 'From sitting.',                          startFrame: 136, endFrame: 172 },
+          { text: 'Even in people who go',                  startFrame: 193, endFrame: 261 },
+          { text: 'to the gym.',                            startFrame: 261, endFrame: 305 },
+          { text: 'This is the Active Couch Potato effect.', startFrame: 305, endFrame: 401 },
         ]}
       />
     </div>

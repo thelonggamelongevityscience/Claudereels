@@ -33,13 +33,13 @@ const FONT_CSS = `
     src: url('${staticFile('fonts/DMMono-400.woff2')}') format('woff2'); }
 `;
 
-// Music volume curve
-// Scenes 1–2 (0–209): 0.5 | fade 210–240: 0.5→0.08 | Scenes 3–5 (240–539): 0.08 | fade 540–570: 0.08→0.5 | Scenes 6–8 (570–839): 0.5
+// Music volume curve — loud on hook/outro scenes, near-silent on instructional scenes 3–5
+// Scene 3 starts at frame 780, Scene 6 starts at frame 1920
 function getMusicVolume(frame: number): number {
-  if (frame < 210) return 0.5;
-  if (frame < 240) return interpolate(frame, [210, 240], [0.5, 0.08]);
-  if (frame < 540) return 0.08;
-  if (frame < 570) return interpolate(frame, [540, 570], [0.08, 0.5]);
+  if (frame < 780) return 0.5;
+  if (frame < 810) return interpolate(frame, [780, 810], [0.5, 0.08]);
+  if (frame < 1920) return 0.08;
+  if (frame < 1950) return interpolate(frame, [1920, 1950], [0.08, 0.5]);
   return 0.5;
 }
 

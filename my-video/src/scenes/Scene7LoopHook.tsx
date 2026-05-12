@@ -139,12 +139,12 @@ export const Scene7LoopHook: React.FC<Scene7Props> = ({ frame }) => {
       <Caption
         frame={frame}
         chunks={[
-          { text: 'How long did you',          startFrame: 0,  endFrame: 18 },
-          { text: 'sit today?',                startFrame: 18, endFrame: 30 },
-          { text: 'Most people have no idea.', startFrame: 30, endFrame: 52 },
-          { text: 'Track it once.',            startFrame: 52, endFrame: 66 },
-          { text: 'The number will',           startFrame: 66, endFrame: 77 },
-          { text: 'surprise you.',             startFrame: 77, endFrame: 86 },
+          { text: 'How long did you',          startFrame: 0,   endFrame: 56  },
+          { text: 'sit today?',                startFrame: 56,  endFrame: 98  },
+          { text: 'Most people have no idea.', startFrame: 98,  endFrame: 170 },
+          { text: 'Track it once.',            startFrame: 170, endFrame: 214 },
+          { text: 'The number will',           startFrame: 214, endFrame: 258 },
+          { text: 'surprise you.',             startFrame: 258, endFrame: 307 },
         ]}
       />
     </div>

@@ -146,11 +146,11 @@ export const Scene1Hook: React.FC<Scene1Props> = ({ frame }) => {
       <Caption
         frame={frame}
         chunks={[
-          { text: 'Sitting for 8 hours', startFrame: 0,  endFrame: 26 },
-          { text: 'a day is killing you', startFrame: 26, endFrame: 51 },
-          { text: 'faster than smoking.', startFrame: 51, endFrame: 75 },
-          { text: "Your doctor isn't", startFrame: 75, endFrame: 90 },
-          { text: 'telling you this.', startFrame: 90, endFrame: 102 },
+          { text: 'Sitting for 8 hours',  startFrame: 0,   endFrame: 60  },
+          { text: 'a day is killing you', startFrame: 60,  endFrame: 120 },
+          { text: 'faster than smoking.', startFrame: 120, endFrame: 181 },
+          { text: "Your doctor isn't",    startFrame: 205, endFrame: 259 },
+          { text: 'telling you this.',    startFrame: 259, endFrame: 308 },
         ]}
       />
     </div>

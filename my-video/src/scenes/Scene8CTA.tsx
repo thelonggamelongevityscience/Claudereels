@@ -204,11 +204,11 @@ export const Scene8CTA: React.FC<Scene8Props> = ({ frame }) => {
       <Caption
         frame={frame}
         chunks={[
-          { text: 'Follow The Long Game',            startFrame: 0,   endFrame: 22 },
-          { text: 'for daily longevity science.',    startFrame: 22,  endFrame: 48 },
-          { text: 'Save this —',                     startFrame: 48,  endFrame: 63 },
-          { text: 'set your 30-minute alarm',        startFrame: 63,  endFrame: 84 },
-          { text: 'before you close this app.',      startFrame: 84,  endFrame: 112 },
+          { text: 'Follow The Long Game',          startFrame: 0,   endFrame: 63  },
+          { text: 'for daily longevity science.',  startFrame: 63,  endFrame: 140 },
+          { text: 'Save this.',                    startFrame: 140, endFrame: 177 },
+          { text: 'Set your 30-minute alarm',      startFrame: 177, endFrame: 253 },
+          { text: 'before you close this app.',    startFrame: 253, endFrame: 319 },
         ]}
       />
     </div>

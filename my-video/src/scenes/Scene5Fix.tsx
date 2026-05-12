@@ -135,13 +135,13 @@ export const Scene5Fix: React.FC<Scene5Props> = ({ frame }) => {
       <Caption
         frame={frame}
         chunks={[
-          { text: 'Two minutes of light walking',             startFrame: 0,   endFrame: 25 },
-          { text: 'every 30 minutes.',                        startFrame: 25,  endFrame: 44 },
-          { text: "That's the protocol.",                     startFrame: 44,  endFrame: 62 },
-          { text: 'It reduces blood sugar spikes',            startFrame: 62,  endFrame: 81 },
-          { text: 'by 30 percent',                            startFrame: 81,  endFrame: 93 },
-          { text: 'and restores the fat-clearing enzymes',    startFrame: 93,  endFrame: 110 },
-          { text: 'sitting shuts down.',                      startFrame: 110, endFrame: 117 },
+          { text: 'Two minutes of light walking',          startFrame: 0,   endFrame: 67  },
+          { text: 'every 30 minutes.',                     startFrame: 67,  endFrame: 124 },
+          { text: "That's the protocol.",                  startFrame: 124, endFrame: 180 },
+          { text: 'It reduces blood sugar spikes',         startFrame: 180, endFrame: 259 },
+          { text: 'by 30 percent',                         startFrame: 259, endFrame: 316 },
+          { text: 'and restores the fat-clearing enzymes', startFrame: 316, endFrame: 406 },
+          { text: 'sitting shuts down.',                   startFrame: 406, endFrame: 464 },
         ]}
       />
     </div>

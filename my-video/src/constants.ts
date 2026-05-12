@@ -19,18 +19,19 @@ export const FONTS = {
 } as const;
 
 // Scene timing (frames at 30fps)
+// Durations derived from actual Kokoro VO audio length at 0.88x + pauses + 30f buffer
 export const SCENES = {
-  scene1: { start: 0,   duration: 105 },
-  scene2: { start: 105, duration: 105 },
-  scene3: { start: 210, duration: 105 },
-  scene4: { start: 315, duration: 105 },
-  scene5: { start: 420, duration: 120 },
-  scene6: { start: 540, duration: 90  },
-  scene7: { start: 630, duration: 90  },
-  scene8: { start: 720, duration: 120 },
+  scene1: { start: 0,    duration: 330 },  // 11s  (VO: 10.3s)
+  scene2: { start: 330,  duration: 450 },  // 15s  (VO: 13.4s)
+  scene3: { start: 780,  duration: 270 },  //  9s  (VO: 8.6s)
+  scene4: { start: 1050, duration: 390 },  // 13s  (VO: 12.3s)
+  scene5: { start: 1440, duration: 480 },  // 16s  (VO: 15.5s)
+  scene6: { start: 1920, duration: 390 },  // 13s  (VO: 12.3s)
+  scene7: { start: 2310, duration: 330 },  // 11s  (VO: 10.2s)
+  scene8: { start: 2640, duration: 330 },  // 11s  (VO: 10.6s)
 } as const;
 
-export const TOTAL_FRAMES = 840;
+export const TOTAL_FRAMES = 2970; // 99 seconds
 export const FPS = 30;
 export const WIDTH = 1080;
 export const HEIGHT = 1920;

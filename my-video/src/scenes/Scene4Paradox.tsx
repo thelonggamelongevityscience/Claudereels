@@ -150,12 +150,12 @@ export const Scene4Paradox: React.FC<Scene4Props> = ({ frame }) => {
       <Caption
         frame={frame}
         chunks={[
-          { text: 'One hour of exercise',            startFrame: 0,  endFrame: 22 },
-          { text: 'cannot cancel 8 hours',           startFrame: 22, endFrame: 44 },
-          { text: 'of sitting.',                     startFrame: 44, endFrame: 56 },
-          { text: 'Sedentary time',                  startFrame: 56, endFrame: 67 },
-          { text: 'is an independent risk factor.',  startFrame: 67, endFrame: 85 },
-          { text: 'Both things are true.',           startFrame: 85, endFrame: 102 },
+          { text: 'One hour of exercise',           startFrame: 0,   endFrame: 70  },
+          { text: 'cannot cancel 8 hours',          startFrame: 70,  endFrame: 141 },
+          { text: 'of sitting.',                    startFrame: 141, endFrame: 176 },
+          { text: 'Sedentary time',                 startFrame: 176, endFrame: 230 },
+          { text: 'is an independent risk factor.', startFrame: 230, endFrame: 308 },
+          { text: 'Both things are true.',          startFrame: 308, endFrame: 369 },
         ]}
       />
     </div>

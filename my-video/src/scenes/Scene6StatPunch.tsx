@@ -142,12 +142,12 @@ export const Scene6StatPunch: React.FC<Scene6Props> = ({ frame }) => {
       <Caption
         frame={frame}
         chunks={[
-          { text: 'Thirty percent.',               startFrame: 0,  endFrame: 20 },
-          { text: 'Lower blood sugar.',            startFrame: 20, endFrame: 39 },
-          { text: 'From two-minute',               startFrame: 39, endFrame: 52 },
-          { text: 'walking breaks.',               startFrame: 52, endFrame: 66 },
-          { text: 'The intervention is',           startFrame: 66, endFrame: 77 },
-          { text: 'almost embarrassingly simple.', startFrame: 77, endFrame: 86 },
+          { text: 'Thirty percent.',               startFrame: 0,   endFrame: 49  },
+          { text: 'Lower blood sugar.',            startFrame: 67,  endFrame: 126 },
+          { text: 'From two-minute',               startFrame: 141, endFrame: 185 },
+          { text: 'walking breaks.',               startFrame: 185, endFrame: 231 },
+          { text: 'The intervention is',           startFrame: 231, endFrame: 292 },
+          { text: 'almost embarrassingly simple.', startFrame: 292, endFrame: 368 },
         ]}
       />
     </div>
