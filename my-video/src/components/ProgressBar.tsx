@@ -1,5 +1,4 @@
 import React from 'react';
-import { interpolate } from 'remotion';
 import { COLORS, SCENES, TOTAL_FRAMES } from '../constants';
 
 interface ProgressBarProps {
@@ -46,7 +45,6 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({ frame }) => {
                 height: '100%',
                 width: `${filled * 100}%`,
                 backgroundColor: frame >= scene.start ? COLORS.green : 'transparent',
-                transition: 'none',
               }}
             />
           </div>
