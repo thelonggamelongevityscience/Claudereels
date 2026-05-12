@@ -3,18 +3,27 @@
 Generate VO WAVs + caption timings using ElevenLabs TTS.
 Generates audio per caption chunk → measures duration → accumulates frame positions.
 """
-import io
 import json
+import os
 import numpy as np
 import soundfile as sf
 from elevenlabs import ElevenLabs
+from elevenlabs.types import VoiceSettings
 
-API_KEY   = "sk_e208f42c991bce3910de44624abc1e66e3a564d8093e94c0"
-VOICE_ID  = "JBFqnCBsd6RMkjVDRZzb"   # George – deep, authoritative
+API_KEY   = os.environ.get("ELEVENLABS_API_KEY", "sk_e208f42c991bce3910de44624abc1e66e3a564d8093e94c0")
+VOICE_ID  = "nPczCjzI2devNBz1zQrb"   # Brian – deep American, professional & warm
 MODEL_ID  = "eleven_multilingual_v2"
 FPS       = 30
 OUT_REMOTION = "/home/user/Claudereels/my-video/public"
 OUT_HF       = "/home/user/Claudereels/hf-reel/assets"
+
+# Voice settings tuned for calm, enthusiastic delivery
+VOICE_SETTINGS = VoiceSettings(
+    stability=0.45,          # lower = more expressive/dynamic
+    similarity_boost=0.80,   # stays true to the voice character
+    style=0.35,              # adds warmth and energy
+    use_speaker_boost=True,
+)
 
 client = ElevenLabs(api_key=API_KEY)
 
@@ -25,7 +34,8 @@ def gen_chunk(text: str) -> tuple[np.ndarray, int]:
             voice_id=VOICE_ID,
             text=text,
             model_id=MODEL_ID,
-            output_format="pcm_24000",   # raw PCM → easy to decode
+            voice_settings=VOICE_SETTINGS,
+            output_format="pcm_24000",
         )
     )
     samples = np.frombuffer(audio_bytes, dtype=np.int16).astype(np.float32) / 32768.0
