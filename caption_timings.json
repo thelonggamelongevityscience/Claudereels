@@ -4,30 +4,30 @@
       {
         "text": "Sitting for 8 hours",
         "startFrame": 0,
-        "endFrame": 60
+        "endFrame": 45
       },
       {
         "text": "a day is killing you",
-        "startFrame": 60,
-        "endFrame": 120
+        "startFrame": 45,
+        "endFrame": 85
       },
       {
         "text": "faster than smoking.",
-        "startFrame": 120,
-        "endFrame": 181
+        "startFrame": 85,
+        "endFrame": 130
       },
       {
         "text": "Your doctor isn't",
-        "startFrame": 205,
-        "endFrame": 259
+        "startFrame": 154,
+        "endFrame": 191
       },
       {
         "text": "telling you this.",
-        "startFrame": 259,
-        "endFrame": 308
+        "startFrame": 191,
+        "endFrame": 225
       }
     ],
-    "audio_frames": 308,
+    "audio_frames": 225,
     "budget_frames": 330
   },
   "scene2": {
@@ -35,35 +35,35 @@
       {
         "text": "A 40 percent",
         "startFrame": 0,
-        "endFrame": 55
+        "endFrame": 36
       },
       {
         "text": "higher risk of death.",
-        "startFrame": 55,
-        "endFrame": 118
+        "startFrame": 36,
+        "endFrame": 79
       },
       {
         "text": "From sitting.",
-        "startFrame": 136,
-        "endFrame": 172
+        "startFrame": 97,
+        "endFrame": 131
       },
       {
         "text": "Even in people who go",
-        "startFrame": 193,
-        "endFrame": 261
+        "startFrame": 152,
+        "endFrame": 195
       },
       {
         "text": "to the gym.",
-        "startFrame": 261,
-        "endFrame": 305
+        "startFrame": 195,
+        "endFrame": 226
       },
       {
         "text": "This is the Active Couch Potato effect.",
-        "startFrame": 305,
-        "endFrame": 401
+        "startFrame": 226,
+        "endFrame": 297
       }
     ],
-    "audio_frames": 401,
+    "audio_frames": 297,
     "budget_frames": 450
   },
   "scene3": {
@@ -71,25 +71,25 @@
       {
         "text": "Here's what's actually",
         "startFrame": 0,
-        "endFrame": 58
+        "endFrame": 46
       },
       {
         "text": "happening inside your body",
-        "startFrame": 58,
-        "endFrame": 131
+        "startFrame": 46,
+        "endFrame": 98
       },
       {
         "text": "during prolonged sitting.",
-        "startFrame": 131,
-        "endFrame": 198
+        "startFrame": 98,
+        "endFrame": 142
       },
       {
         "text": "And none of it is good.",
-        "startFrame": 198,
-        "endFrame": 259
+        "startFrame": 142,
+        "endFrame": 183
       }
     ],
-    "audio_frames": 259,
+    "audio_frames": 183,
     "budget_frames": 270
   },
   "scene4": {
@@ -97,35 +97,35 @@
       {
         "text": "One hour of exercise",
         "startFrame": 0,
-        "endFrame": 70
+        "endFrame": 40
       },
       {
         "text": "cannot cancel 8 hours",
-        "startFrame": 70,
-        "endFrame": 141
+        "startFrame": 40,
+        "endFrame": 88
       },
       {
         "text": "of sitting.",
-        "startFrame": 141,
-        "endFrame": 176
+        "startFrame": 88,
+        "endFrame": 117
       },
       {
         "text": "Sedentary time",
-        "startFrame": 176,
-        "endFrame": 230
+        "startFrame": 117,
+        "endFrame": 152
       },
       {
         "text": "is an independent risk factor.",
-        "startFrame": 230,
-        "endFrame": 308
+        "startFrame": 152,
+        "endFrame": 213
       },
       {
         "text": "Both things are true.",
-        "startFrame": 308,
-        "endFrame": 369
+        "startFrame": 213,
+        "endFrame": 252
       }
     ],
-    "audio_frames": 369,
+    "audio_frames": 252,
     "budget_frames": 390
   },
   "scene5": {
@@ -133,40 +133,40 @@
       {
         "text": "Two minutes of light walking",
         "startFrame": 0,
-        "endFrame": 67
+        "endFrame": 52
       },
       {
         "text": "every 30 minutes.",
-        "startFrame": 67,
-        "endFrame": 124
+        "startFrame": 52,
+        "endFrame": 88
       },
       {
         "text": "That's the protocol.",
-        "startFrame": 124,
-        "endFrame": 180
+        "startFrame": 88,
+        "endFrame": 125
       },
       {
         "text": "It reduces blood sugar spikes",
-        "startFrame": 180,
-        "endFrame": 259
+        "startFrame": 125,
+        "endFrame": 174
       },
       {
         "text": "by 30 percent",
-        "startFrame": 259,
-        "endFrame": 316
+        "startFrame": 174,
+        "endFrame": 209
       },
       {
         "text": "and restores the fat-clearing enzymes",
-        "startFrame": 316,
-        "endFrame": 406
+        "startFrame": 209,
+        "endFrame": 277
       },
       {
         "text": "sitting shuts down.",
-        "startFrame": 406,
-        "endFrame": 464
+        "startFrame": 277,
+        "endFrame": 318
       }
     ],
-    "audio_frames": 464,
+    "audio_frames": 318,
     "budget_frames": 480
   },
   "scene6": {
@@ -174,35 +174,35 @@
       {
         "text": "Thirty percent.",
         "startFrame": 0,
-        "endFrame": 49
+        "endFrame": 32
       },
       {
         "text": "Lower blood sugar.",
-        "startFrame": 67,
-        "endFrame": 126
+        "startFrame": 50,
+        "endFrame": 83
       },
       {
         "text": "From two-minute",
-        "startFrame": 141,
-        "endFrame": 185
+        "startFrame": 98,
+        "endFrame": 213
       },
       {
         "text": "walking breaks.",
-        "startFrame": 185,
-        "endFrame": 231
+        "startFrame": 213,
+        "endFrame": 252
       },
       {
         "text": "The intervention is",
-        "startFrame": 231,
-        "endFrame": 292
+        "startFrame": 252,
+        "endFrame": 291
       },
       {
         "text": "almost embarrassingly simple.",
-        "startFrame": 292,
-        "endFrame": 368
+        "startFrame": 291,
+        "endFrame": 341
       }
     ],
-    "audio_frames": 368,
+    "audio_frames": 341,
     "budget_frames": 390
   },
   "scene7": {
@@ -210,35 +210,35 @@
       {
         "text": "How long did you",
         "startFrame": 0,
-        "endFrame": 56
+        "endFrame": 77
       },
       {
         "text": "sit today?",
-        "startFrame": 56,
-        "endFrame": 98
+        "startFrame": 77,
+        "endFrame": 109
       },
       {
         "text": "Most people have no idea.",
-        "startFrame": 98,
-        "endFrame": 170
+        "startFrame": 109,
+        "endFrame": 160
       },
       {
         "text": "Track it once.",
-        "startFrame": 170,
-        "endFrame": 214
+        "startFrame": 160,
+        "endFrame": 196
       },
       {
         "text": "The number will",
-        "startFrame": 214,
-        "endFrame": 258
+        "startFrame": 196,
+        "endFrame": 230
       },
       {
         "text": "surprise you.",
-        "startFrame": 258,
-        "endFrame": 307
+        "startFrame": 230,
+        "endFrame": 261
       }
     ],
-    "audio_frames": 307,
+    "audio_frames": 261,
     "budget_frames": 330
   },
   "scene8": {
@@ -246,30 +246,30 @@
       {
         "text": "Follow The Long Game",
         "startFrame": 0,
-        "endFrame": 63
+        "endFrame": 128
       },
       {
         "text": "for daily longevity science.",
-        "startFrame": 63,
-        "endFrame": 140
+        "startFrame": 128,
+        "endFrame": 184
       },
       {
         "text": "Save this.",
-        "startFrame": 140,
-        "endFrame": 177
+        "startFrame": 184,
+        "endFrame": 209
       },
       {
         "text": "Set your 30-minute alarm",
-        "startFrame": 177,
-        "endFrame": 253
+        "startFrame": 209,
+        "endFrame": 259
       },
       {
         "text": "before you close this app.",
-        "startFrame": 253,
-        "endFrame": 319
+        "startFrame": 259,
+        "endFrame": 305
       }
     ],
-    "audio_frames": 319,
+    "audio_frames": 305,
     "budget_frames": 330
   }
 }
