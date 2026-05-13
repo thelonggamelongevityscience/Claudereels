@@ -28,18 +28,18 @@ VOICE_SETTINGS = VoiceSettings(
 client = ElevenLabs(api_key=API_KEY)
 
 def gen_chunk(text: str) -> tuple[np.ndarray, int]:
-    """Call ElevenLabs and return (samples_float32, sample_rate)."""
+    """Call ElevenLabs and return (samples_float32, sample_rate=44100)."""
     audio_bytes = b"".join(
         client.text_to_speech.convert(
             voice_id=VOICE_ID,
             text=text,
             model_id=MODEL_ID,
             voice_settings=VOICE_SETTINGS,
-            output_format="pcm_24000",
+            output_format="pcm_44100",  # 44100Hz avoids sample-rate mismatch in renderers
         )
     )
     samples = np.frombuffer(audio_bytes, dtype=np.int16).astype(np.float32) / 32768.0
-    return samples, 24000
+    return samples, 44100
 
 def silence(ms: int, sr: int) -> np.ndarray:
     return np.zeros(int(sr * ms / 1000), dtype=np.float32)
