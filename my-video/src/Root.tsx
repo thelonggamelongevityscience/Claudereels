@@ -1,6 +1,6 @@
 import React from 'react';
 import { Composition } from 'remotion';
-import { SittingReel } from './SittingReel';
+import { SittingReel } from './Composition';
 import { TOTAL_FRAMES, FPS, WIDTH, HEIGHT } from './constants';
 
 export const RemotionRoot: React.FC = () => {
