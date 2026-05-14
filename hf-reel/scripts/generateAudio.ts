@@ -11,26 +11,26 @@ const VOICE_ID = "nPczCjzI2devNBz1zQrb"; // Brian — deep American, professiona
 
 // ── FULL VOICEOVER SCRIPT (from Reel #1: The Sitting Death Sentence) ──────────
 const FULL_SCRIPT = `Sitting for 8 hours a day is killing you faster than smoking. Your doctor isn't telling you this.
-A 40 percent higher risk of death. From sitting. Even in people who go to the gym.
-Here's what happens inside your body. Blood pools in your legs. Your metabolism shuts down. Insulin stops working.
-The paradox? You can exercise every day and still die early. If you sit for the other 23 hours.
-The fix isn't a gym membership. It's movement snacks. Two minutes of walking every 30 minutes resets everything.
-People who break up sitting live 4 years longer on average. Four years. From standing up.
-You already knew sitting too much was bad. Now you know it's as dangerous as a pack of cigarettes a day.
-Follow for one evidence-based habit a week. Your future self will thank you.`;
+A 40 percent higher risk of death. From sitting. Even in people who go to the gym. This is the Active Couch Potato effect.
+Here's what's actually happening inside your body during prolonged sitting. And none of it is good.
+One hour of exercise cannot cancel 8 hours of sitting. Sedentary time is an independent risk factor. Both things are true.
+Two minutes of light walking every 30 minutes. That's the protocol. It reduces blood sugar spikes by 30 percent and restores the fat-clearing enzymes sitting shuts down.
+Thirty percent. Lower blood sugar. From two-minute walking breaks. The intervention is almost embarrassingly simple.
+How long did you sit today? Most people have no idea. Track it once. The number will surprise you.
+Follow The Long Game for daily longevity science. Save this — set your 30-minute alarm before you close this app.`;
 
 // ── SLIDE-TO-SCRIPT MAPPING ────────────────────────────────────────────────────
 // Maps each slide index to the substring of FULL_SCRIPT it corresponds to.
 // We'll use character positions from the timings response to find slide boundaries.
 export const SLIDE_SCRIPTS = [
   "Sitting for 8 hours a day is killing you faster than smoking. Your doctor isn't telling you this.",
-  "A 40 percent higher risk of death. From sitting. Even in people who go to the gym.",
-  "Here's what happens inside your body. Blood pools in your legs. Your metabolism shuts down. Insulin stops working.",
-  "The paradox? You can exercise every day and still die early. If you sit for the other 23 hours.",
-  "The fix isn't a gym membership. It's movement snacks. Two minutes of walking every 30 minutes resets everything.",
-  "People who break up sitting live 4 years longer on average. Four years. From standing up.",
-  "You already knew sitting too much was bad. Now you know it's as dangerous as a pack of cigarettes a day.",
-  "Follow for one evidence-based habit a week. Your future self will thank you.",
+  "A 40 percent higher risk of death. From sitting. Even in people who go to the gym. This is the Active Couch Potato effect.",
+  "Here's what's actually happening inside your body during prolonged sitting. And none of it is good.",
+  "One hour of exercise cannot cancel 8 hours of sitting. Sedentary time is an independent risk factor. Both things are true.",
+  "Two minutes of light walking every 30 minutes. That's the protocol. It reduces blood sugar spikes by 30 percent and restores the fat-clearing enzymes sitting shuts down.",
+  "Thirty percent. Lower blood sugar. From two-minute walking breaks. The intervention is almost embarrassingly simple.",
+  "How long did you sit today? Most people have no idea. Track it once. The number will surprise you.",
+  "Follow The Long Game for daily longevity science. Save this — set your 30-minute alarm before you close this app.",
 ];
 
 async function generateAudioWithTimestamps() {
