@@ -1,0 +1,259 @@
+{
+  "scene1": {
+    "chunks": [
+      {
+        "text": "Sitting for 8 hours",
+        "start_sec": 0.0,
+        "end_sec": 1.68
+      },
+      {
+        "text": "a day is killing you",
+        "start_sec": 2.02,
+        "end_sec": 3.74
+      },
+      {
+        "text": "faster than smoking.",
+        "start_sec": 4.02,
+        "end_sec": 5.76
+      },
+      {
+        "text": "Your doctor isn't",
+        "start_sec": 6.88,
+        "end_sec": 8.36
+      },
+      {
+        "text": "telling you this.",
+        "start_sec": 8.66,
+        "end_sec": 10.251
+      }
+    ]
+  },
+  "scene2": {
+    "chunks": [
+      {
+        "text": "A 40 percent",
+        "start_sec": 11.0,
+        "end_sec": 12.4
+      },
+      {
+        "text": "higher risk of death.",
+        "start_sec": 12.86,
+        "end_sec": 14.46
+      },
+      {
+        "text": "From sitting.",
+        "start_sec": 15.56,
+        "end_sec": 16.5
+      },
+      {
+        "text": "Even in people who go",
+        "start_sec": 17.44,
+        "end_sec": 19.38
+      },
+      {
+        "text": "to the gym.",
+        "start_sec": 19.74,
+        "end_sec": 20.92
+      },
+      {
+        "text": "This is the Active Couch Potato effect.",
+        "start_sec": 21.22,
+        "end_sec": 24.353
+      }
+    ]
+  },
+  "scene3": {
+    "chunks": [
+      {
+        "text": "Here's what's actually",
+        "start_sec": 26.0,
+        "end_sec": 27.66
+      },
+      {
+        "text": "happening inside your body",
+        "start_sec": 27.98,
+        "end_sec": 30.02
+      },
+      {
+        "text": "during prolonged sitting.",
+        "start_sec": 30.42,
+        "end_sec": 32.26
+      },
+      {
+        "text": "And none of it is good.",
+        "start_sec": 32.62,
+        "end_sec": 34.64
+      }
+    ]
+  },
+  "scene4": {
+    "chunks": [
+      {
+        "text": "One hour of exercise",
+        "start_sec": 35.0,
+        "end_sec": 37.0
+      },
+      {
+        "text": "cannot cancel 8 hours",
+        "start_sec": 37.38,
+        "end_sec": 39.42
+      },
+      {
+        "text": "of sitting.",
+        "start_sec": 39.72,
+        "end_sec": 40.66
+      },
+      {
+        "text": "Sedentary time",
+        "start_sec": 40.9,
+        "end_sec": 42.42
+      },
+      {
+        "text": "is an independent risk factor.",
+        "start_sec": 42.68,
+        "end_sec": 44.96
+      },
+      {
+        "text": "Both things are true.",
+        "start_sec": 45.3,
+        "end_sec": 47.309
+      }
+    ]
+  },
+  "scene5": {
+    "chunks": [
+      {
+        "text": "Two minutes of light walking",
+        "start_sec": 48.0,
+        "end_sec": 49.92
+      },
+      {
+        "text": "every 30 minutes.",
+        "start_sec": 50.26,
+        "end_sec": 51.84
+      },
+      {
+        "text": "That's the protocol.",
+        "start_sec": 52.14,
+        "end_sec": 53.76
+      },
+      {
+        "text": "It reduces blood sugar spikes",
+        "start_sec": 54.04,
+        "end_sec": 56.34
+      },
+      {
+        "text": "by 30 percent",
+        "start_sec": 56.66,
+        "end_sec": 58.28
+      },
+      {
+        "text": "and restores the fat-clearing enzymes",
+        "start_sec": 58.56,
+        "end_sec": 61.2
+      },
+      {
+        "text": "sitting shuts down.",
+        "start_sec": 61.54,
+        "end_sec": 63.467
+      }
+    ]
+  },
+  "scene6": {
+    "chunks": [
+      {
+        "text": "Thirty percent.",
+        "start_sec": 64.0,
+        "end_sec": 65.4
+      },
+      {
+        "text": "Lower blood sugar.",
+        "start_sec": 66.26,
+        "end_sec": 67.88
+      },
+      {
+        "text": "From two-minute",
+        "start_sec": 68.72,
+        "end_sec": 70.0
+      },
+      {
+        "text": "walking breaks.",
+        "start_sec": 70.2,
+        "end_sec": 71.46
+      },
+      {
+        "text": "The intervention is",
+        "start_sec": 71.7,
+        "end_sec": 73.44
+      },
+      {
+        "text": "almost embarrassingly simple.",
+        "start_sec": 73.74,
+        "end_sec": 76.257
+      }
+    ]
+  },
+  "scene7": {
+    "chunks": [
+      {
+        "text": "How long did you",
+        "start_sec": 77.0,
+        "end_sec": 78.54
+      },
+      {
+        "text": "sit today?",
+        "start_sec": 78.92,
+        "end_sec": 80.06
+      },
+      {
+        "text": "Most people have no idea.",
+        "start_sec": 80.3,
+        "end_sec": 82.38
+      },
+      {
+        "text": "Track it once.",
+        "start_sec": 82.7,
+        "end_sec": 83.88
+      },
+      {
+        "text": "The number will",
+        "start_sec": 84.18,
+        "end_sec": 85.34
+      },
+      {
+        "text": "surprise you.",
+        "start_sec": 85.62,
+        "end_sec": 87.219
+      }
+    ]
+  },
+  "scene8": {
+    "chunks": [
+      {
+        "text": "Follow The Long Game",
+        "start_sec": 88.0,
+        "end_sec": 89.78
+      },
+      {
+        "text": "for daily longevity science.",
+        "start_sec": 90.16,
+        "end_sec": 92.38
+      },
+      {
+        "text": "Save this.",
+        "start_sec": 92.72,
+        "end_sec": 93.7
+      },
+      {
+        "text": "Set your 30-minute alarm",
+        "start_sec": 93.94,
+        "end_sec": 96.12
+      },
+      {
+        "text": "before you close this app.",
+        "start_sec": 96.46,
+        "end_sec": 98.645
+      }
+    ]
+  }
+}

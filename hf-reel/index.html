@@ -461,12 +461,12 @@
     tl.fromTo("#s1-h3", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.7, ease: "back.out(1.2)" }, 0.80);
     tl.to("#s1-div",   { scaleX: 1, duration: 0.67, ease: "none" }, 1.17);
     tl.fromTo("#s1-sub", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 1.67);
-    // S1 captions (ElevenLabs Brian timings)
-    cap("#s1c1", 0.00,  1.50);
-    cap("#s1c2", 1.50,  2.83);
-    cap("#s1c3", 2.83,  4.33);
-    cap("#s1c4", 5.13,  6.37);
-    cap("#s1c5", 6.37,  7.50);
+    // S1 captions — derived from actual vo1.wav duration (10.251s), word-proportional
+    cap("#s1c1", 0.000, 1.680);
+    cap("#s1c2", 2.020, 3.740);
+    cap("#s1c3", 4.020, 5.760);
+    cap("#s1c4", 6.880, 8.360);
+    cap("#s1c5", 8.660, 10.251);
 
     // ─── SCENE 2 ─────────────────────────────────────────────────────────
     tl.fromTo("#s2-tag",  { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.33, ease: "power2.out" }, 11.1);
@@ -476,12 +476,12 @@
     tl.fromTo("#s2-body", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 12.83);
     tl.to("#s2-src",      { opacity: 1, duration: 0.33, ease: "none" }, 13.4);
     // S2 captions (ElevenLabs Brian timings)
-    cap("#s2c1", 11.00, 12.20);
-    cap("#s2c2", 12.20, 13.63);
-    cap("#s2c3", 14.23, 15.37);
-    cap("#s2c4", 16.07, 17.50);
-    cap("#s2c5", 17.50, 18.53);
-    cap("#s2c6", 18.53, 20.90);
+    cap("#s2c1", 11.000, 12.400);
+    cap("#s2c2", 12.860, 14.460);
+    cap("#s2c3", 15.560, 16.500);
+    cap("#s2c4", 17.440, 19.380);
+    cap("#s2c5", 19.740, 20.920);
+    cap("#s2c6", 21.220, 24.353);
 
     // ─── SCENE 3 ─────────────────────────────────────────────────────────
     tl.fromTo("#s3-tag",  { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.33, ease: "power2.out" }, 26.1);
@@ -492,10 +492,10 @@
     tl.fromTo("#s3b4", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.4, ease: "power3.out" }, 28.0);
     tl.to("#s3-src", { opacity: 1, duration: 0.33 }, 29.0);
     // S3 captions (ElevenLabs Brian timings)
-    cap("#s3c1", 26.00, 27.53);
-    cap("#s3c2", 27.53, 29.27);
-    cap("#s3c3", 29.27, 30.73);
-    cap("#s3c4", 30.73, 32.10);
+    cap("#s3c1", 26.000, 27.660);
+    cap("#s3c2", 27.980, 30.020);
+    cap("#s3c3", 30.420, 32.260);
+    cap("#s3c4", 32.620, 34.640);
 
     // ─── SCENE 4 ─────────────────────────────────────────────────────────
     tl.fromTo("#s4-tag",  { opacity: 0 }, { opacity: 1, duration: 0.33, ease: "power2.out" }, 35.1);
@@ -506,12 +506,12 @@
     tl.fromTo("#s4-body", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.47, ease: "power2.out" }, 37.0);
     tl.to("#s4-src",  { opacity: 1, duration: 0.33 }, 37.73);
     // S4 captions (ElevenLabs Brian timings)
-    cap("#s4c1", 35.00, 36.33);
-    cap("#s4c2", 36.33, 37.93);
-    cap("#s4c3", 37.93, 38.90);
-    cap("#s4c4", 38.90, 40.07);
-    cap("#s4c5", 40.07, 42.10);
-    cap("#s4c6", 42.10, 43.40);
+    cap("#s4c1", 35.000, 37.000);
+    cap("#s4c2", 37.380, 39.420);
+    cap("#s4c3", 39.720, 40.660);
+    cap("#s4c4", 40.900, 42.420);
+    cap("#s4c5", 42.680, 44.960);
+    cap("#s4c6", 45.300, 47.309);
 
     // ─── SCENE 5 ─────────────────────────────────────────────────────────
     tl.fromTo("#s5-tag",  { opacity: 0 }, { opacity: 1, duration: 0.33, ease: "power2.out" }, 48.1);
@@ -523,13 +523,13 @@
     tl.fromTo("#s5b3", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.4, ease: "power3.out" }, 50.4);
     tl.to("#s5-src",  { opacity: 1, duration: 0.33 }, 51.5);
     // S5 captions (ElevenLabs Brian timings)
-    cap("#s5c1", 48.00, 49.73);
-    cap("#s5c2", 49.73, 50.93);
-    cap("#s5c3", 50.93, 52.17);
-    cap("#s5c4", 52.17, 53.80);
-    cap("#s5c5", 53.80, 54.97);
-    cap("#s5c6", 54.97, 57.23);
-    cap("#s5c7", 57.23, 58.60);
+    cap("#s5c1", 48.000, 49.920);
+    cap("#s5c2", 50.260, 51.840);
+    cap("#s5c3", 52.140, 53.760);
+    cap("#s5c4", 54.040, 56.340);
+    cap("#s5c5", 56.660, 58.280);
+    cap("#s5c6", 58.560, 61.200);
+    cap("#s5c7", 61.540, 63.467);
 
     // ─── SCENE 6 ─────────────────────────────────────────────────────────
     tl.fromTo("#s6-tag",  { opacity: 0 }, { opacity: 1, duration: 0.33, ease: "power2.out" }, 64.1);
@@ -538,12 +538,12 @@
     tl.to("#s6-div",  { scaleX: 1, duration: 0.6, ease: "none" }, 65.2);
     tl.fromTo("#s6-body", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.47, ease: "power2.out" }, 65.67);
     // S6 captions (ElevenLabs Brian timings)
-    cap("#s6c1", 64.00, 65.07);
-    cap("#s6c2", 65.67, 66.77);
-    cap("#s6c3", 67.27, 71.10);
-    cap("#s6c4", 71.10, 72.40);
-    cap("#s6c5", 72.40, 73.70);
-    cap("#s6c6", 73.70, 75.37);
+    cap("#s6c1", 64.000, 65.400);
+    cap("#s6c2", 66.260, 67.880);
+    cap("#s6c3", 68.720, 70.000);
+    cap("#s6c4", 70.200, 71.460);
+    cap("#s6c5", 71.700, 73.440);
+    cap("#s6c6", 73.740, 76.257);
 
     // ─── SCENE 7 ─────────────────────────────────────────────────────────
     tl.fromTo("#s7-tag",  { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.33, ease: "power2.out" }, 77.1);
@@ -553,12 +553,12 @@
     tl.to("#s7-div",  { scaleX: 1, duration: 0.67, ease: "none" }, 78.33);
     tl.fromTo("#s7-sub", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.47, ease: "power2.out" }, 78.87);
     // S7 captions (ElevenLabs Brian timings)
-    cap("#s7c1", 77.00, 79.57);
-    cap("#s7c2", 79.57, 80.63);
-    cap("#s7c3", 80.63, 82.33);
-    cap("#s7c4", 82.33, 83.53);
-    cap("#s7c5", 83.53, 84.67);
-    cap("#s7c6", 84.67, 85.70);
+    cap("#s7c1", 77.000, 78.540);
+    cap("#s7c2", 78.920, 80.060);
+    cap("#s7c3", 80.300, 82.380);
+    cap("#s7c4", 82.700, 83.880);
+    cap("#s7c5", 84.180, 85.340);
+    cap("#s7c6", 85.620, 87.219);
 
     // ─── SCENE 8 ─────────────────────────────────────────────────────────
     tl.fromTo("#s8-brand", { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.7, ease: "back.out(1.0)" }, 88.2);
@@ -568,11 +568,11 @@
     tl.fromTo("#s8-cta2",  { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 90.13);
     tl.fromTo("#s8-hash",  { opacity: 0 }, { opacity: 1, duration: 0.4 }, 90.67);
     // S8 captions (ElevenLabs Brian timings)
-    cap("#s8c1", 88.00, 92.27);
-    cap("#s8c2", 92.27, 94.13);
-    cap("#s8c3", 94.13, 94.97);
-    cap("#s8c4", 94.97, 96.63);
-    cap("#s8c5", 96.63, 98.17);
+    cap("#s8c1", 88.000, 89.780);
+    cap("#s8c2", 90.160, 92.380);
+    cap("#s8c3", 92.720, 93.700);
+    cap("#s8c4", 93.940, 96.120);
+    cap("#s8c5", 96.460, 98.645);
 
     window.__timelines["SittingReel"] = tl;
   </script>
