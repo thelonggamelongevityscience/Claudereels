@@ -3,13 +3,14 @@ import { interpolate, spring, useVideoConfig } from 'remotion';
 import { COLORS, FONTS } from '../constants';
 import { GlowBg } from '../components/GlowBg';
 import { GridOverlay } from '../components/GridOverlay';
-import { Caption } from '../components/Caption';
+import { Caption, CaptionChunk } from '../components/Caption';
 
 interface Scene8Props {
   frame: number;
+  captionChunks?: CaptionChunk[];
 }
 
-export const Scene8CTA: React.FC<Scene8Props> = ({ frame }) => {
+export const Scene8CTA: React.FC<Scene8Props> = ({ frame, captionChunks }) => {
   const { fps } = useVideoConfig();
 
   // Brand name entrance
@@ -203,7 +204,7 @@ export const Scene8CTA: React.FC<Scene8Props> = ({ frame }) => {
 
       <Caption
         frame={frame}
-        chunks={[
+        chunks={captionChunks ?? [
           { text: 'Follow The Long Game',          startFrame: 0,   endFrame: 63  },
           { text: 'for daily longevity science.',  startFrame: 63,  endFrame: 140 },
           { text: 'Save this.',                    startFrame: 140, endFrame: 177 },

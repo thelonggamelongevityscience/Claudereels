@@ -2,15 +2,16 @@ import React from 'react';
 import { interpolate, spring, useVideoConfig } from 'remotion';
 import { COLORS, FONTS } from '../constants';
 import { GridOverlay } from '../components/GridOverlay';
-import { Caption } from '../components/Caption';
+import { Caption, CaptionChunk } from '../components/Caption';
 import { DataBlock } from '../components/DataBlock';
 import { SourceStamp } from '../components/SourceStamp';
 
 interface Scene4Props {
   frame: number;
+  captionChunks?: CaptionChunk[];
 }
 
-export const Scene4Paradox: React.FC<Scene4Props> = ({ frame }) => {
+export const Scene4Paradox: React.FC<Scene4Props> = ({ frame, captionChunks }) => {
   const { fps } = useVideoConfig();
 
   // Tag
@@ -149,7 +150,7 @@ export const Scene4Paradox: React.FC<Scene4Props> = ({ frame }) => {
 
       <Caption
         frame={frame}
-        chunks={[
+        chunks={captionChunks ?? [
           { text: 'One hour of exercise',           startFrame: 0,   endFrame: 70  },
           { text: 'cannot cancel 8 hours',          startFrame: 70,  endFrame: 141 },
           { text: 'of sitting.',                    startFrame: 141, endFrame: 176 },

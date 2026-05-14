@@ -3,13 +3,14 @@ import { interpolate, spring, useVideoConfig } from 'remotion';
 import { COLORS, FONTS } from '../constants';
 import { GlowBg } from '../components/GlowBg';
 import { GridOverlay } from '../components/GridOverlay';
-import { Caption } from '../components/Caption';
+import { Caption, CaptionChunk } from '../components/Caption';
 import { DataBlock } from '../components/DataBlock';
 import { BulletItem } from '../components/BulletItem';
 import { SourceStamp } from '../components/SourceStamp';
 
 interface Scene5Props {
   frame: number;
+  captionChunks?: CaptionChunk[];
 }
 
 const bullets = [
@@ -18,7 +19,7 @@ const bullets = [
   "Doesn't need to be intense — light movement is enough",
 ];
 
-export const Scene5Fix: React.FC<Scene5Props> = ({ frame }) => {
+export const Scene5Fix: React.FC<Scene5Props> = ({ frame, captionChunks }) => {
   const { fps } = useVideoConfig();
 
   // Tag
@@ -134,7 +135,7 @@ export const Scene5Fix: React.FC<Scene5Props> = ({ frame }) => {
 
       <Caption
         frame={frame}
-        chunks={[
+        chunks={captionChunks ?? [
           { text: 'Two minutes of light walking',          startFrame: 0,   endFrame: 67  },
           { text: 'every 30 minutes.',                     startFrame: 67,  endFrame: 124 },
           { text: "That's the protocol.",                  startFrame: 124, endFrame: 180 },

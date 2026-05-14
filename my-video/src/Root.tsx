@@ -1,6 +1,6 @@
 import React from 'react';
 import { Composition } from 'remotion';
-import { SittingReel } from './Composition';
+import { SittingReel } from './SittingReel';
 import { FPS, WIDTH, HEIGHT } from './constants';
 import timingsData from '../public/timings.json';
 

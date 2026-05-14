@@ -3,13 +3,14 @@ import { interpolate, spring, useVideoConfig } from 'remotion';
 import { COLORS, FONTS } from '../constants';
 import { GlowBg } from '../components/GlowBg';
 import { GridOverlay } from '../components/GridOverlay';
-import { Caption } from '../components/Caption';
+import { Caption, CaptionChunk } from '../components/Caption';
 
 interface Scene6Props {
   frame: number;
+  captionChunks?: CaptionChunk[];
 }
 
-export const Scene6StatPunch: React.FC<Scene6Props> = ({ frame }) => {
+export const Scene6StatPunch: React.FC<Scene6Props> = ({ frame, captionChunks }) => {
   const { fps } = useVideoConfig();
 
   // Tag
@@ -141,7 +142,7 @@ export const Scene6StatPunch: React.FC<Scene6Props> = ({ frame }) => {
 
       <Caption
         frame={frame}
-        chunks={[
+        chunks={captionChunks ?? [
           { text: 'Thirty percent.',               startFrame: 0,   endFrame: 49  },
           { text: 'Lower blood sugar.',            startFrame: 67,  endFrame: 126 },
           { text: 'From two-minute',               startFrame: 141, endFrame: 185 },

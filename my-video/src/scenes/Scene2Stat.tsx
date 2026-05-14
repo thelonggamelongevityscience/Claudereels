@@ -3,14 +3,15 @@ import { interpolate, spring, useVideoConfig } from 'remotion';
 import { COLORS, FONTS } from '../constants';
 import { GlowBg } from '../components/GlowBg';
 import { GridOverlay } from '../components/GridOverlay';
-import { Caption } from '../components/Caption';
+import { Caption, CaptionChunk } from '../components/Caption';
 import { SourceStamp } from '../components/SourceStamp';
 
 interface Scene2Props {
   frame: number;
+  captionChunks?: CaptionChunk[];
 }
 
-export const Scene2Stat: React.FC<Scene2Props> = ({ frame }) => {
+export const Scene2Stat: React.FC<Scene2Props> = ({ frame, captionChunks }) => {
   const { fps } = useVideoConfig();
 
   // Tag
@@ -151,7 +152,7 @@ export const Scene2Stat: React.FC<Scene2Props> = ({ frame }) => {
 
       <Caption
         frame={frame}
-        chunks={[
+        chunks={captionChunks ?? [
           { text: 'A 40 percent',                            startFrame: 0,   endFrame: 55  },
           { text: 'higher risk of death.',                  startFrame: 55,  endFrame: 118 },
           { text: 'From sitting.',                          startFrame: 136, endFrame: 172 },

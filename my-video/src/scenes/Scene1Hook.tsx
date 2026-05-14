@@ -3,13 +3,14 @@ import { interpolate, spring, useVideoConfig } from 'remotion';
 import { COLORS, FONTS } from '../constants';
 import { GlowBg } from '../components/GlowBg';
 import { GridOverlay } from '../components/GridOverlay';
-import { Caption } from '../components/Caption';
+import { Caption, CaptionChunk } from '../components/Caption';
 
 interface Scene1Props {
   frame: number;
+  captionChunks?: CaptionChunk[];
 }
 
-export const Scene1Hook: React.FC<Scene1Props> = ({ frame }) => {
+export const Scene1Hook: React.FC<Scene1Props> = ({ frame, captionChunks }) => {
   const { fps } = useVideoConfig();
 
   // Tag animation
@@ -145,7 +146,7 @@ export const Scene1Hook: React.FC<Scene1Props> = ({ frame }) => {
 
       <Caption
         frame={frame}
-        chunks={[
+        chunks={captionChunks ?? [
           { text: 'Sitting for 8 hours',  startFrame: 0,   endFrame: 60  },
           { text: 'a day is killing you', startFrame: 60,  endFrame: 120 },
           { text: 'faster than smoking.', startFrame: 120, endFrame: 181 },

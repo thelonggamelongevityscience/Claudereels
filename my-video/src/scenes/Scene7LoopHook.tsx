@@ -2,13 +2,14 @@ import React from 'react';
 import { interpolate, spring, useVideoConfig } from 'remotion';
 import { COLORS, FONTS } from '../constants';
 import { GridOverlay } from '../components/GridOverlay';
-import { Caption } from '../components/Caption';
+import { Caption, CaptionChunk } from '../components/Caption';
 
 interface Scene7Props {
   frame: number;
+  captionChunks?: CaptionChunk[];
 }
 
-export const Scene7LoopHook: React.FC<Scene7Props> = ({ frame }) => {
+export const Scene7LoopHook: React.FC<Scene7Props> = ({ frame, captionChunks }) => {
   const { fps } = useVideoConfig();
 
   // Tag
@@ -138,7 +139,7 @@ export const Scene7LoopHook: React.FC<Scene7Props> = ({ frame }) => {
 
       <Caption
         frame={frame}
-        chunks={[
+        chunks={captionChunks ?? [
           { text: 'How long did you',          startFrame: 0,   endFrame: 56  },
           { text: 'sit today?',                startFrame: 56,  endFrame: 98  },
           { text: 'Most people have no idea.', startFrame: 98,  endFrame: 170 },

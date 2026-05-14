@@ -2,12 +2,13 @@ import React from 'react';
 import { interpolate } from 'remotion';
 import { COLORS, FONTS } from '../constants';
 import { GridOverlay } from '../components/GridOverlay';
-import { Caption } from '../components/Caption';
+import { Caption, CaptionChunk } from '../components/Caption';
 import { BulletItem } from '../components/BulletItem';
 import { SourceStamp } from '../components/SourceStamp';
 
 interface Scene3Props {
   frame: number;
+  captionChunks?: CaptionChunk[];
 }
 
 const bullets = [
@@ -17,7 +18,7 @@ const bullets = [
   'Lipoprotein lipase drops 90% — fat-clearing enzyme nearly shuts off when seated',
 ];
 
-export const Scene3WhatHappens: React.FC<Scene3Props> = ({ frame }) => {
+export const Scene3WhatHappens: React.FC<Scene3Props> = ({ frame, captionChunks }) => {
 
   // Tag
   const tagOpacity = interpolate(frame, [0, 10], [0, 1], { extrapolateRight: 'clamp' });
@@ -112,7 +113,7 @@ export const Scene3WhatHappens: React.FC<Scene3Props> = ({ frame }) => {
 
       <Caption
         frame={frame}
-        chunks={[
+        chunks={captionChunks ?? [
           { text: "Here's what's actually",    startFrame: 0,   endFrame: 58  },
           { text: 'happening inside your body', startFrame: 58,  endFrame: 131 },
           { text: 'during prolonged sitting.',  startFrame: 131, endFrame: 198 },
