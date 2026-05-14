@@ -7,7 +7,7 @@ import * as path from "path";
 import axios from "axios";
 
 const ELEVENLABS_API_KEY = process.env.ELEVENLABS_API_KEY!;
-const VOICE_ID = "N2lVS1w7w7YCOu9C6kH1"; // Brian — professional American male
+const VOICE_ID = "nPczCjzI2devNBz1zQrb"; // Brian — deep American, professional & warm
 
 // ── FULL VOICEOVER SCRIPT (from Reel #1: The Sitting Death Sentence) ──────────
 const FULL_SCRIPT = `Sitting for 8 hours a day is killing you faster than smoking. Your doctor isn't telling you this.
