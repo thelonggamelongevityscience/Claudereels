@@ -1,7 +1,10 @@
 import React from 'react';
 import { Composition } from 'remotion';
 import { SittingReel } from './Composition';
-import { TOTAL_FRAMES, FPS, WIDTH, HEIGHT } from './constants';
+import { FPS, WIDTH, HEIGHT } from './constants';
+import timingsData from '../public/timings.json';
+
+const TOTAL_FRAMES = Math.ceil(timingsData.totalDuration * FPS) + FPS; // +1s buffer
 
 export const RemotionRoot: React.FC = () => {
   return (
