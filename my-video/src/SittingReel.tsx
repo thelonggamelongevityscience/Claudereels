@@ -37,61 +37,62 @@ const FONT_CSS = `
 
 const S1_CAPS: CaptionChunk[] = [
   { text: 'Sitting for 8 hours a day',            startFrame: 0,   endFrame: 44  },
-  { text: 'is killing you faster than smoking.',  startFrame: 45,  endFrame: 102 },
-  { text: "Your doctor isn't telling you this.",  startFrame: 114, endFrame: 162 },
+  { text: 'is killing you faster than smoking.',  startFrame: 45,  endFrame: 104 },
+  { text: "Your doctor isn't telling you this.",  startFrame: 112, endFrame: 160 },
 ];
 
 const S2_CAPS: CaptionChunk[] = [
-  { text: 'A 40 percent higher risk of death.',  startFrame: 0,   endFrame: 61  },
-  { text: 'From sitting.',                        startFrame: 74,  endFrame: 99  },
-  { text: 'Even in people who go to the gym.',   startFrame: 103, endFrame: 154 },
+  { text: 'A 40 percent higher risk of death.',        startFrame: 0,   endFrame: 62  },
+  { text: 'From sitting.',                              startFrame: 74,  endFrame: 100 },
+  { text: 'Even in people who go to the gym.',         startFrame: 102, endFrame: 153 },
+  { text: 'This is the Active Couch Potato effect.',   startFrame: 165, endFrame: 234 },
 ];
 
 const S3_CAPS: CaptionChunk[] = [
-  { text: "Here's what happens inside your body.", startFrame: 0,   endFrame: 52  },
-  { text: 'Blood pools in your legs.',             startFrame: 57,  endFrame: 102 },
-  { text: 'Your metabolism shuts down.',           startFrame: 103, endFrame: 161 },
-  { text: 'Insulin stops working.',                startFrame: 166, endFrame: 216 },
+  { text: "Here's what's actually happening inside your body", startFrame: 0,   endFrame: 71  },
+  { text: 'during prolonged sitting.',                         startFrame: 72,  endFrame: 109 },
+  { text: 'And none of it is good.',                          startFrame: 118, endFrame: 157 },
 ];
 
 const S4_CAPS: CaptionChunk[] = [
-  { text: 'The paradox?',                          startFrame: 0,   endFrame: 26  },
-  { text: 'You can exercise every day',            startFrame: 28,  endFrame: 77  },
-  { text: 'and still die early.',                  startFrame: 79,  endFrame: 113 },
-  { text: 'If you sit for the other 23 hours.',   startFrame: 118, endFrame: 180 },
+  { text: 'One hour of exercise cannot cancel 8 hours of sitting.', startFrame: 0,   endFrame: 97  },
+  { text: 'Sedentary time is an independent risk factor.',           startFrame: 109, endFrame: 187 },
+  { text: 'Both things are true.',                                   startFrame: 193, endFrame: 230 },
 ];
 
 const S5_CAPS: CaptionChunk[] = [
-  { text: "The fix isn't a gym membership.",       startFrame: 0,   endFrame: 49  },
-  { text: "It's movement snacks.",                 startFrame: 52,  endFrame: 87  },
-  { text: 'Two minutes of walking every 30 minutes', startFrame: 100, endFrame: 162 },
-  { text: 'resets everything.',                    startFrame: 165, endFrame: 195 },
+  { text: 'Two minutes of light walking every 30 minutes.',         startFrame: 0,   endFrame: 76  },
+  { text: "That's the protocol.",                                    startFrame: 80,  endFrame: 113 },
+  { text: 'It reduces blood sugar spikes by 30 percent',            startFrame: 117, endFrame: 196 },
+  { text: 'and restores the fat-clearing enzymes sitting shuts down.', startFrame: 198, endFrame: 292 },
 ];
 
 const S6_CAPS: CaptionChunk[] = [
-  { text: 'People who break up sitting',           startFrame: 0,   endFrame: 37  },
-  { text: 'live 4 years longer on average.',       startFrame: 43,  endFrame: 98  },
-  { text: 'Four years.',                           startFrame: 111, endFrame: 134 },
-  { text: 'From standing up.',                     startFrame: 136, endFrame: 165 },
+  { text: 'Thirty percent.',                                       startFrame: 0,   endFrame: 26  },
+  { text: 'Lower blood sugar.',                                    startFrame: 35,  endFrame: 65  },
+  { text: 'From two-minute walking breaks.',                       startFrame: 72,  endFrame: 119 },
+  { text: 'The intervention is almost embarrassingly simple.',     startFrame: 131, endFrame: 210 },
 ];
 
 const S7_CAPS: CaptionChunk[] = [
-  { text: 'You already knew sitting too much was bad.', startFrame: 0,   endFrame: 66  },
-  { text: "Now you know it's as dangerous",             startFrame: 81,  endFrame: 123 },
-  { text: 'as a pack of cigarettes a day.',             startFrame: 125, endFrame: 174 },
+  { text: 'How long did you sit today?',     startFrame: 0,   endFrame: 47  },
+  { text: 'Most people have no idea.',       startFrame: 62,  endFrame: 110 },
+  { text: 'Track it once.',                  startFrame: 113, endFrame: 144 },
+  { text: 'The number will surprise you.',   startFrame: 149, endFrame: 190 },
 ];
 
 const S8_CAPS: CaptionChunk[] = [
-  { text: 'Follow for one evidence-based habit a week.', startFrame: 0,  endFrame: 70  },
-  { text: 'Your future self will thank you.',            startFrame: 83, endFrame: 135 },
+  { text: 'Follow The Long Game for daily longevity science.',       startFrame: 0,   endFrame: 84  },
+  { text: 'Save this',                                               startFrame: 90,  endFrame: 109 },
+  { text: 'set your 30-minute alarm before you close this app.',     startFrame: 128, endFrame: 214 },
 ];
 
 // ── Music volume: louder on hooks/outro, quieter under instructional scenes ──
 function getMusicVolume(frame: number): number {
-  if (frame < 338) return 0.5;
-  if (frame < 368) return interpolate(frame, [338, 368], [0.5, 0.08]);
-  if (frame < 947) return 0.08;
-  if (frame < 977) return interpolate(frame, [947, 977], [0.08, 0.5]);
+  if (frame < 415) return 0.5;
+  if (frame < 445) return interpolate(frame, [415, 445], [0.5, 0.08]);
+  if (frame < 1133) return 0.08;
+  if (frame < 1163) return interpolate(frame, [1133, 1163], [0.08, 0.5]);
   return 0.5;
 }
 
