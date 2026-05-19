@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Long Game — Optimised Reel Demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Barlow+Condensed:wght@400;700;800;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0D0D0D;
+    --green: #00FF85;
+    --gold: #FFD166;
+    --red: #FF4D6D;
+    --white: #FFFFFF;
+    --greige: #E8E0D5;
+    --grey: #777777;
+    --darkgrey: #1a1a1a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #0a0a0a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    font-family: 'Barlow Condensed', sans-serif;
+    padding: 24px 16px 40px;
+    gap: 20px;
+  }
+
+  /* REEL FRAME — 9:16 */
+  .reel-frame {
+    width: 360px;
+    height: 640px;
+    background: var(--black);
+    position: relative;
+    overflow: hidden;
+    border-radius: 18px;
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,0.06),
+      0 0 60px rgba(0,255,133,0.12),
+      0 40px 80px rgba(0,0,0,0.6);
+    flex-shrink: 0;
+  }
+
+  /* GRID TEXTURE */
+  .reel-frame::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
+    background-size: 32px 32px;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* STORY SEGMENTS */
+  .segments {
+    position: absolute;
+    top: 12px;
+    left: 10px;
+    right: 10px;
+    display: flex;
+    gap: 3px;
+    z-index: 50;
+  }
+  .seg {
+    flex: 1;
+    height: 2px;
+    background: rgba(255,255,255,0.18);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .seg-fill {
+    height: 100%;
+    background: var(--white);
+    width: 0%;
+  }
+  .seg.done .seg-fill { width: 100%; background: var(--white); }
+
+  /* ACCOUNT HEADER */
+  .acct-header {
+    position: absolute;
+    top: 22px;
+    left: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 50;
+  }
+  .acct-avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 10px;
+    color: var(--black);
+    letter-spacing: -0.02em;
+    flex-shrink: 0;
+  }
+  .acct-name {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 0.04em;
+  }
+  .acct-follow {
+    font-size: 11px;
+    color: var(--green);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    margin-left: 6px;
+  }
+
+  /* SCENE SYSTEM */
+  .scene {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 28px 80px;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 2;
+  }
+  .scene.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  /* BOTTOM BAR */
+  .bottom-bar {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 12px 16px 16px;
+    background: linear-gradient(transparent, rgba(0,0,0,0.7));
+    z-index: 40;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .caption-text {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.4;
+  }
+  .caption-text span { color: var(--green); }
+
+  /* VOICEOVER BADGE */
+  .vo-badge {
+    position: absolute;
+    top: 62px;
+    right: 14px;
+    background: rgba(0,255,133,0.1);
+    border: 1px solid rgba(0,255,133,0.3);
+    color: var(--green);
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    padding: 3px 8px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    z-index: 50;
+    border-radius: 3px;
+  }
+
+  /* =====================
+     SCENE ANIMATIONS
+  ===================== */
+  .anim-up {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.35s ease, transform 0.35s ease;
+  }
+  .anim-left {
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.35s ease, transform 0.35s ease;
+  }
+  .anim-scale {
+    opacity: 0;
+    transform: scale(0.75);
+    transition: opacity 0.4s cubic-bezier(0.34,1.56,0.64,1), transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
+  }
+  .anim-fade {
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+  .scene.active .anim-up { opacity: 1; transform: translateY(0); }
+  .scene.active .anim-left { opacity: 1; transform: translateX(0); }
+  .scene.active .anim-scale { opacity: 1; transform: scale(1); }
+  .scene.active .anim-fade { opacity: 1; }
+
+  /* Stagger delays */
+  .d1 { transition-delay: 0.1s !important; }
+  .d2 { transition-delay: 0.25s !important; }
+  .d3 { transition-delay: 0.4s !important; }
+  .d4 { transition-delay: 0.55s !important; }
+  .d5 { transition-delay: 0.7s !important; }
+  .d6 { transition-delay: 0.85s !important; }
+  .d7 { transition-delay: 1.0s !important; }
+
+  /* LINE REVEAL */
+  .line-reveal {
+    width: 0;
+    height: 2px;
+    background: var(--green);
+    transition: width 0.7s ease;
+  }
+  .scene.active .line-reveal { width: 100%; }
+
+  .line-reveal-gold {
+    width: 0;
+    height: 2px;
+    background: var(--gold);
+    transition: width 0.7s ease 0.3s;
+  }
+  .scene.active .line-reveal-gold { width: 60%; }
+
+  /* =====================
+     TYPOGRAPHY SYSTEM
+  ===================== */
+  .tag {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 12px;
+  }
+  .tag.gold { color: var(--gold); }
+  .tag.red { color: var(--red); }
+
+  .h-giant {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 88px;
+    color: var(--white);
+    line-height: 0.85;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+  }
+  .h-huge {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 64px;
+    color: var(--white);
+    line-height: 0.88;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+  }
+  .h-large {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 44px;
+    color: var(--white);
+    line-height: 0.9;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+  }
+  .h-med {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 28px;
+    color: var(--white);
+    line-height: 1;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+  }
+  .italic-sub {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 20px;
+    color: var(--greige);
+    line-height: 1.3;
+  }
+  .body-mono {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--grey);
+    line-height: 1.6;
+  }
+  .body-mono.bright { color: var(--greige); }
+  .num-green {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 160px;
+    color: var(--green);
+    line-height: 0.8;
+    letter-spacing: -0.04em;
+  }
+  .num-white {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 120px;
+    color: var(--white);
+    line-height: 0.85;
+    letter-spacing: -0.03em;
+  }
+  .source-stamp {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: rgba(0,255,133,0.5);
+    letter-spacing: 0.08em;
+    margin-top: 8px;
+  }
+
+  /* DATA BLOCK */
+  .data-block {
+    border-left: 2px solid var(--green);
+    padding-left: 12px;
+    margin: 8px 0;
+  }
+  .data-block.gold { border-color: var(--gold); }
+  .data-block.red { border-color: var(--red); }
+  .data-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 3px;
+  }
+  .data-label.gold { color: var(--gold); }
+  .data-label.red { color: var(--red); }
+  .data-value {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 32px;
+    color: var(--white);
+    line-height: 1;
+    letter-spacing: -0.01em;
+  }
+  .data-desc {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--greige);
+    line-height: 1.5;
+    margin-top: 2px;
+  }
+
+  /* LIST ITEM */
+  .list-item {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    margin-bottom: 10px;
+  }
+  .list-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--green);
+    flex-shrink: 0;
+    margin-top: 5px;
+  }
+  .list-dot.gold { background: var(--gold); }
+  .list-dot.red { background: var(--red); }
+  .list-text {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--greige);
+    line-height: 1.5;
+  }
+  .list-text strong { color: var(--white); font-weight: 500; }
+
+  /* NUMBER BADGE */
+  .num-badge {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 11px;
+    color: var(--green);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .num-badge.gold { color: var(--gold); }
+  .num-badge.red { color: var(--red); }
+
+  /* BACKGROUND GLOW */
+  .bg-glow-green {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 60%, rgba(0,255,133,0.07) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .bg-glow-red {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 50%, rgba(255,77,109,0.09) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .bg-glow-gold {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 40%, rgba(255,209,102,0.07) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  /* WAVE INDICATOR */
+  .wave-track {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 16px;
+  }
+  .wave-pip {
+    width: 24px;
+    height: 3px;
+    border-radius: 2px;
+    background: rgba(255,255,255,0.15);
+  }
+  .wave-pip.active-w { background: var(--green); }
+  .wave-pip.done-w { background: rgba(255,255,255,0.4); }
+
+  /* SPLIT LAYOUT */
+  .split {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+  }
+  .split-col {
+    flex: 1;
+    padding: 10px;
+    border-top: 2px solid var(--green);
+  }
+  .split-col.red-col { border-color: var(--red); }
+  .split-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 8px;
+  }
+  .split-label.red { color: var(--red); }
+  .split-item {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--greige);
+    line-height: 1.6;
+    padding: 2px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  /* CTA SCENE */
+  .cta-box {
+    border: 1.5px solid var(--green);
+    padding: 14px 16px;
+    margin-top: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .cta-box-text {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--green);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .cta-arrow {
+    font-size: 18px;
+    color: var(--green);
+  }
+
+  /* LOOP FLASH */
+  .loop-flash {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,255,133,0.03);
+    z-index: 3;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s;
+  }
+
+  /* CONTROLS */
+  .controls-wrap {
+    width: 360px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .controls-row {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  .btn {
+    flex: 1;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.7);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 11px 16px;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.2s;
+    text-align: center;
+  }
+  .btn:hover { background: rgba(255,255,255,0.1); color: white; }
+  .btn.green { background: var(--green); color: var(--black); border-color: var(--green); flex: 2; }
+  .btn.green:hover { background: #00dd70; }
+  .btn.active-btn { border-color: var(--green); color: var(--green); }
+
+  .scene-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .scene-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: rgba(255,255,255,0.35);
+  }
+  .scene-title-disp {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: rgba(255,255,255,0.35);
+    text-align: right;
+  }
+
+  .vo-script-box {
+    background: rgba(0,255,133,0.04);
+    border: 1px solid rgba(0,255,133,0.15);
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+  .vo-script-label {
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--green);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .vo-script-text {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.7;
+  }
+  .vo-script-text em {
+    color: var(--green);
+    font-style: normal;
+  }
+
+  .info-note {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: rgba(255,255,255,0.2);
+    text-align: center;
+    line-height: 1.6;
+    padding: 0 8px;
+  }
+
+  /* TIMING INDICATOR */
+  .timing-bar {
+    width: 360px;
+    height: 3px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .timing-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--green), var(--gold));
+    width: 0%;
+    transition: width linear;
+  }
+  .timing-label {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: rgba(255,255,255,0.25);
+    margin-top: 4px;
+  }
+</style>
+</head>
+<body>
+
+<!-- REEL FRAME -->
+<div class="reel-frame" id="reel" onclick="nextScene()">
+
+  <!-- SEGMENTS -->
+  <div class="segments" id="segments"></div>
+
+  <!-- ACCOUNT HEADER -->
+  <div class="acct-header" style="top:28px;">
+    <div class="acct-avatar">TLG</div>
+    <div>
+      <span class="acct-name">thelonggame</span>
+      <span class="acct-follow">• Follow</span>
+    </div>
+  </div>
+
+  <!-- VOICEOVER BADGE -->
+  <div class="vo-badge">🎙 Add voiceover here</div>
+
+  <!-- =====================
+       SCENE 1 — HOOK (0-4s)
+       VO: "Your body starts aging at 34. Not 60. Not 50. Thirty. Four."
+  ===================== -->
+  <div class="scene active" id="scene1" data-title="Hook" data-duration="3500">
+    <div class="tag anim-up d1">AGING SCIENCE · STANFORD 2019</div>
+    <div class="h-huge anim-up d2" style="margin-bottom:4px;">YOUR BODY<br>STARTS<br>AGING AT</div>
+    <div class="num-green anim-scale d3">34</div>
+    <div class="line-reveal" style="margin-top:16px; transition-delay:0.8s;"></div>
+    <div class="italic-sub anim-up d4" style="margin-top:10px;">Not 60. Not 50. <strong style="color:white;">34.</strong></div>
+  </div>
+
+  <!-- =====================
+       SCENE 2 — THE STUDY (4-7s)
+       VO: "Stanford researchers measured 2,925 proteins in human blood. What they found changed everything we knew about aging."
+  ===================== -->
+  <div class="scene" id="scene2" data-title="The Study" data-duration="3500">
+    <div class="bg-glow-green"></div>
+    <div class="tag anim-up d1">NATURE MEDICINE · 2019</div>
+    <div class="h-large anim-up d2" style="margin-bottom:20px;">The Stanford<br>Discovery</div>
+    <div class="data-block anim-left d2">
+      <div class="data-label">Proteins measured</div>
+      <div class="data-value">2,925</div>
+      <div class="data-desc">plasma proteins tracked across<br>4,263 participants aged 18–95</div>
+    </div>
+    <div class="data-block anim-left d3" style="margin-top:8px;">
+      <div class="data-label">Finding</div>
+      <div class="data-value" style="font-size:22px; line-height:1.2;">Aging is NOT<br>gradual</div>
+      <div class="data-desc">It happens in 3 sudden,<br>measurable biological waves</div>
+    </div>
+    <div class="source-stamp anim-fade d4">★ Sinha et al., Nature Medicine 2019</div>
+  </div>
+
+  <!-- =====================
+       SCENE 3 — WAVE 1 INTRO (7-10s)
+       VO: "Wave one hits at thirty-four."
+  ===================== -->
+  <div class="scene" id="scene3" data-title="Wave 01 Intro" data-duration="2500">
+    <div class="wave-track anim-up d1">
+      <div class="wave-pip active-w"></div>
+      <div class="wave-pip"></div>
+      <div class="wave-pip"></div>
+    </div>
+    <div class="num-badge anim-up d1">Wave 01 of 03</div>
+    <div class="num-white anim-left d2" style="color: var(--green);">34</div>
+    <div class="h-large anim-up d3" style="margin-top:-8px;">The Silent<br>Shift</div>
+    <div class="line-reveal" style="margin-top:16px; transition-delay:0.6s;"></div>
+    <div class="body-mono bright anim-up d4" style="margin-top:12px;">Most people feel nothing.<br>The biology has already changed.</div>
+  </div>
+
+  <!-- =====================
+       SCENE 4 — WAVE 1 DATA (10-13s)
+       VO: "Muscle protein synthesis declines. Metabolism slows. Collagen drops one percent every year from now."
+  ===================== -->
+  <div class="scene" id="scene4" data-title="Wave 01 Data" data-duration="3500">
+    <div class="wave-track anim-fade d1">
+      <div class="wave-pip active-w"></div>
+      <div class="wave-pip"></div>
+      <div class="wave-pip"></div>
+    </div>
+    <div class="num-badge anim-up d1">What changes at 34</div>
+    <div class="list-item anim-left d2">
+      <div class="list-dot"></div>
+      <div class="list-text"><strong>Muscle synthesis declines</strong> — without training, you lose 3–5% of muscle mass per decade from here</div>
+    </div>
+    <div class="list-item anim-left d3">
+      <div class="list-dot"></div>
+      <div class="list-text"><strong>Metabolic rate slows</strong> — fat accumulates even without dietary change</div>
+    </div>
+    <div class="list-item anim-left d4">
+      <div class="list-dot"></div>
+      <div class="list-text"><strong>Collagen drops 1%/year</strong> — skin joint and arterial wall integrity begins declining</div>
+    </div>
+    <div class="list-item anim-left d5">
+      <div class="list-dot"></div>
+      <div class="list-text"><strong>GH output falls</strong> — growth hormone declines 14% per decade from peak</div>
+    </div>
+  </div>
+
+  <!-- =====================
+       SCENE 5 — WAVE 2 INTRO (13-16s)
+       VO: "Wave two hits at sixty. This is when things accelerate."
+  ===================== -->
+  <div class="scene" id="scene5" data-title="Wave 02 Intro" data-duration="2500">
+    <div class="bg-glow-gold"></div>
+    <div class="wave-track anim-up d1">
+      <div class="wave-pip done-w"></div>
+      <div class="wave-pip active-w" style="background:var(--gold);"></div>
+      <div class="wave-pip"></div>
+    </div>
+    <div class="num-badge gold anim-up d1">Wave 02 of 03</div>
+    <div class="num-white anim-left d2" style="color: var(--gold);">60</div>
+    <div class="h-large anim-up d3" style="margin-top:-8px;">The<br>Acceleration</div>
+    <div class="line-reveal-gold" style="margin-top:16px;"></div>
+    <div class="body-mono bright anim-up d4" style="margin-top:12px;">Multiple systems accelerate<br>simultaneously. The window<br>to intervene is narrowing.</div>
+  </div>
+
+  <!-- =====================
+       SCENE 6 — WAVE 2 DATA (16-19s)
+       VO: "Cardiovascular aging accelerates. The immune system begins attacking healthy tissue. Alzheimer's risk becomes measurable."
+  ===================== -->
+  <div class="scene" id="scene6" data-title="Wave 02 Data" data-duration="3500">
+    <div class="bg-glow-gold"></div>
+    <div class="wave-track anim-fade d1">
+      <div class="wave-pip done-w"></div>
+      <div class="wave-pip active-w" style="background:var(--gold);"></div>
+      <div class="wave-pip"></div>
+    </div>
+    <div class="num-badge gold anim-up d1">What changes at 60</div>
+    <div class="list-item anim-left d2">
+      <div class="list-dot gold"></div>
+      <div class="list-text"><strong>Cardiovascular aging accelerates</strong> — arterial stiffness and plaque accumulation compound sharply</div>
+    </div>
+    <div class="list-item anim-left d3">
+      <div class="list-dot gold"></div>
+      <div class="list-text"><strong>Immune senescence</strong> — aging immune system begins attacking healthy tissue</div>
+    </div>
+    <div class="list-item anim-left d4">
+      <div class="list-dot gold"></div>
+      <div class="list-text"><strong>Cognitive risk measurable</strong> — Alzheimer's amyloid accumulation detectable 20 years before symptoms</div>
+    </div>
+    <div class="list-item anim-left d5">
+      <div class="list-dot gold"></div>
+      <div class="list-text"><strong>Hormone floor reached</strong> — testosterone DHEA and estrogen at significantly reduced baselines</div>
+    </div>
+  </div>
+
+  <!-- =====================
+       SCENE 7 — WAVE 3 INTRO (19-22s)
+       VO: "Wave three hits at seventy-eight. By now biological age can be twenty years different between two people born the same year."
+  ===================== -->
+  <div class="scene" id="scene7" data-title="Wave 03 Intro" data-duration="2500">
+    <div class="bg-glow-red"></div>
+    <div class="wave-track anim-up d1">
+      <div class="wave-pip done-w"></div>
+      <div class="wave-pip done-w"></div>
+      <div class="wave-pip active-w" style="background:var(--red);"></div>
+    </div>
+    <div class="num-badge red anim-up d1">Wave 03 of 03</div>
+    <div class="num-white anim-left d2" style="color: var(--red);">78</div>
+    <div class="h-large anim-up d3" style="margin-top:-8px;">The Final<br>Wave</div>
+    <div style="width:0;height:2px;background:var(--red);transition:width 0.7s ease 0.6s;margin-top:16px;" class="red-line"></div>
+    <div class="body-mono bright anim-up d4" style="margin-top:12px;">Two people born the same year<br>can now be <strong style="color:var(--red);">20 biological years</strong> apart.</div>
+  </div>
+
+  <!-- =====================
+       SCENE 8 — THE SPLIT (22-26s)
+       VO: "Same age. Completely different bodies. The gap opened at thirty-four."
+  ===================== -->
+  <div class="scene" id="scene8" data-title="The Split" data-duration="4000">
+    <div class="h-med anim-up d1" style="margin-bottom:14px;">Same Birthday.<br>Different Bodies.</div>
+    <div class="split anim-up d2">
+      <div class="split-col red-col">
+        <div class="split-label red">Person A</div>
+        <div class="split-item" style="color:var(--red);font-family:'Barlow Condensed';font-weight:800;font-size:28px;border:none;padding:0 0 4px;">BIO AGE 57</div>
+        <div class="split-item">No exercise</div>
+        <div class="split-item">6h disrupted sleep</div>
+        <div class="split-item">High stress / UPF diet</div>
+        <div class="split-item">Sedentary lifestyle</div>
+      </div>
+      <div class="split-col">
+        <div class="split-label">Person B</div>
+        <div class="split-item" style="color:var(--green);font-family:'Barlow Condensed';font-weight:800;font-size:28px;border:none;padding:0 0 4px;">BIO AGE 36</div>
+        <div class="split-item">Zone 2 + lifts</div>
+        <div class="split-item">8h consistent sleep</div>
+        <div class="split-item">Manages stress / whole food</div>
+        <div class="split-item">7,000+ steps/day</div>
+      </div>
+    </div>
+    <div class="body-mono anim-fade d3" style="margin-top:10px;text-align:center;font-size:10px;">Chronological age: <strong style="color:white;">45 — both of them.</strong></div>
+  </div>
+
+  <!-- =====================
+       SCENE 9 — WHAT TO DO (26-31s)
+       VO: "The good news. Every wave is modifiable. Here's what the evidence says to do before each one hits."
+  ===================== -->
+  <div class="scene" id="scene9" data-title="The Intervention" data-duration="4500">
+    <div class="bg-glow-green"></div>
+    <div class="tag anim-up d1">The good news</div>
+    <div class="h-large anim-up d2" style="margin-bottom:16px;">Every Wave<br>Is Modifiable.</div>
+    <div class="data-block anim-left d3">
+      <div class="data-label">Before wave 1 · Age 34</div>
+      <div class="data-desc">Build your baseline now. Zone 2 cardio + resistance training sets the trajectory for everything that follows.</div>
+    </div>
+    <div class="data-block anim-left d4" style="margin-top:6px;">
+      <div class="data-label">Before wave 2 · Age 60</div>
+      <div class="data-desc">Advanced biomarkers. ApoB, fasting insulin, VO2 max, hs-CRP. Know your numbers before the acceleration.</div>
+    </div>
+    <div class="data-block anim-left d5" style="margin-top:6px;">
+      <div class="data-label">Before wave 3 · Age 78</div>
+      <div class="data-desc">Muscle preservation is survival. Grip strength and leg strength determine independence in the final decade.</div>
+    </div>
+    <div class="source-stamp anim-fade d6">★ Based on Sinha et al. 2019 + Attia Medicine 3.0 framework</div>
+  </div>
+
+  <!-- =====================
+       SCENE 10 — STAT PUNCH (31-34s)
+       VO: "People with the highest VO2 max have a five times lower risk of dying from any cause. That number is trainable at any age."
+  ===================== -->
+  <div class="scene" id="scene10" data-title="Stat Punch" data-duration="3500">
+    <div class="bg-glow-green"></div>
+    <div class="tag anim-up d1">Key Data Point</div>
+    <div class="num-green anim-scale d2" style="font-size:120px;">5×</div>
+    <div class="h-large anim-up d3" style="margin-top:-4px;">Lower death<br>risk</div>
+    <div class="line-reveal" style="margin-top:12px; transition-delay:0.6s;"></div>
+    <div class="body-mono bright anim-up d4" style="margin-top:12px;">People with high VO2 max vs low VO2 max. All-cause mortality. Every age group. Every study.</div>
+    <div class="body-mono anim-up d5" style="margin-top:6px;">VO2 max is trainable at any age.<br>Zone 2 cardio is the mechanism.</div>
+    <div class="source-stamp anim-fade d6">★ Kokkinos et al., JACC 2022 · n=750,000+</div>
+  </div>
+
+  <!-- =====================
+       SCENE 11 — YOUR NUMBER (34-37s)
+       VO: "One number predicts your biological wave position better than any other. Your VO2 max."
+  ===================== -->
+  <div class="scene" id="scene11" data-title="Your Number" data-duration="3500">
+    <div class="tag anim-up d1">Your Most Important Number</div>
+    <div class="h-huge anim-up d2" style="margin-bottom:16px;">VO2<br>MAX</div>
+    <div class="split anim-up d3">
+      <div style="flex:1;padding:10px;background:rgba(255,255,255,0.03);border-top:2px solid var(--red);">
+        <div style="font-size:9px;letter-spacing:0.2em;color:var(--red);font-weight:700;margin-bottom:4px;">LOW RISK</div>
+        <div style="font-family:'Barlow Condensed';font-weight:800;font-size:22px;color:var(--white);">Under 25</div>
+        <div style="font-size:10px;color:var(--grey);font-family:'DM Mono';">mL/kg/min<br>Bottom 25%</div>
+      </div>
+      <div style="flex:1;padding:10px;background:rgba(255,255,255,0.03);border-top:2px solid var(--gold);">
+        <div style="font-size:9px;letter-spacing:0.2em;color:var(--gold);font-weight:700;margin-bottom:4px;">AVERAGE</div>
+        <div style="font-family:'Barlow Condensed';font-weight:800;font-size:22px;color:var(--white);">35–45</div>
+        <div style="font-size:10px;color:var(--grey);font-family:'DM Mono';">mL/kg/min<br>Middle 50%</div>
+      </div>
+      <div style="flex:1;padding:10px;background:rgba(255,255,255,0.03);border-top:2px solid var(--green);">
+        <div style="font-size:9px;letter-spacing:0.2em;color:var(--green);font-weight:700;margin-bottom:4px;">ELITE</div>
+        <div style="font-family:'Barlow Condensed';font-weight:800;font-size:22px;color:var(--white);">50+</div>
+        <div style="font-size:10px;color:var(--grey);font-family:'DM Mono';">mL/kg/min<br>Top 25%</div>
+      </div>
+    </div>
+    <div class="body-mono bright anim-up d4" style="margin-top:12px;">Test it free: 12-minute Cooper Run.<br>Distance in metres ÷ 35 = approximate VO2 max.</div>
+  </div>
+
+  <!-- =====================
+       SCENE 12 — LOOP HOOK (37-40s)
+       VO: "Your body started changing at thirty-four. Where are you in the wave?"
+  ===================== -->
+  <div class="scene" id="scene12" data-title="Loop Hook" data-duration="3000">
+    <div class="bg-glow-green"></div>
+    <div class="tag anim-up d1" style="color:var(--greige);">THE QUESTION</div>
+    <div class="h-huge anim-up d2" style="margin-bottom:16px;">Which<br>Wave Are<br>You In?</div>
+    <div class="line-reveal" style="margin-top:0; transition-delay:0.5s;"></div>
+    <div class="italic-sub anim-up d3" style="margin-top:16px; font-size:16px;">Drop your age in the comments.<br>The next post covers exactly what to do<br>in each wave — before it hits.</div>
+  </div>
+
+  <!-- =====================
+       SCENE 13 — CTA (40-44s)
+       VO: "Follow The Long Game. Daily longevity science — no supplements required."
+  ===================== -->
+  <div class="scene" id="scene13" data-title="CTA" data-duration="4000">
+    <div class="bg-glow-green"></div>
+    <div style="display:flex;flex-direction:column;align-items:flex-start;gap:2px;margin-bottom:24px;" class="anim-up d1">
+      <div class="italic-sub" style="font-size:22px;color:var(--greige);">the</div>
+      <div class="h-giant" style="font-size:80px;line-height:0.85;">LONG<br>GAME</div>
+      <div class="line-reveal" style="width:0; transition-delay:0.5s;"></div>
+      <div class="tag" style="margin-top:8px;margin-bottom:0;">Longevity Science</div>
+    </div>
+    <div class="cta-box anim-up d3">
+      <div class="cta-box-text">→ Save this</div>
+    </div>
+    <div class="cta-box anim-up d4" style="border-color:rgba(255,255,255,0.15);margin-top:6px;">
+      <div class="cta-box-text" style="color:rgba(255,255,255,0.5);">→ Follow for more</div>
+    </div>
+    <div class="body-mono anim-up d5" style="margin-top:12px;font-size:10px;color:rgba(0,255,133,0.4);">
+      #agingscience #longevity #biologicalage<br>#stanford #healthspan #vo2max
+    </div>
+  </div>
+
+  <!-- BOTTOM CAPTION -->
+  <div class="bottom-bar">
+    <div class="caption-text" id="scene-caption">▶ Tap to advance · ← → keys · Auto Play below</div>
+  </div>
+
+  <!-- LOOP FLASH -->
+  <div class="loop-flash" id="loopFlash"></div>
+</div>
+
+<!-- TIMING BAR -->
+<div style="width:360px;">
+  <div class="timing-bar">
+    <div class="timing-fill" id="timingFill"></div>
+  </div>
+  <div class="timing-label">
+    <span id="timeElapsed">0s</span>
+    <span>Target: 40–44 seconds</span>
+    <span id="timeTotal">44s</span>
+  </div>
+</div>
+
+<!-- SCENE INFO -->
+<div class="controls-wrap">
+  <div class="scene-info">
+    <div class="scene-num" id="sceneNum">Scene 1 of 13</div>
+    <div class="scene-title-disp" id="sceneTitleDisp">Hook</div>
+  </div>
+
+  <!-- CONTROLS -->
+  <div class="controls-row">
+    <div class="btn" onclick="prevScene()">← Prev</div>
+    <div class="btn green" id="playBtn" onclick="togglePlay()">▶ Auto Play</div>
+    <div class="btn" onclick="nextScene()">Next →</div>
+  </div>
+  <div class="controls-row">
+    <div class="btn" onclick="restartReel()" style="font-size:11px;">↺ Restart</div>
+    <div class="btn" onclick="toggleSpeed()" id="speedBtn" style="font-size:11px;">Speed: 1×</div>
+  </div>
+
+  <!-- VOICEOVER SCRIPT -->
+  <div class="vo-script-box">
+    <div class="vo-script-label">🎙 Voiceover Script — Current Scene</div>
+    <div class="vo-script-text" id="voScript">
+      <em>"Your body starts aging at 34. Not 60. Not 50. Thirty. Four."</em>
+    </div>
+  </div>
+
+  <div class="info-note">
+    Screen record on Auto Play → import to CapCut<br>
+    Add your voiceover · Add trending audio · Export &amp; post<br>
+    Total runtime: ~44 seconds · 13 scenes · 2–3s per cut
+  </div>
+</div>
+
+<script>
+  const SCENES = [
+    { id: 'scene1',  title: 'Hook',           duration: 3500, vo: '"Your body starts aging at 34. Not 60. Not 50. <em>Thirty. Four.</em>"' },
+    { id: 'scene2',  title: 'The Study',       duration: 3500, vo: '"Stanford researchers measured 2,925 proteins in human blood across 4,263 people. What they found changed everything we knew about aging."' },
+    { id: 'scene3',  title: 'Wave 01 Intro',   duration: 2500, vo: '"Wave one hits at <em>thirty-four.</em>"' },
+    { id: 'scene4',  title: 'Wave 01 Data',    duration: 3500, vo: '"Muscle protein synthesis declines. Metabolism slows. Collagen drops one percent every year — from now."' },
+    { id: 'scene5',  title: 'Wave 02 Intro',   duration: 2500, vo: '"Wave two hits at <em>sixty.</em> This is when things accelerate."' },
+    { id: 'scene6',  title: 'Wave 02 Data',    duration: 3500, vo: '"Cardiovascular aging accelerates. The immune system begins attacking healthy tissue. Alzheimer\'s risk becomes measurable decades before symptoms."' },
+    { id: 'scene7',  title: 'Wave 03 Intro',   duration: 2500, vo: '"Wave three hits at <em>seventy-eight.</em> By now, biological age can be twenty years different between two people born the same year."' },
+    { id: 'scene8',  title: 'The Split',       duration: 4000, vo: '"Same age. Completely different bodies. The gap between these two people <em>opened at thirty-four.</em>"' },
+    { id: 'scene9',  title: 'The Intervention',duration: 4500, vo: '"The good news. Every wave is modifiable. Here\'s what the evidence says to do <em>before</em> each one hits."' },
+    { id: 'scene10', title: 'Stat Punch',      duration: 3500, vo: '"People with the highest VO2 max have a <em>five times lower risk</em> of dying from any cause. That number is trainable at any age."' },
+    { id: 'scene11', title: 'Your Number',     duration: 3500, vo: '"One number predicts your biological wave position better than any other. Your VO2 max. Test it free — 12-minute Cooper Run."' },
+    { id: 'scene12', title: 'Loop Hook',       duration: 3000, vo: '"Your body started changing at thirty-four. <em>Which wave are you in?</em> Drop your age in the comments."' },
+    { id: 'scene13', title: 'CTA',             duration: 4000, vo: '"Follow The Long Game. Daily longevity science — no supplements required. <em>Save this.</em>"' },
+  ];
+
+  const CAPTIONS = [
+    '🔴 HOOK — stops the scroll in 3 seconds',
+    '📊 STUDY — establishes credibility immediately',
+    '💚 WAVE 01 — visual wave tracker orients viewer',
+    '📋 WAVE 01 DATA — 4 bullet max, 2-3s each',
+    '💛 WAVE 02 — color shift signals new chapter',
+    '📋 WAVE 02 DATA — gold accent maintains distinction',
+    '🔴 WAVE 03 — red signals urgency',
+    '⚡ THE SPLIT — highest share trigger in the Reel',
+    '✅ INTERVENTION — save trigger · actionable',
+    '💥 STAT PUNCH — shock data = rewatch trigger',
+    '📈 YOUR NUMBER — personalises the data',
+    '🔄 LOOP HOOK — question pulls viewer back to start',
+    '📲 CTA — follow + save + hashtags',
+  ];
+
+  let current = 0;
+  let playing = false;
+  let timer = null;
+  let segTimer = null;
+  let speed = 1;
+  let elapsed = 0;
+  let elapsedTimer = null;
+  const TOTAL = SCENES.length;
+  const TOTAL_DURATION = SCENES.reduce((a, s) => a + s.duration, 0);
+
+  // Build segments
+  const segsEl = document.getElementById('segments');
+  SCENES.forEach((_, i) => {
+    const seg = document.createElement('div');
+    seg.className = 'seg';
+    seg.id = `seg${i}`;
+    seg.innerHTML = `<div class="seg-fill" id="segfill${i}"></div>`;
+    segsEl.appendChild(seg);
+  });
+
+  // Red line scene7 fix
+  document.querySelector('.red-line') && Object.defineProperty(
+    document.querySelector('.red-line').style, 'transition',
+    { value: 'width 0.7s ease 0.6s' }
+  );
+
+  function showScene(n) {
+    // Deactivate all
+    SCENES.forEach((s, i) => {
+      const el = document.getElementById(s.id);
+      if (el) el.classList.remove('active');
+    });
+
+    // Activate current
+    const scene = document.getElementById(SCENES[n].id);
+    if (scene) scene.classList.add('active');
+
+    // Update segments
+    SCENES.forEach((_, i) => {
+      const fill = document.getElementById(`segfill${i}`);
+      const seg = document.getElementById(`seg${i}`);
+      seg.classList.remove('done');
+      fill.style.transition = 'none';
+      fill.style.width = i < n ? '100%' : '0%';
+      if (i < n) seg.classList.add('done');
+    });
+
+    // UI updates
+    document.getElementById('sceneNum').textContent = `Scene ${n + 1} of ${TOTAL}`;
+    document.getElementById('sceneTitleDisp').textContent = SCENES[n].title;
+    document.getElementById('voScript').innerHTML = SCENES[n].vo;
+    document.getElementById('scene-caption').innerHTML = CAPTIONS[n];
+
+    current = n;
+  }
+
+  function animateSeg(n, dur) {
+    const fill = document.getElementById(`segfill${n}`);
+    if (!fill) return;
+    fill.style.transition = 'none';
+    fill.style.width = '0%';
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      fill.style.transition = `width ${dur / speed}ms linear`;
+      fill.style.width = '100%';
+    }));
+  }
+
+  function nextScene() {
+    if (current < TOTAL - 1) showScene(current + 1);
+    else { loopFlash(); setTimeout(() => showScene(0), 300); }
+  }
+  function prevScene() {
+    if (current > 0) showScene(current - 1);
+  }
+  function restartReel() {
+    stopPlay();
+    showScene(0);
+    elapsed = 0;
+    updateTiming();
+  }
+
+  function loopFlash() {
+    const lf = document.getElementById('loopFlash');
+    lf.style.opacity = '1';
+    setTimeout(() => lf.style.opacity = '0', 200);
+  }
+
+  function togglePlay() {
+    playing ? stopPlay() : startPlay();
+  }
+
+  function startPlay() {
+    playing = true;
+    document.getElementById('playBtn').textContent = '⏸ Pause';
+    document.getElementById('playBtn').style.background = '#FF4D6D';
+    document.getElementById('playBtn').style.borderColor = '#FF4D6D';
+    runScene();
+    startElapsed();
+  }
+
+  function stopPlay() {
+    playing = false;
+    clearTimeout(timer);
+    clearTimeout(segTimer);
+    clearInterval(elapsedTimer);
+    document.getElementById('playBtn').textContent = '▶ Auto Play';
+    document.getElementById('playBtn').style.background = 'var(--green)';
+    document.getElementById('playBtn').style.borderColor = 'var(--green)';
+  }
+
+  function runScene() {
+    if (!playing) return;
+    const dur = SCENES[current].duration;
+    animateSeg(current, dur);
+    timer = setTimeout(() => {
+      if (!playing) return;
+      if (current < TOTAL - 1) {
+        showScene(current + 1);
+        runScene();
+      } else {
+        loopFlash();
+        setTimeout(() => {
+          showScene(0);
+          elapsed = 0;
+          runScene();
+        }, 400);
+      }
+    }, dur / speed);
+  }
+
+  function startElapsed() {
+    clearInterval(elapsedTimer);
+    elapsedTimer = setInterval(() => {
+      elapsed += 100;
+      updateTiming();
+    }, 100);
+  }
+
+  function updateTiming() {
+    const secs = Math.floor(elapsed / 1000);
+    document.getElementById('timeElapsed').textContent = `${secs}s`;
+    const pct = Math.min((elapsed / TOTAL_DURATION) * 100, 100);
+    const fill = document.getElementById('timingFill');
+    fill.style.transition = 'width 0.1s linear';
+    fill.style.width = pct + '%';
+  }
+
+  function toggleSpeed() {
+    const speeds = [1, 1.5, 2, 0.5];
+    const labels = ['1×', '1.5×', '2×', '0.5×'];
+    const idx = speeds.indexOf(speed);
+    speed = speeds[(idx + 1) % speeds.length];
+    document.getElementById('speedBtn').textContent = `Speed: ${labels[(idx + 1) % labels.length]}`;
+    if (playing) { stopPlay(); startPlay(); }
+  }
+
+  // Keyboard
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); nextScene(); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); prevScene(); }
+    if (e.key === 'p' || e.key === 'P') togglePlay();
+  });
+
+  // Touch swipe
+  let tx = 0;
+  document.getElementById('reel').addEventListener('touchstart', e => tx = e.touches[0].clientX);
+  document.getElementById('reel').addEventListener('touchend', e => {
+    const diff = tx - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) diff > 0 ? nextScene() : prevScene();
+  });
+
+  // Init
+  showScene(0);
+</script>
+</body>
+</html>
