@@ -24,54 +24,54 @@ const FONT_CSS = `
     src: url('/fonts/DMMono-400.woff2') format('woff2'); }
 `;
 
-// ── Caption chunks — updated after ElevenLabs audio ──
+// ── Caption chunks — from real ElevenLabs audio (caption_timings_zombie_cells.json) ──
 
 const S1_CAPS: CaptionChunk[] = [
-  { text: "Your body is full of zombie cells.", startFrame: 0,  endFrame: 40  },
-  { text: "They refused to die.",               startFrame: 52, endFrame: 75  },
-  { text: "And right now they are ageing you from the inside.", startFrame: 87, endFrame: 110 },
+  { text: "Your body is full of zombie cells.",                      startFrame: 0,   endFrame: 65  },
+  { text: "They refused to die.",                                    startFrame: 77,  endFrame: 126 },
+  { text: "And right now they are ageing you from the inside.",      startFrame: 138, endFrame: 227 },
 ];
 
 const S2_CAPS: CaptionChunk[] = [
-  { text: "Senescent cells are damaged cells that stop dividing but refuse to die.", startFrame: 0,   endFrame: 65  },
-  { text: "They release a toxic cocktail of inflammatory signals called the SASP —", startFrame: 74,  endFrame: 118 },
-  { text: "and it spreads to healthy cells around them.",                              startFrame: 124, endFrame: 130 },
+  { text: "Senescent cells are damaged cells that stop dividing but refuse to die.", startFrame: 0,   endFrame: 125 },
+  { text: "They release a toxic cocktail of inflammatory signals called the SASP —", startFrame: 134, endFrame: 260 },
+  { text: "and it spreads to healthy cells around them.",                              startFrame: 266, endFrame: 337 },
 ];
 
 const S3_CAPS: CaptionChunk[] = [
-  { text: "Zombie cells drive chronic inflammation, accelerate tissue ageing, impair organ function, and fuel cancer risk.", startFrame: 0,   endFrame: 88  },
-  { text: "They do not just sit there —",                                                                                   startFrame: 97,  endFrame: 115 },
-  { text: "they actively corrupt everything around them.",                                                                   startFrame: 121, endFrame: 130 },
+  { text: "Zombie cells drive chronic inflammation, accelerate tissue ageing, impair organ function, and fuel cancer risk.", startFrame: 0,   endFrame: 188 },
+  { text: "They do not just sit there —",                                                                                   startFrame: 197, endFrame: 244 },
+  { text: "they actively corrupt everything around them.",                                                                   startFrame: 250, endFrame: 324 },
 ];
 
 const S4_CAPS: CaptionChunk[] = [
-  { text: "In 2016 the Mayo Clinic engineered mice to clear senescent cells.",                                                   startFrame: 0,   endFrame: 72  },
-  { text: "They lived 25% longer.",                                                                                              startFrame: 81,  endFrame: 104 },
-  { text: "Delayed cancer. Better heart and kidney function. Maintained muscle mass far longer than controls.", startFrame: 117, endFrame: 140 },
+  { text: "In 2016 the Mayo Clinic engineered mice to clear senescent cells.",                                             startFrame: 0,   endFrame: 128 },
+  { text: "They lived 25 percent longer.",                                                                                 startFrame: 137, endFrame: 196 },
+  { text: "Delayed cancer. Better heart and kidney function. Maintained muscle mass far longer than controls.", startFrame: 208, endFrame: 389 },
 ];
 
 const S5_CAPS: CaptionChunk[] = [
-  { text: "Four things accelerate zombie cell accumulation:",                                                    startFrame: 0,   endFrame: 42  },
-  { text: "chronic inflammation, DNA damage, oxidative stress from poor diet and alcohol, and poor sleep.", startFrame: 52,  endFrame: 105 },
-  { text: "All four are lifestyle factors.",                                                                   startFrame: 115, endFrame: 120 },
+  { text: "Four things accelerate zombie cell accumulation:",                                                           startFrame: 0,   endFrame: 79  },
+  { text: "chronic inflammation, DNA damage, oxidative stress from poor diet and alcohol, and poor sleep.", startFrame: 88,  endFrame: 265 },
+  { text: "All four are lifestyle factors.",                                                                           startFrame: 274, endFrame: 336 },
 ];
 
 const S6_CAPS: CaptionChunk[] = [
-  { text: "To clear them naturally:",                                                              startFrame: 0,   endFrame: 26  },
-  { text: "intermittent fasting triggers autophagy — your body's built-in cleanup system.",     startFrame: 36,  endFrame: 100 },
-  { text: "Zone 2 exercise is the most potent natural senolytic available.",                      startFrame: 109, endFrame: 145 },
-  { text: "And an anti-inflammatory diet removes the primary driver of ongoing accumulation.", startFrame: 153, endFrame: 150 },
+  { text: "To clear them naturally:",                                                                        startFrame: 0,   endFrame: 40  },
+  { text: "intermittent fasting triggers autophagy — your body's built-in cleanup system.",               startFrame: 49,  endFrame: 190 },
+  { text: "Zone 2 exercise is the most potent natural senolytic available.",                                 startFrame: 199, endFrame: 306 },
+  { text: "And an anti-inflammatory diet removes the primary driver of ongoing accumulation.", startFrame: 312, endFrame: 453 },
 ];
 
 const S7_CAPS: CaptionChunk[] = [
-  { text: "Did you know zombie cells were real?",                   startFrame: 0,   endFrame: 55  },
-  { text: "Most people have never heard of senescence.",            startFrame: 70,  endFrame: 100 },
-  { text: "Drop a zombie emoji below if this blew your mind.", startFrame: 112, endFrame: 110 },
+  { text: "Did you know zombie cells were real?",                  startFrame: 0,   endFrame: 59  },
+  { text: "Most people have never heard of senescence.",           startFrame: 74,  endFrame: 140 },
+  { text: "Drop a zombie emoji below if this blew your mind.", startFrame: 149, endFrame: 239 },
 ];
 
 const S8_CAPS: CaptionChunk[] = [
-  { text: "Follow The Long Game for daily longevity science.", startFrame: 0,  endFrame: 56 },
-  { text: "Save this — your cells are listening.",             startFrame: 65, endFrame: 90 },
+  { text: "Follow The Long Game for daily longevity science.", startFrame: 0,  endFrame: 85  },
+  { text: "Save this — your cells are listening.",             startFrame: 94, endFrame: 169 },
 ];
 
 function getMusicVolume(frame: number): number {

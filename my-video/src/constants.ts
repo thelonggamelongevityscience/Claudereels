@@ -18,16 +18,16 @@ export const FONTS = {
   mono:    "'DM Mono', monospace",
 } as const;
 
-// ── ZombieCellsReel — PLACEHOLDER timing (frames at 30fps) — updated after audio gen ──
+// ── ZombieCellsReel — scene timing (frames at 30fps) — from real ElevenLabs audio ──
 export const ZOMBIE_CELLS_SCENES = {
-  scene1: { start:    0, duration: 110 },  // Hook
-  scene2: { start:  110, duration: 130 },  // What They Are
-  scene3: { start:  240, duration: 130 },  // The Damage
-  scene4: { start:  370, duration: 140 },  // The Research
-  scene5: { start:  510, duration: 120 },  // What Creates Them
-  scene6: { start:  630, duration: 150 },  // The Protocol
-  scene7: { start:  780, duration: 110 },  // Loop Hook
-  scene8: { start:  890, duration:  90 },  // CTA
+  scene1: { start:    0, duration: 227 },  // 0.000–7.567s    Hook
+  scene2: { start:  227, duration: 337 },  // 7.567–18.800s   What They Are
+  scene3: { start:  564, duration: 324 },  // 18.800–29.600s  The Damage
+  scene4: { start:  888, duration: 389 },  // 29.600–42.567s  The Research
+  scene5: { start: 1277, duration: 336 },  // 42.567–53.767s  What Creates Them
+  scene6: { start: 1613, duration: 453 },  // 53.767–68.867s  The Protocol
+  scene7: { start: 2066, duration: 239 },  // 68.867–76.833s  Loop Hook
+  scene8: { start: 2305, duration: 169 },  // 76.833–82.467s  CTA
 } as const;
 
-export const ZOMBIE_CELLS_TOTAL_FRAMES = 1010; // placeholder
+export const ZOMBIE_CELLS_TOTAL_FRAMES = 2504; // 2474f audio + 30f buffer (82.47s)
