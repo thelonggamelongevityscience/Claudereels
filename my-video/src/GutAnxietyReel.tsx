@@ -26,46 +26,46 @@ const FONT_CSS = `
 // ── Caption chunks — placeholder, updated after ElevenLabs audio ──
 
 const S1_CAPS: CaptionChunk[] = [
-  { text: "Your gut is making you anxious.",               startFrame: 0,  endFrame: 40 },
-  { text: "Not your thoughts.",                            startFrame: 52, endFrame: 68 },
-  { text: "Your gut bacteria are running your mood.",      startFrame: 80, endFrame: 105 },
+  { text: "Your gut is making you anxious.",               startFrame: 0,   endFrame: 53 },
+  { text: "Not your thoughts.",                            startFrame: 65,  endFrame: 98 },
+  { text: "Your gut bacteria are running your mood.",      startFrame: 110, endFrame: 174 },
 ];
 
 const S2_CAPS: CaptionChunk[] = [
-  { text: "90 percent of your serotonin is made in your gut.",        startFrame: 0,   endFrame: 55 },
-  { text: "The vagus nerve runs directly between your gut and brain —", startFrame: 64,  endFrame: 115 },
-  { text: "and 80 percent of its signals travel upward.",              startFrame: 121, endFrame: 148 },
-  { text: "Your gut is talking to your brain more than your brain is talking to your gut.", startFrame: 157, endFrame: 150 },
+  { text: "90 percent of your serotonin is made in your gut.",                                              startFrame: 0,   endFrame: 86 },
+  { text: "The vagus nerve runs directly between your gut and brain —",                                      startFrame: 95,  endFrame: 192 },
+  { text: "and 80 percent of its signals travel upward.",                                                   startFrame: 198, endFrame: 270 },
+  { text: "Your gut is talking to your brain more than your brain is talking to your gut.",                 startFrame: 279, endFrame: 417 },
 ];
 
 const S3_CAPS: CaptionChunk[] = [
-  { text: "Four signs your gut is driving your anxiety.",                                                    startFrame: 0,  endFrame: 44 },
-  { text: "Anxiety that worsens after eating. Bloating alongside low mood. Anxiety spikes after antibiotics.", startFrame: 53, endFrame: 105 },
-  { text: "And feeling calmer after fermented foods. These are not coincidences.",                           startFrame: 111, endFrame: 130 },
+  { text: "Four signs your gut is driving your anxiety.",                                                                    startFrame: 0,   endFrame: 77 },
+  { text: "Anxiety that worsens after eating. Bloating alongside low mood. Anxiety spikes after antibiotics.",              startFrame: 86,  endFrame: 272 },
+  { text: "And feeling calmer after fermented foods. These are not coincidences.",                                          startFrame: 278, endFrame: 418 },
 ];
 
 const S4_CAPS: CaptionChunk[] = [
-  { text: "Four things are disrupting your gut-brain axis right now:",         startFrame: 0,  endFrame: 50 },
-  { text: "ultra-processed food, chronic stress, antibiotics, and poor sleep.", startFrame: 59, endFrame: 110 },
-  { text: "Each one compounds the others.",                                     startFrame: 119, endFrame: 120 },
+  { text: "Four things are disrupting your gut-brain axis right now:",         startFrame: 0,   endFrame: 89 },
+  { text: "ultra-processed food, chronic stress, antibiotics, and poor sleep.", startFrame: 98,  endFrame: 226 },
+  { text: "Each one compounds the others.",                                     startFrame: 235, endFrame: 285 },
 ];
 
 const S5_CAPS: CaptionChunk[] = [
-  { text: "To calm your gut and your anxiety:",                                                                          startFrame: 0,   endFrame: 32 },
-  { text: "fermented foods daily, 30 different plants per week, remove ultra-processed food, and manage your stress.", startFrame: 41,  endFrame: 110 },
-  { text: "In that order.",                                                                                               startFrame: 116, endFrame: 130 },
-  { text: "You cannot fix the gut while cortisol is running the show.",                                                  startFrame: 136, endFrame: 145 },
+  { text: "To calm your gut and your anxiety:",                                                                         startFrame: 0,   endFrame: 56 },
+  { text: "fermented foods daily, 30 different plants per week, remove ultra-processed food, and manage your stress.", startFrame: 65,  endFrame: 253 },
+  { text: "In that order.",                                                                                              startFrame: 262, endFrame: 292 },
+  { text: "You cannot fix the gut while cortisol is running the show.",                                                 startFrame: 298, endFrame: 389 },
 ];
 
 const S6_CAPS: CaptionChunk[] = [
-  { text: "Does your anxiety get worse after certain foods?", startFrame: 0,  endFrame: 55 },
-  { text: "More people than you think say yes.",              startFrame: 70, endFrame: 95 },
-  { text: "Drop your trigger below.",                         startFrame: 104, endFrame: 105 },
+  { text: "Does your anxiety get worse after certain foods?", startFrame: 0,   endFrame: 85 },
+  { text: "More people than you think say yes.",              startFrame: 100, endFrame: 168 },
+  { text: "Drop your trigger below.",                         startFrame: 177, endFrame: 226 },
 ];
 
 const S7_CAPS: CaptionChunk[] = [
-  { text: "Follow The Long Game for daily longevity science.",              startFrame: 0,  endFrame: 52 },
-  { text: "Save this and check what you ate the last time anxiety hit.", startFrame: 61, endFrame: 85 },
+  { text: "Follow The Long Game for daily longevity science.",              startFrame: 0,  endFrame: 82 },
+  { text: "Save this and check what you ate the last time anxiety hit.", startFrame: 91, endFrame: 192 },
 ];
 
 function getMusicVolume(frame: number): number {
