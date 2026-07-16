@@ -72,15 +72,15 @@ export const HORMONES_SCENES = {
 
 export const HORMONES_TOTAL_FRAMES = 2725; // 2695f audio + 30f buffer (88.83s)
 
-// ── MetabolicReel — PLACEHOLDER timing (frames at 30fps) — updated after audio gen ──
+// ── MetabolicReel — scene timing (frames at 30fps) — from real ElevenLabs audio ──
 export const METABOLIC_SCENES = {
-  scene1: { start:    0, duration: 105 },  // Hook
-  scene2: { start:  105, duration: 130 },  // The Number
-  scene3: { start:  235, duration: 130 },  // Why Nobody Knows
-  scene4: { start:  365, duration: 120 },  // What It Drives
-  scene5: { start:  485, duration: 130 },  // The Five Tests
-  scene6: { start:  615, duration: 105 },  // Loop Hook
-  scene7: { start:  720, duration:  90 },  // CTA
+  scene1: { start:    0, duration: 196 },  // 0.000–6.533s    Hook
+  scene2: { start:  196, duration: 526 },  // 6.533–24.067s   The Number
+  scene3: { start:  722, duration: 531 },  // 24.067–41.767s  Why Nobody Knows
+  scene4: { start: 1253, duration: 473 },  // 41.767–57.533s  What It Drives
+  scene5: { start: 1726, duration: 601 },  // 57.533–77.567s  The Five Tests
+  scene6: { start: 2327, duration: 349 },  // 77.567–89.200s  Loop Hook
+  scene7: { start: 2676, duration: 240 },  // 89.200–97.200s  CTA
 } as const;
 
-export const METABOLIC_TOTAL_FRAMES = 840; // placeholder
+export const METABOLIC_TOTAL_FRAMES = 2946; // 2916f audio + 30f buffer (97.2s)
