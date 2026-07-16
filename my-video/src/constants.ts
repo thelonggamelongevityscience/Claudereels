@@ -59,15 +59,15 @@ export const BLOOD_SUGAR_SCENES = {
 
 export const BLOOD_SUGAR_TOTAL_FRAMES = 2502; // 2472f audio + 30f buffer (82.4s)
 
-// ── HormonesReel — PLACEHOLDER timing (frames at 30fps) — updated after audio gen ──
+// ── HormonesReel — scene timing (frames at 30fps) — from real ElevenLabs audio ──
 export const HORMONES_SCENES = {
-  scene1: { start:    0, duration: 105 },  // Hook
-  scene2: { start:  105, duration: 120 },  // Cortisol & Insulin
-  scene3: { start:  225, duration: 120 },  // Testosterone & Thyroid
-  scene4: { start:  345, duration: 120 },  // What Destroys Them
-  scene5: { start:  465, duration: 120 },  // The Protocol
-  scene6: { start:  585, duration: 105 },  // Loop Hook
-  scene7: { start:  690, duration:  90 },  // CTA
+  scene1: { start:    0, duration: 222 },  // 0.000–7.400s    Hook
+  scene2: { start:  222, duration: 437 },  // 7.400–22.967s   Cortisol & Insulin
+  scene3: { start:  659, duration: 558 },  // 22.967–41.567s  Testosterone & Thyroid
+  scene4: { start: 1217, duration: 399 },  // 40.567–53.867s  What Destroys Them
+  scene5: { start: 1616, duration: 575 },  // 53.867–73.033s  The Protocol
+  scene6: { start: 2191, duration: 259 },  // 73.033–81.667s  Loop Hook
+  scene7: { start: 2450, duration: 215 },  // 81.667–88.833s  CTA
 } as const;
 
-export const HORMONES_TOTAL_FRAMES = 810; // placeholder
+export const HORMONES_TOTAL_FRAMES = 2725; // 2695f audio + 30f buffer (88.83s)

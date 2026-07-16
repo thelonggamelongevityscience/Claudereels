@@ -26,50 +26,53 @@ const FONT_CSS = `
 // ── Caption chunks — placeholder, updated after ElevenLabs audio ──
 
 const S1_CAPS: CaptionChunk[] = [
-  { text: "Your hormones are running your life.", startFrame: 0,  endFrame: 45 },
-  { text: "Not you.",                             startFrame: 50, endFrame: 65 },
-  { text: "Every decision you think you are making — your chemistry made first.", startFrame: 70, endFrame: 105 },
+  { text: "Your hormones are running your life. Not you.", startFrame: 0,   endFrame: 89 },
+  { text: "Every decision you think you are making —",  startFrame: 97,  endFrame: 186 },
+  { text: "your chemistry made first.",                     startFrame: 194, endFrame: 238 },
 ];
 
 const S2_CAPS: CaptionChunk[] = [
-  { text: "Four hormones are deciding your entire day.",              startFrame: 0,   endFrame: 50 },
-  { text: "Cortisol — the threat detector —",                        startFrame: 55,  endFrame: 80 },
-  { text: "controls your energy, inflammation, blood sugar, and sleep.", startFrame: 85, endFrame: 130 },
-  { text: "Insulin — the storage manager —",                         startFrame: 135, endFrame: 160 },
-  { text: "decides whether calories become energy or fat.",           startFrame: 165, endFrame: 200 },
+  { text: "Four hormones are deciding your entire day. Cortisol", startFrame: 0,   endFrame: 103 },
+  { text: "— the threat detector — controls your energy,",        startFrame: 111, endFrame: 214 },
+  { text: "inflammation, blood sugar, and sleep. Insulin — the",  startFrame: 222, endFrame: 325 },
+  { text: "storage manager — decides whether calories become energy", startFrame: 333, endFrame: 436 },
+  { text: "or fat.",                                               startFrame: 444, endFrame: 470 },
 ];
 
 const S3_CAPS: CaptionChunk[] = [
-  { text: "Testosterone controls muscle synthesis, libido, motivation, and cognitive focus —", startFrame: 0,   endFrame: 80 },
-  { text: "and it is declining in men 10 years earlier than previous generations.", startFrame: 85,  endFrame: 145 },
-  { text: "Thyroid sets the speed of every cellular process.",        startFrame: 150, endFrame: 190 },
-  { text: "One in five people has subclinical hypothyroidism. Most have no idea.", startFrame: 195, endFrame: 240 },
+  { text: "Testosterone controls muscle synthesis, libido, motivation, and cognitive", startFrame: 0,   endFrame: 109 },
+  { text: "focus — and it is declining in men",                      startFrame: 117, endFrame: 226 },
+  { text: "10 years earlier than previous generations. Thyroid sets", startFrame: 234, endFrame: 343 },
+  { text: "the speed of every cellular process. One in",             startFrame: 351, endFrame: 460 },
+  { text: "five people has subclinical hypothyroidism. Most have no", startFrame: 468, endFrame: 577 },
+  { text: "idea.",                                                    startFrame: 585, endFrame: 599 },
 ];
 
 const S4_CAPS: CaptionChunk[] = [
-  { text: "Four things are destroying your hormonal balance:",        startFrame: 0,   endFrame: 55 },
-  { text: "chronic stress, endocrine disruptors in plastic and pesticides,", startFrame: 60, endFrame: 120 },
-  { text: "poor sleep — 70% of testosterone release happens during deep sleep —", startFrame: 125, endFrame: 190 },
-  { text: "and ultra-processed food.",                                startFrame: 195, endFrame: 225 },
+  { text: "Four things are destroying your hormonal balance: chronic", startFrame: 0,   endFrame: 103 },
+  { text: "stress, endocrine disruptors in plastic and pesticides, poor", startFrame: 111, endFrame: 214 },
+  { text: "sleep — 70 percent of testosterone release happens",      startFrame: 222, endFrame: 325 },
+  { text: "during deep sleep — and ultra-processed food.",           startFrame: 333, endFrame: 423 },
 ];
 
 const S5_CAPS: CaptionChunk[] = [
-  { text: "To take back control: sleep first —",                     startFrame: 0,   endFrame: 45 },
-  { text: "it is the single most powerful hormonal intervention.",    startFrame: 50,  endFrame: 95 },
-  { text: "Resistance train. Remove plastic from your kitchen.",      startFrame: 100, endFrame: 145 },
-  { text: "And test all four: cortisol curve, fasting insulin,",     startFrame: 150, endFrame: 195 },
-  { text: "free testosterone, and full thyroid panel.",               startFrame: 200, endFrame: 235 },
+  { text: "To take back control: sleep first — it",                  startFrame: 0,   endFrame: 128 },
+  { text: "is the single most powerful hormonal intervention. Resistance", startFrame: 136, endFrame: 264 },
+  { text: "train. Remove plastic from your kitchen. And test",       startFrame: 272, endFrame: 400 },
+  { text: "all four: cortisol curve, fasting insulin, free testosterone,", startFrame: 408, endFrame: 536 },
+  { text: "and full thyroid panel.",                                  startFrame: 544, endFrame: 608 },
 ];
 
 const S6_CAPS: CaptionChunk[] = [
-  { text: "Which of these four hormones do you think is off for you —", startFrame: 0,  endFrame: 70 },
-  { text: "cortisol, insulin, testosterone, or thyroid?",             startFrame: 75, endFrame: 120 },
-  { text: "Drop your guess below.",                                   startFrame: 125, endFrame: 150 },
+  { text: "Which of these four hormones do you think", startFrame: 0,   endFrame: 94 },
+  { text: "is off for you — cortisol, insulin, testosterone,", startFrame: 102, endFrame: 196 },
+  { text: "or thyroid? Drop your guess below.",        startFrame: 204, endFrame: 275 },
 ];
 
 const S7_CAPS: CaptionChunk[] = [
-  { text: "Follow The Long Game for daily longevity science.",        startFrame: 0,  endFrame: 55 },
-  { text: "Save this — your hormones are paying attention even when you are not.", startFrame: 60, endFrame: 110 },
+  { text: "Follow The Long Game for daily longevity science.", startFrame: 0,   endFrame: 82 },
+  { text: "Save this — your hormones are paying attention",   startFrame: 90,  endFrame: 172 },
+  { text: "even when you are not.",                           startFrame: 180, endFrame: 231 },
 ];
 
 function getMusicVolume(frame: number): number {
