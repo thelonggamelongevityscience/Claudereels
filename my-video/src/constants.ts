@@ -31,3 +31,16 @@ export const ZOMBIE_CELLS_SCENES = {
 } as const;
 
 export const ZOMBIE_CELLS_TOTAL_FRAMES = 2504; // 2474f audio + 30f buffer (82.47s)
+
+// ── GutAnxietyReel — PLACEHOLDER timing (frames at 30fps) — updated after audio gen ──
+export const GUT_ANXIETY_SCENES = {
+  scene1: { start:    0, duration: 105 },  // Hook
+  scene2: { start:  105, duration: 150 },  // The Connection
+  scene3: { start:  255, duration: 130 },  // The Signs
+  scene4: { start:  385, duration: 120 },  // What Breaks It
+  scene5: { start:  505, duration: 145 },  // The Fix
+  scene6: { start:  650, duration: 105 },  // Loop Hook
+  scene7: { start:  755, duration:  85 },  // CTA
+} as const;
+
+export const GUT_ANXIETY_TOTAL_FRAMES = 870; // placeholder
