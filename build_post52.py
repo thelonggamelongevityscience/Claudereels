@@ -118,8 +118,8 @@ print("Composing video with ffmpeg...")
 filter_complex = (
     # Cover image → 2s video clip
     f"[0:v]scale={W}:{H},setsar=1,trim=duration={COVER_SECONDS},setpts=PTS-STARTPTS[cover_v];"
-    # Background video → loop to fill VIDEO_SECTION seconds, then trim exactly
-    f"[1:v]scale={W}:{H},setsar=1,loop=-1:1:0,trim=duration={VIDEO_SECTION:.3f},setpts=PTS-STARTPTS[bg_v];"
+    # Background video → scale, trim to VIDEO_SECTION (input is stream_loop -1)
+    f"[1:v]scale={W}:{H},setsar=1,trim=duration={VIDEO_SECTION:.3f},setpts=PTS-STARTPTS[bg_v];"
     # Text overlay PNG → hold for VIDEO_SECTION seconds
     f"[2:v]scale={W}:{H},trim=duration={VIDEO_SECTION:.3f},setpts=PTS-STARTPTS[txt_v];"
     # Overlay text on looped background video
