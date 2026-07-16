@@ -13,6 +13,8 @@ FFMPEG   = imageio_ffmpeg.get_ffmpeg_exe()
 
 W, H = 1080, 1920
 COVER_SECONDS  = 2.0
+TARGET_TOTAL   = 35.0           # desired total duration
+VIDEO_SECTION  = TARGET_TOTAL - COVER_SECONDS  # 33s of looped background
 VIDEO_FPS      = 24
 MUSIC_VOLUME   = 0.15
 FADE_OUT_DUR   = 2.0
@@ -34,9 +36,9 @@ probe = subprocess.run(
     capture_output=True, text=True
 )
 video_duration = float(json.loads(probe.stdout)["format"]["duration"])
-print(f"  Video duration: {video_duration:.3f}s")
+print(f"  Video duration: {video_duration:.3f}s (will loop to fill {VIDEO_SECTION:.0f}s)")
 
-total_duration = COVER_SECONDS + video_duration
+total_duration = TARGET_TOTAL
 fade_start     = total_duration - FADE_OUT_DUR
 print(f"  Total: {total_duration:.3f}s, music fade at {fade_start:.3f}s")
 
@@ -116,11 +118,11 @@ print("Composing video with ffmpeg...")
 filter_complex = (
     # Cover image → 2s video clip
     f"[0:v]scale={W}:{H},setsar=1,trim=duration={COVER_SECONDS},setpts=PTS-STARTPTS[cover_v];"
-    # Background video → scale
-    f"[1:v]scale={W}:{H},setsar=1,setpts=PTS-STARTPTS[bg_v];"
-    # Text overlay PNG → scale
-    f"[2:v]scale={W}:{H}[txt_v];"
-    # Overlay text on background video
+    # Background video → loop to fill VIDEO_SECTION seconds, then trim exactly
+    f"[1:v]scale={W}:{H},setsar=1,loop=-1:1:0,trim=duration={VIDEO_SECTION:.3f},setpts=PTS-STARTPTS[bg_v];"
+    # Text overlay PNG → hold for VIDEO_SECTION seconds
+    f"[2:v]scale={W}:{H},trim=duration={VIDEO_SECTION:.3f},setpts=PTS-STARTPTS[txt_v];"
+    # Overlay text on looped background video
     "[bg_v][txt_v]overlay=0:0[video_v];"
     # Concatenate cover + text-video
     f"[cover_v][video_v]concat=n=2:v=1:a=0[out_v];"
@@ -132,8 +134,8 @@ filter_complex = (
 cmd = [
     FFMPEG, "-y",
     "-loop", "1", "-framerate", str(VIDEO_FPS), "-t", str(COVER_SECONDS), "-i", cover_png,
-    "-i", VIDEO_IN,
-    "-loop", "1", "-framerate", str(VIDEO_FPS), "-t", str(video_duration), "-i", text_png,
+    "-stream_loop", "-1", "-i", VIDEO_IN,   # loop video input indefinitely
+    "-loop", "1", "-framerate", str(VIDEO_FPS), "-i", text_png,  # text PNG loops too
     "-i", MUSIC_IN,
     "-filter_complex", filter_complex,
     "-map", "[out_v]",
@@ -141,6 +143,7 @@ cmd = [
     "-c:v", "libx264", "-preset", "fast", "-crf", "18",
     "-c:a", "aac", "-b:a", "192k",
     "-r", str(VIDEO_FPS),
+    "-t", str(total_duration),
     OUTPUT,
 ]
 
