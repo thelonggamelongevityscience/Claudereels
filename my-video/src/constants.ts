@@ -10,6 +10,7 @@ export const COLORS = {
   red:    '#FF4D6D',
   green:  '#00FF85',
   gold:   '#FFD166',
+  purple: '#C4A0FF',
 } as const;
 
 export const FONTS = {
@@ -57,3 +58,16 @@ export const BLOOD_SUGAR_SCENES = {
 } as const;
 
 export const BLOOD_SUGAR_TOTAL_FRAMES = 2502; // 2472f audio + 30f buffer (82.4s)
+
+// ── HormonesReel — PLACEHOLDER timing (frames at 30fps) — updated after audio gen ──
+export const HORMONES_SCENES = {
+  scene1: { start:    0, duration: 105 },  // Hook
+  scene2: { start:  105, duration: 120 },  // Cortisol & Insulin
+  scene3: { start:  225, duration: 120 },  // Testosterone & Thyroid
+  scene4: { start:  345, duration: 120 },  // What Destroys Them
+  scene5: { start:  465, duration: 120 },  // The Protocol
+  scene6: { start:  585, duration: 105 },  // Loop Hook
+  scene7: { start:  690, duration:  90 },  // CTA
+} as const;
+
+export const HORMONES_TOTAL_FRAMES = 810; // placeholder

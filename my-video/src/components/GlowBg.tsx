@@ -1,12 +1,13 @@
 import React from 'react';
 import { COLORS } from '../constants';
 
-type GlowColor = 'red' | 'green' | 'gold';
+type GlowColor = 'red' | 'green' | 'gold' | 'purple';
 
 const COLOR_MAP: Record<GlowColor, string> = {
-  red:   COLORS.red,
-  green: COLORS.green,
-  gold:  COLORS.gold,
+  red:    COLORS.red,
+  green:  COLORS.green,
+  gold:   COLORS.gold,
+  purple: COLORS.purple,
 };
 
 interface Props {
