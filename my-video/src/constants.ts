@@ -44,3 +44,16 @@ export const GUT_ANXIETY_SCENES = {
 } as const;
 
 export const GUT_ANXIETY_TOTAL_FRAMES = 2131; // 2101f audio + 30f buffer (70.03s)
+
+// ── BloodSugarReel — PLACEHOLDER timing (frames at 30fps) — updated after audio gen ──
+export const BLOOD_SUGAR_SCENES = {
+  scene1: { start:    0, duration: 105 },  // Hook
+  scene2: { start:  105, duration: 120 },  // The Problem
+  scene3: { start:  225, duration: 120 },  // What Spikes Do
+  scene4: { start:  345, duration: 105 },  // The Hidden Signs
+  scene5: { start:  450, duration: 120 },  // The Fix
+  scene6: { start:  570, duration: 105 },  // Loop Hook
+  scene7: { start:  675, duration:  90 },  // CTA
+} as const;
+
+export const BLOOD_SUGAR_TOTAL_FRAMES = 795; // placeholder

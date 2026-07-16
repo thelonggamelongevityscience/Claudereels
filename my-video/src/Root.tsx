@@ -2,7 +2,8 @@ import React from 'react';
 import { Composition } from 'remotion';
 import { ZombieCellsReel } from './ZombieCellsReel';
 import { GutAnxietyReel } from './GutAnxietyReel';
-import { FPS, WIDTH, HEIGHT, ZOMBIE_CELLS_TOTAL_FRAMES, GUT_ANXIETY_TOTAL_FRAMES } from './constants';
+import { BloodSugarReel } from './BloodSugarReel';
+import { FPS, WIDTH, HEIGHT, ZOMBIE_CELLS_TOTAL_FRAMES, GUT_ANXIETY_TOTAL_FRAMES, BLOOD_SUGAR_TOTAL_FRAMES } from './constants';
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -19,6 +20,14 @@ export const RemotionRoot: React.FC = () => {
         id="GutAnxietyReel"
         component={GutAnxietyReel}
         durationInFrames={GUT_ANXIETY_TOTAL_FRAMES}
+        fps={FPS}
+        width={WIDTH}
+        height={HEIGHT}
+      />
+      <Composition
+        id="BloodSugarReel"
+        component={BloodSugarReel}
+        durationInFrames={BLOOD_SUGAR_TOTAL_FRAMES}
         fps={FPS}
         width={WIDTH}
         height={HEIGHT}
