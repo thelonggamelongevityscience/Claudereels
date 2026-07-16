@@ -26,46 +26,54 @@ const FONT_CSS = `
 // ── Caption chunks — placeholder, updated after ElevenLabs audio ──
 
 const S1_CAPS: CaptionChunk[] = [
-  { text: "Your blood sugar is lying to you.",                     startFrame: 0,  endFrame: 45 },
-  { text: "Your fasting glucose looks fine.",                      startFrame: 52, endFrame: 80 },
-  { text: "The damage is happening between meals.",                startFrame: 85, endFrame: 105 },
+  { text: "Your blood sugar is lying to you. Your",        startFrame: 0,   endFrame: 84 },
+  { text: "fasting glucose looks fine. The damage is happening", startFrame: 92, endFrame: 176 },
+  { text: "between meals.",                                startFrame: 184, endFrame: 205 },
 ];
 
 const S2_CAPS: CaptionChunk[] = [
-  { text: "Your doctor checks fasting glucose and HbA1c —",       startFrame: 0,   endFrame: 55 },
-  { text: "both snapshots taken when your blood sugar is at its lowest.", startFrame: 60, endFrame: 110 },
-  { text: "They miss the 4 to 6 hours after every meal when most metabolic damage is done.", startFrame: 115, endFrame: 175 },
-  { text: "Studies show 80% of people with normal fasting glucose still experience significant postprandial spikes.", startFrame: 180, endFrame: 255 },
+  { text: "Your doctor checks fasting glucose and HbA1c —",           startFrame: 0,   endFrame: 92 },
+  { text: "both snapshots taken when your blood sugar is",             startFrame: 100, endFrame: 192 },
+  { text: "at its lowest. They miss the 4 to",                        startFrame: 200, endFrame: 292 },
+  { text: "6 hours after every meal when most metabolic",              startFrame: 300, endFrame: 392 },
+  { text: "damage is done. Studies show 80 percent of",                startFrame: 400, endFrame: 492 },
+  { text: "people with normal fasting glucose still experience significant", startFrame: 500, endFrame: 592 },
+  { text: "postprandial spikes.",                                      startFrame: 600, endFrame: 623 },
 ];
 
 const S3_CAPS: CaptionChunk[] = [
-  { text: "Every glucose spike triggers glycation, oxidative stress, an insulin surge, and a wave of inflammation.", startFrame: 0,  endFrame: 90 },
-  { text: "This is happening multiple times a day in most people.",  startFrame: 95,  endFrame: 145 },
-  { text: "And their doctor has no idea because the test is not designed to catch it.", startFrame: 150, endFrame: 210 },
+  { text: "Every glucose spike triggers glycation, oxidative stress, an", startFrame: 0,   endFrame: 86 },
+  { text: "insulin surge, and a wave of inflammation. This",             startFrame: 94,  endFrame: 180 },
+  { text: "is happening multiple times a day in most",                   startFrame: 188, endFrame: 274 },
+  { text: "people. And their doctor has no idea because",                startFrame: 282, endFrame: 368 },
+  { text: "the test is not designed to catch it.",                       startFrame: 376, endFrame: 462 },
 ];
 
 const S4_CAPS: CaptionChunk[] = [
-  { text: "Signs your blood sugar is spiking without a test:",      startFrame: 0,  endFrame: 55 },
-  { text: "crashing after meals, intense cravings two hours later,", startFrame: 60, endFrame: 105 },
-  { text: "belly fat that does not respond to diet, and afternoon energy crashes. Sound familiar?", startFrame: 110, endFrame: 175 },
+  { text: "Signs your blood sugar is spiking without a",   startFrame: 0,   endFrame: 104 },
+  { text: "test: crashing after meals, intense cravings two hours", startFrame: 112, endFrame: 216 },
+  { text: "later, belly fat that does not respond to",     startFrame: 224, endFrame: 328 },
+  { text: "diet, and afternoon energy crashes. Sound familiar?", startFrame: 336, endFrame: 427 },
 ];
 
 const S5_CAPS: CaptionChunk[] = [
-  { text: "To flatten your glucose curve:",                         startFrame: 0,  endFrame: 40 },
-  { text: "eat fibre and protein first, carbs last — this alone reduces spikes by up to 73%.", startFrame: 45, endFrame: 115 },
-  { text: "Take a 10 minute walk after meals. Never eat carbs alone.", startFrame: 120, endFrame: 175 },
-  { text: "These four habits change your metabolic health faster than any supplement.", startFrame: 180, endFrame: 240 },
+  { text: "To flatten your glucose curve: eat fibre and",  startFrame: 0,   endFrame: 90 },
+  { text: "protein first, carbs last — this alone reduces", startFrame: 98,  endFrame: 188 },
+  { text: "spikes by up to 73 percent. Take a",            startFrame: 196, endFrame: 286 },
+  { text: "10 minute walk after meals. Never eat carbs",   startFrame: 294, endFrame: 384 },
+  { text: "alone. These four habits change your metabolic health", startFrame: 392, endFrame: 482 },
+  { text: "faster than any supplement.",                   startFrame: 490, endFrame: 535 },
 ];
 
 const S6_CAPS: CaptionChunk[] = [
-  { text: "Do you crash after meals or stay steady?",              startFrame: 0,  endFrame: 60 },
-  { text: "Your answer tells us a lot about your metabolic health.", startFrame: 65, endFrame: 115 },
-  { text: "Drop it below.",                                         startFrame: 120, endFrame: 150 },
+  { text: "Do you crash after meals or stay steady?",      startFrame: 0,   endFrame: 78 },
+  { text: "Your answer tells us a lot about your",         startFrame: 86,  endFrame: 164 },
+  { text: "metabolic health. Drop it below.",              startFrame: 172, endFrame: 221 },
 ];
 
 const S7_CAPS: CaptionChunk[] = [
-  { text: "Follow The Long Game for daily longevity science.",     startFrame: 0,  endFrame: 55 },
-  { text: "Save this — your blood sugar is listening.",            startFrame: 60, endFrame: 90 },
+  { text: "Follow The Long Game for daily longevity science.", startFrame: 0,  endFrame: 88 },
+  { text: "Save this — your blood sugar is listening.",        startFrame: 96, endFrame: 184 },
 ];
 
 function getMusicVolume(frame: number): number {
