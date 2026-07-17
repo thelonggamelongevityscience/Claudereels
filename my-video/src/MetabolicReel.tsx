@@ -26,56 +26,54 @@ const FONT_CSS = `
 // ── Caption chunks — placeholder, updated after ElevenLabs audio ──
 
 const S1_CAPS: CaptionChunk[] = [
-  { text: "88% of people are metabolically unhealthy. Most of", startFrame: 0,   endFrame: 87 },
-  { text: "them think they are fine. Are you one",              startFrame: 95,  endFrame: 182 },
-  { text: "of them?",                                           startFrame: 190, endFrame: 212 },
+  { text: "88% of people are metabolically unhealthy.",  startFrame: 0,   endFrame: 87 },
+  { text: "Most of them think they are fine.",           startFrame: 95,  endFrame: 155 },
+  { text: "Are you one of them?",                        startFrame: 156, endFrame: 212 },
 ];
 
 const S2_CAPS: CaptionChunk[] = [
-  { text: "88% of Americans fail at least one marker",            startFrame: 0,   endFrame: 111 },
-  { text: "of metabolic health. The five markers: blood pressure,", startFrame: 119, endFrame: 230 },
-  { text: "fasting glucose, triglycerides, HDL cholesterol, and waist circumference.", startFrame: 238, endFrame: 349 },
-  { text: "You need all five in range without medication.",        startFrame: 357, endFrame: 468 },
-  { text: "Most people do not make it.",                          startFrame: 476, endFrame: 559 },
+  { text: "88% of Americans fail at least one marker of metabolic health.", startFrame: 0,   endFrame: 118 },
+  { text: "The five markers: blood pressure, fasting glucose,",             startFrame: 119, endFrame: 237 },
+  { text: "triglycerides, HDL cholesterol, and waist circumference.",       startFrame: 238, endFrame: 356 },
+  { text: "You need all five in range without medication.",                  startFrame: 357, endFrame: 475 },
+  { text: "Most people do not make it.",                                     startFrame: 476, endFrame: 559 },
 ];
 
 const S3_CAPS: CaptionChunk[] = [
-  { text: "Insulin resistance — the root of metabolic syndrome", startFrame: 0,   endFrame: 88 },
-  { text: "— develops silently for 10 to 15 years",             startFrame: 96,  endFrame: 184 },
-  { text: "before any standard test catches it. The decade",    startFrame: 192, endFrame: 280 },
-  { text: "before diagnosis is when intervention is most powerful.", startFrame: 288, endFrame: 376 },
-  { text: "Standard care is not designed to catch you",         startFrame: 384, endFrame: 472 },
-  { text: "in the window. You have to catch yourself.",         startFrame: 480, endFrame: 568 },
+  { text: "Insulin resistance — the root of metabolic syndrome —", startFrame: 0,   endFrame: 88 },
+  { text: "develops silently for 10 to 15 years",                  startFrame: 96,  endFrame: 184 },
+  { text: "before any standard test catches it.",                   startFrame: 192, endFrame: 280 },
+  { text: "The decade before diagnosis is when intervention is most powerful.", startFrame: 288, endFrame: 376 },
+  { text: "Standard care is not designed to catch you in the window.", startFrame: 384, endFrame: 479 },
+  { text: "You have to catch yourself.",                            startFrame: 480, endFrame: 568 },
 ];
 
 const S4_CAPS: CaptionChunk[] = [
-  { text: "Every major disease of ageing starts here. Type",     startFrame: 0,   endFrame: 115 },
-  { text: "2 diabetes. Cardiovascular disease. Alzheimer's — now called", startFrame: 123, endFrame: 238 },
-  { text: "Type 3 diabetes by researchers. And cancer. One",     startFrame: 246, endFrame: 361 },
-  { text: "metabolic dysfunction. Four of the leading causes of", startFrame: 369, endFrame: 484 },
-  { text: "death.",                                               startFrame: 492, endFrame: 506 },
+  { text: "Every major disease of ageing starts here.",                        startFrame: 0,   endFrame: 122 },
+  { text: "Type 2 diabetes. Cardiovascular disease.",                          startFrame: 123, endFrame: 245 },
+  { text: "Alzheimer's — now called Type 3 diabetes by researchers.",          startFrame: 246, endFrame: 368 },
+  { text: "And cancer. One metabolic dysfunction. Four of the leading causes of death.", startFrame: 369, endFrame: 506 },
 ];
 
 const S5_CAPS: CaptionChunk[] = [
-  { text: "How to know where you actually stand: fasting",        startFrame: 0,   endFrame: 120 },
-  { text: "insulin — the earliest warning signal almost nobody",  startFrame: 128, endFrame: 248 },
-  { text: "tests. HbA1c below 5.4. Triglyceride to HDL ratio",   startFrame: 256, endFrame: 376 },
-  { text: "below 1.5. And ApoB — the actual cardiovascular",     startFrame: 384, endFrame: 504 },
-  { text: "risk marker your standard panel is not measuring.",    startFrame: 512, endFrame: 632 },
+  { text: "How to know where you actually stand: fasting insulin —", startFrame: 0,   endFrame: 127 },
+  { text: "the earliest warning signal almost nobody tests.",         startFrame: 128, endFrame: 255 },
+  { text: "HbA1c below 5.4. Triglyceride to HDL ratio below 1.5.",  startFrame: 256, endFrame: 383 },
+  { text: "And ApoB — the actual cardiovascular risk marker",        startFrame: 384, endFrame: 511 },
+  { text: "your standard panel is not measuring.",                   startFrame: 512, endFrame: 632 },
 ];
 
 const S6_CAPS: CaptionChunk[] = [
-  { text: "Have you ever had your fasting insulin tested?", startFrame: 0,   endFrame: 78 },
-  { text: "Most people have not. And it is the",           startFrame: 86,  endFrame: 164 },
-  { text: "most important number most doctors never order. Comment", startFrame: 172, endFrame: 250 },
-  { text: "LABS below and I will send you the",            startFrame: 258, endFrame: 336 },
-  { text: "full blood test guide.",                        startFrame: 344, endFrame: 383 },
+  { text: "Have you ever had your fasting insulin tested?",             startFrame: 0,   endFrame: 85 },
+  { text: "Most people have not.",                                      startFrame: 86,  endFrame: 140 },
+  { text: "And it is the most important number most doctors never order.", startFrame: 141, endFrame: 257 },
+  { text: "Comment LABS below — I will send you the full blood test guide.", startFrame: 258, endFrame: 383 },
 ];
 
 const S7_CAPS: CaptionChunk[] = [
   { text: "Follow The Long Game for daily longevity science.", startFrame: 0,   endFrame: 83 },
-  { text: "Save this. Your metabolic health is either working", startFrame: 91,  endFrame: 174 },
-  { text: "for you or against you right now.",               startFrame: 182, endFrame: 255 },
+  { text: "Save this. Your metabolic health is either",        startFrame: 91,  endFrame: 165 },
+  { text: "working for you or against you right now.",         startFrame: 166, endFrame: 255 },
 ];
 
 function getMusicVolume(frame: number): number {

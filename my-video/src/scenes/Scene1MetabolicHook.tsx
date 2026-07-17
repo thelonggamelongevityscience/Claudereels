@@ -36,7 +36,7 @@ export const Scene1MetabolicHook: React.FC<Props> = ({ frame, captionChunks }) =
 
       {(['88% OF PEOPLE', 'ARE METABOLICALLY', 'UNHEALTHY.'] as const).map((text, i) => (
         <div key={i} style={{ overflow: 'hidden', marginBottom: 4 }}>
-          <div style={{ ...mk((i + 1) * 8), fontFamily: FONTS.barlow, fontWeight: 900, fontSize: 128, lineHeight: 1.0, textTransform: 'uppercase', color: i === 2 ? COLORS.red : COLORS.white }}>
+          <div style={{ ...mk((i + 1) * 8), fontFamily: FONTS.barlow, fontWeight: 900, fontSize: 96, lineHeight: 1.0, textTransform: 'uppercase', color: i === 2 ? COLORS.red : COLORS.white }}>
             {text}
           </div>
         </div>
