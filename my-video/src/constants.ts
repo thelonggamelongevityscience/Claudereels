@@ -84,3 +84,16 @@ export const METABOLIC_SCENES = {
 } as const;
 
 export const METABOLIC_TOTAL_FRAMES = 2946; // 2916f audio + 30f buffer (97.2s)
+
+// ── LiverReel — PLACEHOLDER timing (frames at 30fps) — updated after audio gen ──
+export const LIVER_SCENES = {
+  scene1: { start:    0, duration: 120 },  // Hook
+  scene2: { start:  120, duration: 150 },  // What It Does
+  scene3: { start:  270, duration: 145 },  // The Silent Epidemic
+  scene4: { start:  415, duration: 130 },  // The Signs
+  scene5: { start:  545, duration: 155 },  // The Protocol
+  scene6: { start:  700, duration:  95 },  // Loop Hook
+  scene7: { start:  795, duration:  80 },  // CTA
+} as const;
+
+export const LIVER_TOTAL_FRAMES = 905; // placeholder
