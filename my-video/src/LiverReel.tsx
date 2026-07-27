@@ -26,50 +26,51 @@ const FONT_CSS = `
 // ── Caption chunks — placeholder, updated after ElevenLabs audio ──
 
 const S1_CAPS: CaptionChunk[] = [
-  { text: "Your liver is keeping score. And it never lies.", startFrame: 0,  endFrame: 55 },
-  { text: "Every ultra-processed meal. Every late night.",   startFrame: 60, endFrame: 95 },
-  { text: "It remembers all of it.",                        startFrame: 100, endFrame: 120 },
+  { text: "Your liver is keeping score. And it never lies.", startFrame: 0,   endFrame: 100 },
+  { text: "Every ultra-processed meal. Every late night.",   startFrame: 105, endFrame: 163 },
+  { text: "It remembers all of it.",                        startFrame: 168, endFrame: 207 },
 ];
 
 const S2_CAPS: CaptionChunk[] = [
-  { text: "Your liver is running 500 functions right now.",       startFrame: 0,   endFrame: 60 },
-  { text: "Filtering your blood. Regulating blood sugar.",        startFrame: 65,  endFrame: 120 },
-  { text: "Processing every drug and alcohol molecule you consume.", startFrame: 125, endFrame: 190 },
-  { text: "When it becomes overburdened, it begins storing fat inside its own cells.", startFrame: 195, endFrame: 265 },
-  { text: "This is how NAFLD begins. Silently. Without a single symptom.", startFrame: 270, endFrame: 330 },
+  { text: "Your liver is running 500 functions right now.",                          startFrame: 0,   endFrame: 115 },
+  { text: "Filtering your blood. Regulating blood sugar.",                           startFrame: 120, endFrame: 215 },
+  { text: "Processing every drug and alcohol molecule you consume.",                 startFrame: 220, endFrame: 355 },
+  { text: "When it becomes overburdened, it begins storing fat inside its own cells.", startFrame: 360, endFrame: 490 },
+  { text: "This is how NAFLD begins. Silently. Without a single symptom.",           startFrame: 495, endFrame: 630 },
 ];
 
 const S3_CAPS: CaptionChunk[] = [
-  { text: "One in four adults globally now has NAFLD. Most have no idea.", startFrame: 0,   endFrame: 75 },
-  { text: "You do not have to drink alcohol to develop it —",             startFrame: 80,  endFrame: 140 },
-  { text: "excess fructose and refined carbs are equally damaging.",      startFrame: 145, endFrame: 210 },
-  { text: "Standard liver tests miss it until the damage is already significant.", startFrame: 215, endFrame: 285 },
+  { text: "One in four adults globally now has non-alcoholic fatty liver disease.", startFrame: 0,   endFrame: 155 },
+  { text: "Most have no idea.",                                                     startFrame: 160, endFrame: 195 },
+  { text: "You do not have to drink alcohol to develop it —",                       startFrame: 200, endFrame: 305 },
+  { text: "excess fructose and refined carbs are equally damaging.",                startFrame: 310, endFrame: 405 },
+  { text: "And standard liver tests miss it until the damage is already significant.", startFrame: 410, endFrame: 466 },
 ];
 
 const S4_CAPS: CaptionChunk[] = [
-  { text: "Signs your liver is struggling:",                              startFrame: 0,   endFrame: 45 },
-  { text: "stubborn belly fat, afternoon brain fog, bloating after fatty meals,", startFrame: 50, endFrame: 125 },
-  { text: "high triglycerides, and poor sleep.",                         startFrame: 130, endFrame: 175 },
-  { text: "These are not random. They are a pattern.",                   startFrame: 180, endFrame: 225 },
+  { text: "Signs your liver is struggling:",                                                          startFrame: 0,   endFrame: 50 },
+  { text: "stubborn belly fat that does not shift with diet,",                                        startFrame: 55,  endFrame: 155 },
+  { text: "afternoon brain fog, bloating after fatty meals, high triglycerides, and poor sleep.",     startFrame: 160, endFrame: 340 },
+  { text: "These are not random. They are a pattern.",                                                startFrame: 345, endFrame: 422 },
 ];
 
 const S5_CAPS: CaptionChunk[] = [
-  { text: "Remove fructose — it converts directly to fat in the liver.", startFrame: 0,   endFrame: 80 },
-  { text: "Drink 2 to 3 cups of coffee daily —",                        startFrame: 85,  endFrame: 130 },
-  { text: "it reduces liver fibrosis risk by up to 40%.",               startFrame: 135, endFrame: 185 },
-  { text: "Do Zone 2 exercise — it reduces hepatic fat faster than diet alone.", startFrame: 190, endFrame: 260 },
-  { text: "And add GGT and ALT to your next blood panel.",              startFrame: 265, endFrame: 315 },
+  { text: "To give your liver a fighting chance:",                                         startFrame: 0,   endFrame: 85 },
+  { text: "remove fructose — it converts directly to fat in the liver.",                  startFrame: 90,  endFrame: 190 },
+  { text: "Drink 2 to 3 cups of coffee daily — it reduces liver fibrosis risk by up to 40%.", startFrame: 195, endFrame: 400 },
+  { text: "Do Zone 2 exercise — it reduces hepatic fat faster than diet alone.",           startFrame: 405, endFrame: 595 },
+  { text: "And add GGT and ALT to your next blood panel.",                                 startFrame: 600, endFrame: 696 },
 ];
 
 const S6_CAPS: CaptionChunk[] = [
-  { text: "Have you ever had a liver function test done?", startFrame: 0,  endFrame: 65 },
-  { text: "Most people have not.",                        startFrame: 70, endFrame: 100 },
-  { text: "Drop your answer below.",                     startFrame: 105, endFrame: 130 },
+  { text: "Have you ever had a liver function test done?", startFrame: 0,   endFrame: 80 },
+  { text: "Most people have not.",                         startFrame: 85,  endFrame: 120 },
+  { text: "Drop your answer below.",                       startFrame: 125, endFrame: 166 },
 ];
 
 const S7_CAPS: CaptionChunk[] = [
-  { text: "Follow The Long Game for daily longevity science.", startFrame: 0,  endFrame: 55 },
-  { text: "Save this — your liver is listening.",             startFrame: 60, endFrame: 95 },
+  { text: "Follow The Long Game for daily longevity science.", startFrame: 0,  endFrame: 86 },
+  { text: "Save this — your liver is listening.",             startFrame: 91, endFrame: 162 },
 ];
 
 function getMusicVolume(frame: number): number {
