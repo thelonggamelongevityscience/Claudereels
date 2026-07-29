@@ -1,17 +1,23 @@
-import os, textwrap
+import os, math
 from PIL import Image, ImageDraw, ImageFont
 import numpy as np
+import imageio_ffmpeg
+import subprocess
 from moviepy import VideoFileClip, AudioFileClip, ImageClip, CompositeVideoClip
 from moviepy.audio.fx import MultiplyVolume, AudioFadeOut
-from moviepy.video.fx import Loop
 
 VIDEO_IN  = "/root/.claude/uploads/37d971bc-cb9a-57c8-a7cd-0e63d7416cc2/b78007be-reset_alorithim_reel.mp4"
 MUSIC_IN  = "/root/.claude/uploads/37d971bc-cb9a-57c8-a7cd-0e63d7416cc2/e1d6718b-perfect_sound_algorithim_reset_reel.mpeg"
 FONT_PATH = "/tmp/claude-0/-home-user-Claudereels/37d971bc-cb9a-57c8-a7cd-0e63d7416cc2/scratchpad/Montserrat-Regular.ttf"
 OUT_FILE  = "/home/user/Claudereels/outputs/cortisol_with_text.mp4"
+LOOPED_TMP = "/tmp/cortisol_looped.mp4"
 
 W, H = 1080, 1920
 DURATION = 35
+VIDEO_DUR = 8.84    # seconds (source clip length)
+XFADE_DUR = 0.5     # crossfade duration at each loop join
+EFF_DUR = VIDEO_DUR - XFADE_DUR  # 8.34s effective per iteration
+
 FONT_SIZE = 36
 LINE_SPACING = 1.5
 TEXT_COLOR = (255, 255, 255)
@@ -29,44 +35,76 @@ TEXT = (
 )
 
 
-def render_text_overlay(text, font_path, font_size, line_spacing, color, canvas_w, canvas_h):
-    font = ImageFont.truetype(font_path, font_size)
-    img = Image.new("RGBA", (canvas_w, canvas_h), (0, 0, 0, 0))
+def build_looped_video_with_xfade():
+    ffmpeg = imageio_ffmpeg.get_ffmpeg_exe()
+    n = math.ceil(DURATION / EFF_DUR) + 1  # enough clips to cover 35s
+
+    # Each -i is the same source file; FFmpeg resets timestamps per input
+    inputs = []
+    for _ in range(n):
+        inputs += ["-i", VIDEO_IN]
+
+    # Chain xfade filters: [prev][next]xfade=...offset=i*EFF_DUR
+    parts = []
+    prev = "[0:v]"
+    for i in range(1, n):
+        offset = i * EFF_DUR
+        out_tag = f"[v{i:02d}]" if i < n - 1 else "[vout]"
+        parts.append(
+            f"{prev}[{i}:v]xfade=transition=fade:duration={XFADE_DUR:.3f}:offset={offset:.3f}{out_tag}"
+        )
+        prev = out_tag
+
+    filter_complex = ";".join(parts)
+
+    cmd = [ffmpeg, "-y"] + inputs + [
+        "-filter_complex", filter_complex,
+        "-map", "[vout]",
+        "-t", str(DURATION),
+        "-c:v", "libx264", "-pix_fmt", "yuv420p", "-preset", "fast",
+        "-an",
+        LOOPED_TMP,
+    ]
+    print(f"Building seamless loop ({n} clips, {XFADE_DUR}s crossfades)...")
+    result = subprocess.run(cmd, capture_output=True, text=True)
+    if result.returncode != 0:
+        print(result.stderr[-800:])
+        raise RuntimeError("FFmpeg xfade failed")
+    print(f"  Looped video: {os.path.getsize(LOOPED_TMP)/1024/1024:.1f} MB")
+
+
+def render_text_overlay():
+    font = ImageFont.truetype(FONT_PATH, FONT_SIZE)
+    img = Image.new("RGBA", (W, H), (0, 0, 0, 0))
     draw = ImageDraw.Draw(img)
 
-    lines = text.split("\n")
-    line_h = int(font_size * line_spacing)
+    lines = TEXT.split("\n")
+    line_h = int(FONT_SIZE * LINE_SPACING)
     total_h = line_h * len(lines)
-
-    y_start = (canvas_h - total_h) // 2
+    y_start = (H - total_h) // 2
 
     for i, line in enumerate(lines):
-        if line.strip() == "":
+        if not line.strip():
             continue
         bbox = draw.textbbox((0, 0), line, font=font)
         line_w = bbox[2] - bbox[0]
-        x = (canvas_w - line_w) // 2
+        x = (W - line_w) // 2
         y = y_start + i * line_h
-        draw.text((x, y), line, font=font, fill=color)
+        draw.text((x, y), line, font=font, fill=TEXT_COLOR)
 
     return np.array(img)
 
 
+build_looped_video_with_xfade()
+
 print("Rendering text overlay...")
-text_arr = render_text_overlay(TEXT, FONT_PATH, FONT_SIZE, LINE_SPACING, TEXT_COLOR, W, H)
+text_arr = render_text_overlay()
 
-print("Loading video...")
-bg = VideoFileClip(VIDEO_IN).with_effects([Loop(duration=DURATION)]).with_duration(DURATION)
-
-# Scale to fill 1080x1920 if needed (already correct size but be safe)
-if bg.w != W or bg.h != H:
-    bg = bg.resized((W, H))
+print("Loading looped video...")
+bg = VideoFileClip(LOOPED_TMP).with_duration(DURATION)
 
 print("Building text clip...")
-text_clip = (
-    ImageClip(text_arr, duration=DURATION)
-    .with_position("center")
-)
+text_clip = ImageClip(text_arr, duration=DURATION).with_position("center")
 
 print("Compositing...")
 composite = CompositeVideoClip([bg, text_clip], size=(W, H)).with_duration(DURATION)
@@ -75,12 +113,8 @@ print("Loading music...")
 music = (
     AudioFileClip(MUSIC_IN)
     .with_duration(DURATION)
-    .with_effects([
-        MultiplyVolume(MUSIC_VOL),
-        AudioFadeOut(FADE_OUT_SECS),
-    ])
+    .with_effects([MultiplyVolume(MUSIC_VOL), AudioFadeOut(FADE_OUT_SECS)])
 )
-
 composite = composite.with_audio(music)
 
 os.makedirs(os.path.dirname(OUT_FILE), exist_ok=True)
@@ -93,4 +127,5 @@ composite.write_videofile(
     preset="fast",
     logger="bar",
 )
-print(f"\nDone: {OUT_FILE} ({os.path.getsize(OUT_FILE)/1024/1024:.1f} MB)")
+size = os.path.getsize(OUT_FILE)
+print(f"\nDone: {OUT_FILE} ({size/1024/1024:.1f} MB)")
