@@ -98,15 +98,15 @@ export const LIVER_SCENES = {
 
 export const LIVER_TOTAL_FRAMES = 2779; // 2749f audio + 30f buffer (91.6s)
 
-// ── CholesterolReel — PLACEHOLDER timing (frames at 30fps) — updated after audio gen ──
+// ── CholesterolReel — scene timing (frames at 30fps) — from real ElevenLabs audio ──
 export const CHOLESTEROL_SCENES = {
-  scene1: { start:    0, duration: 130 },  // Hook
-  scene2: { start:  130, duration: 230 },  // The Problem
-  scene3: { start:  360, duration: 200 },  // What Actually Matters
-  scene4: { start:  560, duration: 185 },  // What Builds Plaque
-  scene5: { start:  745, duration: 225 },  // The Protocol
-  scene6: { start:  970, duration: 135 },  // Loop Hook
-  scene7: { start: 1105, duration:  95 },  // CTA
+  scene1: { start:    0, duration: 222 },  // 0.000–7.400s    Hook
+  scene2: { start:  222, duration: 701 },  // 7.400–30.767s   The Problem
+  scene3: { start:  923, duration: 661 },  // 30.767–52.800s  What Actually Matters
+  scene4: { start: 1584, duration: 614 },  // 52.800–73.267s  What Builds Plaque
+  scene5: { start: 2198, duration: 848 },  // 73.267–101.567s The Protocol
+  scene6: { start: 3046, duration: 271 },  // 101.567–110.600s Loop Hook
+  scene7: { start: 3317, duration: 264 },  // 110.600–119.400s CTA
 } as const;
 
-export const CHOLESTEROL_TOTAL_FRAMES = 1230; // placeholder
+export const CHOLESTEROL_TOTAL_FRAMES = 3611; // 3581f audio + 30f buffer (120.4s)

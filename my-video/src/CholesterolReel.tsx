@@ -26,49 +26,54 @@ const FONT_CSS = `
 // ── Caption chunks — placeholder, updated after ElevenLabs audio ──
 
 const S1_CAPS: CaptionChunk[] = [
-  { text: "Your doctor is checking the wrong cholesterol number.", startFrame: 0,   endFrame: 55 },
-  { text: "Total cholesterol tells you almost nothing.",           startFrame: 60,  endFrame: 95 },
-  { text: "Here is what actually predicts your risk.",            startFrame: 100, endFrame: 130 },
+  { text: "Your doctor is checking the wrong cholesterol number.", startFrame: 0,   endFrame: 85 },
+  { text: "Total cholesterol tells you almost nothing.",           startFrame: 90,  endFrame: 155 },
+  { text: "Here is what actually predicts your risk.",            startFrame: 160, endFrame: 222 },
 ];
 
 const S2_CAPS: CaptionChunk[] = [
-  { text: "Total cholesterol combines LDL, HDL, and VLDL into one number.",          startFrame: 0,   endFrame: 85 },
-  { text: "That tells you almost nothing about actual cardiovascular risk.",          startFrame: 90,  endFrame: 165 },
-  { text: "People have heart attacks with low total cholesterol.",                    startFrame: 170, endFrame: 240 },
-  { text: "People live to 95 with high total cholesterol.",                           startFrame: 245, endFrame: 310 },
-  { text: "The target you're managed to was set by pharmaceutical trial design.",     startFrame: 315, endFrame: 400 },
+  { text: "Total cholesterol combines LDL, HDL, and VLDL into one number",            startFrame: 0,   endFrame: 130 },
+  { text: "that tells you almost nothing about actual cardiovascular risk.",           startFrame: 135, endFrame: 215 },
+  { text: "People have heart attacks with low total cholesterol.",                     startFrame: 220, endFrame: 325 },
+  { text: "People live to 95 with high total cholesterol.",                            startFrame: 330, endFrame: 430 },
+  { text: "The number your doctor is managing you to was largely set by pharmaceutical trial design —", startFrame: 435, endFrame: 650 },
+  { text: "not by optimal health outcomes.",                                            startFrame: 655, endFrame: 701 },
 ];
 
 const S3_CAPS: CaptionChunk[] = [
-  { text: "Three numbers that actually predict your risk.",                           startFrame: 0,   endFrame: 75 },
-  { text: "ApoB — counts every atherogenic particle in your blood.",                 startFrame: 80,  endFrame: 165 },
-  { text: "LDL particle number — small dense particles are far more dangerous.",     startFrame: 170, endFrame: 270 },
-  { text: "And your triglyceride to HDL ratio — below 1.5 is your target.",         startFrame: 275, endFrame: 375 },
+  { text: "Three numbers that actually predict your risk.",                                                            startFrame: 0,   endFrame: 85 },
+  { text: "ApoB — counts every atherogenic particle in your blood,",                                                  startFrame: 90,  endFrame: 200 },
+  { text: "the most direct measure of cardiovascular risk available.",                                                 startFrame: 205, endFrame: 300 },
+  { text: "LDL particle number — small dense particles are far more dangerous than large fluffy ones at the same LDL-C.", startFrame: 305, endFrame: 520 },
+  { text: "And your triglyceride to HDL ratio — below 1.5 is your target.",                                           startFrame: 525, endFrame: 661 },
 ];
 
 const S4_CAPS: CaptionChunk[] = [
-  { text: "Arterial plaque requires chronic inflammation to begin.",                 startFrame: 0,   endFrame: 90 },
-  { text: "Oxidised LDL particles — not native LDL — embed in arterial walls.",     startFrame: 95,  endFrame: 200 },
-  { text: "Lowering LDL with a statin while leaving inflammation untreated",         startFrame: 205, endFrame: 295 },
-  { text: "is like painting over rust.",                                              startFrame: 300, endFrame: 355 },
+  { text: "Arterial plaque requires chronic inflammation to begin.",                                     startFrame: 0,   endFrame: 105 },
+  { text: "Oxidised LDL particles — not native LDL — are what embed in arterial walls.",                startFrame: 110, endFrame: 230 },
+  { text: "The inflammation comes from insulin resistance, chronic stress, and ultra-processed food.",   startFrame: 235, endFrame: 355 },
+  { text: "Lowering LDL with a statin while leaving inflammation untreated is like painting over rust.", startFrame: 360, endFrame: 614 },
 ];
 
 const S5_CAPS: CaptionChunk[] = [
-  { text: "At your next blood test: request ApoB.",                                  startFrame: 0,   endFrame: 80 },
-  { text: "Calculate your TG to HDL ratio — below 1.5 is your target.",             startFrame: 85,  endFrame: 185 },
-  { text: "Request Lp(a) — test it once in your life.",                              startFrame: 190, endFrame: 275 },
-  { text: "And add hsCRP to see if the inflammatory environment is active.",         startFrame: 280, endFrame: 390 },
+  { text: "At your next blood test: request ApoB —",                                                      startFrame: 0,   endFrame: 100 },
+  { text: "worth more than your entire standard lipid panel for cardiovascular risk assessment.",          startFrame: 105, endFrame: 225 },
+  { text: "Calculate your triglyceride to HDL ratio — below 1.5 is your target.",                        startFrame: 230, endFrame: 345 },
+  { text: "Request Lp(a) — test it once in your life,",                                                   startFrame: 350, endFrame: 460 },
+  { text: "it is largely genetic and changes everything about your cardiovascular risk picture.",          startFrame: 465, endFrame: 665 },
+  { text: "And add hsCRP to see whether the inflammatory environment is currently active.",               startFrame: 670, endFrame: 848 },
 ];
 
 const S6_CAPS: CaptionChunk[] = [
-  { text: "Has your doctor ever tested your ApoB or Lp(a)?",  startFrame: 0,   endFrame: 80 },
-  { text: "Most have not.",                                    startFrame: 85,  endFrame: 115 },
-  { text: "Comment LABS below.",                              startFrame: 120, endFrame: 155 },
+  { text: "Has your doctor ever tested your ApoB or Lp(a)?", startFrame: 0,   endFrame: 100 },
+  { text: "Most have not.",                                   startFrame: 105, endFrame: 135 },
+  { text: "These are the numbers that actually matter.",      startFrame: 140, endFrame: 215 },
+  { text: "Comment LABS below.",                             startFrame: 220, endFrame: 271 },
 ];
 
 const S7_CAPS: CaptionChunk[] = [
-  { text: "Follow The Long Game for daily longevity science.",                       startFrame: 0,  endFrame: 60 },
-  { text: "Save this and send it to someone managing their cholesterol.",            startFrame: 65, endFrame: 120 },
+  { text: "Follow The Long Game for daily longevity science.",                               startFrame: 0,   endFrame: 96 },
+  { text: "Save this and send it to someone managing their cholesterol without knowing these numbers.", startFrame: 101, endFrame: 264 },
 ];
 
 function getMusicVolume(frame: number): number {
