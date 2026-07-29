@@ -110,3 +110,16 @@ export const CHOLESTEROL_SCENES = {
 } as const;
 
 export const CHOLESTEROL_TOTAL_FRAMES = 3611; // 3581f audio + 30f buffer (120.4s)
+
+// ── BellyFatReel — scene timing (frames at 30fps) — PLACEHOLDER until ElevenLabs audio ──
+export const BELLY_FAT_SCENES = {
+  scene1: { start:    0, duration: 225 },  // ~7.5s    Hook
+  scene2: { start:  225, duration: 450 },  // ~15.0s   Two Types of Fat
+  scene3: { start:  675, duration: 500 },  // ~16.7s   Why Diet Fails
+  scene4: { start: 1175, duration: 390 },  // ~13.0s   Why Exercise Fails
+  scene5: { start: 1565, duration: 480 },  // ~16.0s   The Protocol
+  scene6: { start: 2045, duration: 270 },  // ~9.0s    Loop Hook
+  scene7: { start: 2315, duration: 240 },  // ~8.0s    CTA
+} as const;
+
+export const BELLY_FAT_TOTAL_FRAMES = 2585; // placeholder — update after audio
