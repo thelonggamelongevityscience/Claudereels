@@ -23,65 +23,92 @@ const FONT_CSS = `
     src: url('/fonts/DMMono-400.woff2') format('woff2'); }
 `;
 
-// ── Caption chunks — from real ElevenLabs audio (caption_timings_belly_fat.json) ──
+// ── Caption chunks — sentence-boundary aligned using proportional word timing ──
+// Split points within chunks: frame = chunk_start + (words_before_split/chunk_words) * chunk_duration
 
 const S1_CAPS: CaptionChunk[] = [
-  { text: "The belly fat is not a diet problem.",           startFrame: 0,   endFrame: 77  },
-  { text: "It is a hormone problem. That is why",           startFrame: 85,  endFrame: 162 },
-  { text: "cutting calories alone never works. Here is what", startFrame: 170, endFrame: 247 },
-  { text: "is actually happening.",                          startFrame: 255, endFrame: 284 },
+  // c0 complete (8w, 0–77)
+  { text: "The belly fat is not a diet problem.",          startFrame: 0,   endFrame: 77  },
+  // c1 words 0–4: "It is a hormone problem." — ends at 85+(5/8)*77=133
+  { text: "It is a hormone problem.",                      startFrame: 85,  endFrame: 133 },
+  // c1 words 5–7 + c2 words 0–4: "That is why cutting calories alone never works." — ends at 170+(5/8)*77=218
+  { text: "That is why cutting calories alone never works.", startFrame: 134, endFrame: 218 },
+  // c2 words 5–7 + c3 complete
+  { text: "Here is what is actually happening.",           startFrame: 219, endFrame: 284 },
 ];
 
 const S2_CAPS: CaptionChunk[] = [
-  { text: "Not all belly fat is the same. Subcutaneous",           startFrame: 0,   endFrame: 102 },
-  { text: "fat — the soft fat under your skin",                    startFrame: 110, endFrame: 212 },
-  { text: "— is relatively harmless. Visceral fat — packed",       startFrame: 220, endFrame: 322 },
-  { text: "around your organs — produces inflammatory cytokines continuously,", startFrame: 330, endFrame: 432 },
-  { text: "drives insulin resistance, and is far more dangerous.", startFrame: 440, endFrame: 542 },
-  { text: "This is the one most people are actually",              startFrame: 550, endFrame: 652 },
-  { text: "fighting.",                                             startFrame: 660, endFrame: 673 },
+  // c0 words 0–6 (7w): "Not all belly fat is the same." — ends at (7/8)*102=89
+  { text: "Not all belly fat is the same.",                                                        startFrame: 0,   endFrame: 89  },
+  // c0 word 7 + c1 + c2 words 0–3: full sentence — c2 word 3 ends at 220+(4/8)*102=271
+  { text: "Subcutaneous fat — the soft fat under your skin — is relatively harmless.",             startFrame: 90,  endFrame: 271 },
+  // c2 words 4–7 + c3: "Visceral fat — packed around your organs — produces inflammatory cytokines continuously,"
+  { text: "Visceral fat — packed around your organs — produces inflammatory cytokines continuously,", startFrame: 272, endFrame: 432 },
+  // c4 complete: "drives insulin resistance, and is far more dangerous."
+  { text: "drives insulin resistance, and is far more dangerous.",                                 startFrame: 440, endFrame: 542 },
+  // c5 + c6 complete sentence
+  { text: "This is the one most people are actually fighting.",                                    startFrame: 550, endFrame: 673 },
 ];
 
 const S3_CAPS: CaptionChunk[] = [
-  { text: "Two hormones make visceral fat almost impossible to",          startFrame: 0,   endFrame: 108 },
-  { text: "shift. Cortisol — chronic stress specifically directs fat",    startFrame: 116, endFrame: 224 },
-  { text: "storage to the abdomen. And insulin — when",                   startFrame: 232, endFrame: 340 },
-  { text: "chronically elevated, the body cannot access fat for",         startFrame: 348, endFrame: 456 },
-  { text: "fuel regardless of caloric deficit. High cortisol plus",       startFrame: 464, endFrame: 572 },
-  { text: "high insulin is the combination that makes visceral",          startFrame: 580, endFrame: 688 },
-  { text: "fat completely resistant to conventional dieting.",            startFrame: 696, endFrame: 777 },
+  // c0 + c1 word 0 ("shift."): ends at 116+(1/8)*108=130
+  { text: "Two hormones make visceral fat almost impossible to shift.",                                   startFrame: 0,   endFrame: 130 },
+  // c1 words 1–7 + c2 words 0–3 ("abdomen."): c2 word 3 ends at 232+(4/8)*108=286
+  { text: "Cortisol — chronic stress specifically directs fat storage to the abdomen.",                   startFrame: 131, endFrame: 286 },
+  // c2 words 4–7 + c3 words 0–1 ("chronically elevated,"): c3 word 1 ends at 348+(2/8)*108=375
+  { text: "And insulin — when chronically elevated,",                                                     startFrame: 287, endFrame: 375 },
+  // c3 words 2–7 + c4 words 0–4 ("deficit."): c4 word 4 ends at 464+(5/8)*108=532
+  { text: "the body cannot access fat for fuel regardless of caloric deficit.",                           startFrame: 376, endFrame: 532 },
+  // c4 words 5–7 + c5 words 0–4 ("combination"): c5 word 4 ends at 580+(5/8)*108=648
+  { text: "High cortisol plus high insulin is the combination",                                          startFrame: 533, endFrame: 648 },
+  // c5 words 5–7 + c6 complete
+  { text: "that makes visceral fat completely resistant to conventional dieting.",                        startFrame: 649, endFrame: 777 },
 ];
 
 const S4_CAPS: CaptionChunk[] = [
-  { text: "High-intensity exercise without adequate recovery raises cortisol further.", startFrame: 0,   endFrame: 112 },
-  { text: "For someone already cortisol-dominant, adding more intense training",       startFrame: 120, endFrame: 232 },
-  { text: "can increase visceral fat accumulation rather than reduce",                 startFrame: 240, endFrame: 352 },
-  { text: "it. Zone 2 aerobic exercise — not HIIT",                                   startFrame: 360, endFrame: 472 },
-  { text: "— is what the evidence actually supports for",                              startFrame: 480, endFrame: 592 },
-  { text: "visceral fat specifically.",                                                startFrame: 600, endFrame: 642 },
+  // c0 complete sentence
+  { text: "High-intensity exercise without adequate recovery raises cortisol further.",        startFrame: 0,   endFrame: 112 },
+  // c1 complete (natural comma break after "training")
+  { text: "For someone already cortisol-dominant, adding more intense training",              startFrame: 120, endFrame: 232 },
+  // c2 + c3 word 0 ("it."): c3 word 0 ends at 360+(1/8)*112=374
+  { text: "can increase visceral fat accumulation rather than reduce it.",                    startFrame: 240, endFrame: 374 },
+  // c3 words 1–7: "Zone 2 aerobic exercise — not HIIT"
+  { text: "Zone 2 aerobic exercise — not HIIT",                                              startFrame: 375, endFrame: 479 },
+  // c4 + c5 complete sentence
+  { text: "— is what the evidence actually supports for visceral fat specifically.",          startFrame: 480, endFrame: 642 },
 ];
 
 const S5_CAPS: CaptionChunk[] = [
-  { text: "How to actually shift it: fix sleep first",                   startFrame: 0,   endFrame: 98  },
-  { text: "— cortisol normalisation starts here and visceral fat",       startFrame: 106, endFrame: 204 },
-  { text: "responds to sleep quality faster than to diet.",              startFrame: 212, endFrame: 310 },
-  { text: "Lower insulin through time-restricted eating and less refined", startFrame: 318, endFrame: 416 },
-  { text: "carbohydrate. Zone 2 exercise four times per week.",          startFrame: 424, endFrame: 522 },
-  { text: "And manage the stress system — no protocol",                  startFrame: 530, endFrame: 628 },
-  { text: "works while cortisol is chronically elevated.",               startFrame: 636, endFrame: 709 },
+  // c0 complete
+  { text: "How to actually shift it: fix sleep first",                                startFrame: 0,   endFrame: 98  },
+  // c1 complete
+  { text: "— cortisol normalisation starts here and visceral fat",                   startFrame: 106, endFrame: 204 },
+  // c2 complete — end of first sentence
+  { text: "responds to sleep quality faster than to diet.",                           startFrame: 212, endFrame: 310 },
+  // c3 + c4 word 0 ("carbohydrate."): c4 word 0 ends at 424+(1/8)*98=436
+  { text: "Lower insulin through time-restricted eating and less refined carbohydrate.", startFrame: 318, endFrame: 436 },
+  // c4 words 1–7: "Zone 2 exercise four times per week."
+  { text: "Zone 2 exercise four times per week.",                                     startFrame: 437, endFrame: 522 },
+  // c5 complete
+  { text: "And manage the stress system — no protocol",                               startFrame: 530, endFrame: 628 },
+  // c6 complete — end of last sentence
+  { text: "works while cortisol is chronically elevated.",                            startFrame: 636, endFrame: 709 },
 ];
 
 const S6_CAPS: CaptionChunk[] = [
-  { text: "Have you been blaming your diet when it",           startFrame: 0,   endFrame: 79  },
-  { text: "was actually your hormones? Most people have. Drop", startFrame: 87,  endFrame: 166 },
-  { text: "a yes below if this reframes it for",               startFrame: 174, endFrame: 253 },
-  { text: "you.",                                               startFrame: 261, endFrame: 271 },
+  // c0 + c1 words 0–3 ("hormones?"): c1 word 3 ends at 87+(4/8)*79=127
+  { text: "Have you been blaming your diet when it was actually your hormones?", startFrame: 0,   endFrame: 127 },
+  // c1 words 4–6 ("Most people have."): word 6 ends at 87+(7/8)*79=156
+  { text: "Most people have.",                                                     startFrame: 128, endFrame: 156 },
+  // c1 word 7 + c2 + c3: "Drop a yes below if this reframes it for you."
+  { text: "Drop a yes below if this reframes it for you.",                        startFrame: 157, endFrame: 271 },
 ];
 
 const S7_CAPS: CaptionChunk[] = [
-  { text: "Follow The Long Game for daily longevity science.", startFrame: 0,   endFrame: 86  },
-  { text: "Save this and send it to someone who",             startFrame: 94,  endFrame: 180 },
-  { text: "has been dieting without results.",                 startFrame: 188, endFrame: 242 },
+  // c0 complete sentence
+  { text: "Follow The Long Game for daily longevity science.",                         startFrame: 0,  endFrame: 86  },
+  // c1 + c2 complete sentence
+  { text: "Save this and send it to someone who has been dieting without results.",    startFrame: 94, endFrame: 242 },
 ];
 
 function getMusicVolume(frame: number): number {
