@@ -26,54 +26,53 @@ const FONT_CSS = `
 // ── Caption chunks — placeholder, updated after ElevenLabs audio ──
 
 const S1_CAPS: CaptionChunk[] = [
-  { text: "Your doctor is checking the wrong cholesterol number.", startFrame: 0,   endFrame: 85 },
-  { text: "Total cholesterol tells you almost nothing.",           startFrame: 90,  endFrame: 155 },
-  { text: "Here is what actually predicts your risk.",            startFrame: 160, endFrame: 222 },
+  { text: "Your doctor is checking the wrong cholesterol number.", startFrame: 0,   endFrame: 92  },
+  { text: "Total cholesterol tells you almost nothing.",           startFrame: 93,  endFrame: 185 },
+  { text: "Here is what actually predicts your risk.",            startFrame: 186, endFrame: 222 },
 ];
 
 const S2_CAPS: CaptionChunk[] = [
-  { text: "Total cholesterol combines LDL, HDL, and VLDL into one number",            startFrame: 0,   endFrame: 130 },
-  { text: "that tells you almost nothing about actual cardiovascular risk.",           startFrame: 135, endFrame: 215 },
-  { text: "People have heart attacks with low total cholesterol.",                     startFrame: 220, endFrame: 325 },
-  { text: "People live to 95 with high total cholesterol.",                            startFrame: 330, endFrame: 430 },
-  { text: "The number your doctor is managing you to was largely set by pharmaceutical trial design —", startFrame: 435, endFrame: 650 },
-  { text: "not by optimal health outcomes.",                                            startFrame: 655, endFrame: 701 },
+  { text: "Total cholesterol combines LDL, HDL, and VLDL into one number", startFrame: 0,   endFrame: 133 },
+  { text: "that tells you almost nothing about actual cardiovascular risk.", startFrame: 134, endFrame: 253 },
+  { text: "People have heart attacks with low total cholesterol.",           startFrame: 254, endFrame: 361 },
+  { text: "People live to 95 with high total cholesterol.",                  startFrame: 362, endFrame: 469 },
+  { text: "The number your doctor is managing you to was largely set by pharmaceutical trial design — not by optimal health outcomes.", startFrame: 470, endFrame: 701 },
 ];
 
 const S3_CAPS: CaptionChunk[] = [
-  { text: "Three numbers that actually predict your risk.",                                                            startFrame: 0,   endFrame: 85 },
-  { text: "ApoB — counts every atherogenic particle in your blood,",                                                  startFrame: 90,  endFrame: 200 },
-  { text: "the most direct measure of cardiovascular risk available.",                                                 startFrame: 205, endFrame: 300 },
-  { text: "LDL particle number — small dense particles are far more dangerous than large fluffy ones at the same LDL-C.", startFrame: 305, endFrame: 520 },
-  { text: "And your triglyceride to HDL ratio — below 1.5 is your target.",                                           startFrame: 525, endFrame: 661 },
+  { text: "Three numbers that actually predict your risk.",      startFrame: 0,   endFrame: 84  },
+  { text: "ApoB — counts every atherogenic particle in your blood,", startFrame: 85,  endFrame: 207 },
+  { text: "the most direct measure of cardiovascular risk available.", startFrame: 208, endFrame: 311 },
+  { text: "LDL particle number — small dense particles are far more dangerous than large fluffy ones at the same LDL-C.", startFrame: 312, endFrame: 556 },
+  { text: "And your triglyceride to HDL ratio — below 1.5 is your target.", startFrame: 557, endFrame: 661 },
 ];
 
 const S4_CAPS: CaptionChunk[] = [
-  { text: "Arterial plaque requires chronic inflammation to begin.",                                     startFrame: 0,   endFrame: 105 },
-  { text: "Oxidised LDL particles — not native LDL — are what embed in arterial walls.",                startFrame: 110, endFrame: 230 },
-  { text: "The inflammation comes from insulin resistance, chronic stress, and ultra-processed food.",   startFrame: 235, endFrame: 355 },
-  { text: "Lowering LDL with a statin while leaving inflammation untreated is like painting over rust.", startFrame: 360, endFrame: 614 },
+  { text: "Arterial plaque requires chronic inflammation to begin.",                                     startFrame: 0,   endFrame: 94  },
+  { text: "Oxidised LDL particles — not native LDL — are what embed in arterial walls.",                startFrame: 95,  endFrame: 297 },
+  { text: "The inflammation comes from insulin resistance, chronic stress, and ultra-processed food.",   startFrame: 298, endFrame: 459 },
+  { text: "Lowering LDL with a statin while leaving inflammation untreated is like painting over rust.", startFrame: 460, endFrame: 614 },
 ];
 
 const S5_CAPS: CaptionChunk[] = [
-  { text: "At your next blood test: request ApoB —",                                                      startFrame: 0,   endFrame: 100 },
-  { text: "worth more than your entire standard lipid panel for cardiovascular risk assessment.",          startFrame: 105, endFrame: 225 },
-  { text: "Calculate your triglyceride to HDL ratio — below 1.5 is your target.",                        startFrame: 230, endFrame: 345 },
-  { text: "Request Lp(a) — test it once in your life,",                                                   startFrame: 350, endFrame: 460 },
-  { text: "it is largely genetic and changes everything about your cardiovascular risk picture.",          startFrame: 465, endFrame: 665 },
-  { text: "And add hsCRP to see whether the inflammatory environment is currently active.",               startFrame: 670, endFrame: 848 },
+  { text: "At your next blood test: request ApoB —",                                                   startFrame: 0,   endFrame: 111 },
+  { text: "worth more than your entire standard lipid panel for cardiovascular risk assessment.",       startFrame: 112, endFrame: 276 },
+  { text: "Calculate your triglyceride to HDL ratio — below 1.5 is your target.",                     startFrame: 277, endFrame: 447 },
+  { text: "Request Lp(a) — test it once in your life,",                                                startFrame: 448, endFrame: 573 },
+  { text: "it is largely genetic and changes everything about your cardiovascular risk picture.",       startFrame: 574, endFrame: 737 },
+  { text: "And add hsCRP to see whether the inflammatory environment is currently active.",            startFrame: 738, endFrame: 848 },
 ];
 
 const S6_CAPS: CaptionChunk[] = [
-  { text: "Has your doctor ever tested your ApoB or Lp(a)?", startFrame: 0,   endFrame: 100 },
-  { text: "Most have not.",                                   startFrame: 105, endFrame: 135 },
-  { text: "These are the numbers that actually matter.",      startFrame: 140, endFrame: 215 },
-  { text: "Comment LABS below.",                             startFrame: 220, endFrame: 271 },
+  { text: "Has your doctor ever tested your ApoB or Lp(a)?", startFrame: 0,   endFrame: 120 },
+  { text: "Most have not.",                                   startFrame: 121, endFrame: 157 },
+  { text: "These are the numbers that actually matter.",      startFrame: 158, endFrame: 243 },
+  { text: "Comment LABS below.",                             startFrame: 244, endFrame: 271 },
 ];
 
 const S7_CAPS: CaptionChunk[] = [
-  { text: "Follow The Long Game for daily longevity science.",                               startFrame: 0,   endFrame: 96 },
-  { text: "Save this and send it to someone managing their cholesterol without knowing these numbers.", startFrame: 101, endFrame: 264 },
+  { text: "Follow The Long Game for daily longevity science.",                                         startFrame: 0,   endFrame: 103 },
+  { text: "Save this and send it to someone managing their cholesterol without knowing these numbers.", startFrame: 104, endFrame: 264 },
 ];
 
 function getMusicVolume(frame: number): number {
