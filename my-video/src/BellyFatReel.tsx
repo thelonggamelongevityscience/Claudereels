@@ -23,53 +23,65 @@ const FONT_CSS = `
     src: url('/fonts/DMMono-400.woff2') format('woff2'); }
 `;
 
-// ── Caption chunks — placeholder, updated after ElevenLabs audio ──
+// ── Caption chunks — from real ElevenLabs audio (caption_timings_belly_fat.json) ──
 
 const S1_CAPS: CaptionChunk[] = [
-  { text: "The belly fat is not a diet problem.", startFrame: 0,   endFrame: 60  },
-  { text: "It is a hormone problem.",             startFrame: 65,  endFrame: 105 },
-  { text: "That is why cutting calories alone never works.", startFrame: 110, endFrame: 180 },
-  { text: "Here is what is actually happening.",  startFrame: 185, endFrame: 224 },
+  { text: "The belly fat is not a diet problem.",           startFrame: 0,   endFrame: 77  },
+  { text: "It is a hormone problem. That is why",           startFrame: 85,  endFrame: 162 },
+  { text: "cutting calories alone never works. Here is what", startFrame: 170, endFrame: 247 },
+  { text: "is actually happening.",                          startFrame: 255, endFrame: 284 },
 ];
 
 const S2_CAPS: CaptionChunk[] = [
-  { text: "Not all belly fat is the same.",                                                  startFrame: 0,   endFrame: 80  },
-  { text: "Subcutaneous fat — the soft fat under your skin — is relatively harmless.",       startFrame: 85,  endFrame: 215 },
-  { text: "Visceral fat — packed around your organs — produces inflammatory cytokines continuously,", startFrame: 220, endFrame: 380 },
-  { text: "drives insulin resistance, and is far more dangerous.",                           startFrame: 385, endFrame: 480 },
-  { text: "This is the one most people are actually fighting.",                              startFrame: 485, endFrame: 575 },
+  { text: "Not all belly fat is the same. Subcutaneous",           startFrame: 0,   endFrame: 102 },
+  { text: "fat — the soft fat under your skin",                    startFrame: 110, endFrame: 212 },
+  { text: "— is relatively harmless. Visceral fat — packed",       startFrame: 220, endFrame: 322 },
+  { text: "around your organs — produces inflammatory cytokines continuously,", startFrame: 330, endFrame: 432 },
+  { text: "drives insulin resistance, and is far more dangerous.", startFrame: 440, endFrame: 542 },
+  { text: "This is the one most people are actually",              startFrame: 550, endFrame: 652 },
+  { text: "fighting.",                                             startFrame: 660, endFrame: 673 },
 ];
 
 const S3_CAPS: CaptionChunk[] = [
-  { text: "Two hormones make visceral fat almost impossible to shift.",                                          startFrame: 0,   endFrame: 115 },
-  { text: "Cortisol — chronic stress specifically directs fat storage to the abdomen.",                          startFrame: 120, endFrame: 240 },
-  { text: "And insulin — when chronically elevated, the body cannot access fat for fuel regardless of caloric deficit.", startFrame: 245, endFrame: 420 },
-  { text: "High cortisol plus high insulin is the combination that makes visceral fat completely resistant to conventional dieting.", startFrame: 425, endFrame: 645 },
+  { text: "Two hormones make visceral fat almost impossible to",          startFrame: 0,   endFrame: 108 },
+  { text: "shift. Cortisol — chronic stress specifically directs fat",    startFrame: 116, endFrame: 224 },
+  { text: "storage to the abdomen. And insulin — when",                   startFrame: 232, endFrame: 340 },
+  { text: "chronically elevated, the body cannot access fat for",         startFrame: 348, endFrame: 456 },
+  { text: "fuel regardless of caloric deficit. High cortisol plus",       startFrame: 464, endFrame: 572 },
+  { text: "high insulin is the combination that makes visceral",          startFrame: 580, endFrame: 688 },
+  { text: "fat completely resistant to conventional dieting.",            startFrame: 696, endFrame: 777 },
 ];
 
 const S4_CAPS: CaptionChunk[] = [
-  { text: "High-intensity exercise without adequate recovery raises cortisol further.",                         startFrame: 0,   endFrame: 130 },
-  { text: "For someone already cortisol-dominant, adding more intense training can increase visceral fat accumulation.", startFrame: 135, endFrame: 315 },
-  { text: "Zone 2 aerobic exercise — not HIIT — is what the evidence actually supports for visceral fat specifically.", startFrame: 320, endFrame: 520 },
+  { text: "High-intensity exercise without adequate recovery raises cortisol further.", startFrame: 0,   endFrame: 112 },
+  { text: "For someone already cortisol-dominant, adding more intense training",       startFrame: 120, endFrame: 232 },
+  { text: "can increase visceral fat accumulation rather than reduce",                 startFrame: 240, endFrame: 352 },
+  { text: "it. Zone 2 aerobic exercise — not HIIT",                                   startFrame: 360, endFrame: 472 },
+  { text: "— is what the evidence actually supports for",                              startFrame: 480, endFrame: 592 },
+  { text: "visceral fat specifically.",                                                startFrame: 600, endFrame: 642 },
 ];
 
 const S5_CAPS: CaptionChunk[] = [
-  { text: "How to actually shift it: fix sleep first —",                                                  startFrame: 0,   endFrame: 100 },
-  { text: "cortisol normalisation starts here and visceral fat responds to sleep quality faster than to diet.", startFrame: 105, endFrame: 255 },
-  { text: "Lower insulin through time-restricted eating and less refined carbohydrate.",                   startFrame: 260, endFrame: 395 },
-  { text: "Zone 2 exercise four times per week.",                                                          startFrame: 400, endFrame: 480 },
-  { text: "And manage the stress system — no protocol works while cortisol is chronically elevated.",      startFrame: 485, endFrame: 650 },
+  { text: "How to actually shift it: fix sleep first",                   startFrame: 0,   endFrame: 98  },
+  { text: "— cortisol normalisation starts here and visceral fat",       startFrame: 106, endFrame: 204 },
+  { text: "responds to sleep quality faster than to diet.",              startFrame: 212, endFrame: 310 },
+  { text: "Lower insulin through time-restricted eating and less refined", startFrame: 318, endFrame: 416 },
+  { text: "carbohydrate. Zone 2 exercise four times per week.",          startFrame: 424, endFrame: 522 },
+  { text: "And manage the stress system — no protocol",                  startFrame: 530, endFrame: 628 },
+  { text: "works while cortisol is chronically elevated.",               startFrame: 636, endFrame: 709 },
 ];
 
 const S6_CAPS: CaptionChunk[] = [
-  { text: "Have you been blaming your diet when it was actually your hormones?", startFrame: 0,   endFrame: 130 },
-  { text: "Most people have.",                                                    startFrame: 135, endFrame: 175 },
-  { text: "Drop a yes below if this reframes it for you.",                       startFrame: 180, endFrame: 270 },
+  { text: "Have you been blaming your diet when it",           startFrame: 0,   endFrame: 79  },
+  { text: "was actually your hormones? Most people have. Drop", startFrame: 87,  endFrame: 166 },
+  { text: "a yes below if this reframes it for",               startFrame: 174, endFrame: 253 },
+  { text: "you.",                                               startFrame: 261, endFrame: 271 },
 ];
 
 const S7_CAPS: CaptionChunk[] = [
-  { text: "Follow The Long Game for daily longevity science.",                                        startFrame: 0,   endFrame: 95  },
-  { text: "Save this and send it to someone who has been dieting without results.",                   startFrame: 100, endFrame: 240 },
+  { text: "Follow The Long Game for daily longevity science.", startFrame: 0,   endFrame: 86  },
+  { text: "Save this and send it to someone who",             startFrame: 94,  endFrame: 180 },
+  { text: "has been dieting without results.",                 startFrame: 188, endFrame: 242 },
 ];
 
 function getMusicVolume(frame: number): number {
