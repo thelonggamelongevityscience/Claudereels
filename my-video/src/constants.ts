@@ -113,13 +113,13 @@ export const CHOLESTEROL_TOTAL_FRAMES = 3611; // 3581f audio + 30f buffer (120.4
 
 // ── BellyFatReel — scene timing (frames at 30fps) — from real ElevenLabs audio ──
 export const BELLY_FAT_SCENES = {
-  scene1: { start:    0, duration: 349 },  // 0.000–11.633s   Hook
-  scene2: { start:  349, duration: 806 },  // 11.633–38.500s  Two Types of Fat
-  scene3: { start: 1155, duration: 927 },  // 38.500–69.400s  Why Diet Fails
-  scene4: { start: 2082, duration: 781 },  // 69.400–95.433s  Why Exercise Fails
-  scene5: { start: 2863, duration: 861 },  // 95.433–124.133s The Protocol
-  scene6: { start: 3724, duration: 366 },  // 124.133–136.333s Loop Hook
-  scene7: { start: 4090, duration: 315 },  // 136.333–146.833s CTA
+  scene1: { start:    0, duration: 259 },  // 0.000–8.633s    Hook
+  scene2: { start:  259, duration: 626 },  // 8.633–29.500s   Two Types of Fat
+  scene3: { start:  885, duration: 727 },  // 29.500–53.733s  Why Diet Fails
+  scene4: { start: 1612, duration: 601 },  // 53.733–73.767s  Why Exercise Fails
+  scene5: { start: 2213, duration: 661 },  // 73.767–95.800s  The Protocol
+  scene6: { start: 2874, duration: 246 },  // 95.800–104.000s Loop Hook
+  scene7: { start: 3120, duration: 225 },  // 104.000–111.500s CTA
 } as const;
 
-export const BELLY_FAT_TOTAL_FRAMES = 4435; // 4405f audio + 30f buffer (147.8s)
+export const BELLY_FAT_TOTAL_FRAMES = 3375; // 3345f audio + 30f buffer (112.5s)
