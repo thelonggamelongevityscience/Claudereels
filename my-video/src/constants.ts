@@ -124,16 +124,16 @@ export const BELLY_FAT_SCENES = {
 
 export const BELLY_FAT_TOTAL_FRAMES = 3375; // 3345f audio + 30f buffer (112.5s)
 
-// ── ZombieCellsRemakeReel — PLACEHOLDER timings — update after gen_zombie_cells_remake.py ──
+// ── ZombieCellsRemakeReel — scene timing (frames at 30fps) — from real ElevenLabs audio ──
 export const ZCR_SCENES = {
-  scene1: { start:    0, duration:  90 },  // Hook
-  scene2: { start:   90, duration: 390 },  // The Stat First
-  scene3: { start:  480, duration: 390 },  // What They Are
-  scene4: { start:  870, duration: 390 },  // They Spread
-  scene5: { start: 1260, duration: 345 },  // What Creates Them
-  scene6: { start: 1605, duration: 420 },  // The Protocol
-  scene7: { start: 2025, duration: 330 },  // Loop Hook
-  scene8: { start: 2355, duration: 270 },  // CTA
+  scene1: { start:    0, duration:  144 },  // 0.000–4.800s    Hook
+  scene2: { start:  144, duration:  540 },  // 4.800–22.800s   The Stat
+  scene3: { start:  684, duration:  546 },  // 22.800–40.999s  What They Are
+  scene4: { start: 1230, duration:  623 },  // 40.999–61.766s  They Spread
+  scene5: { start: 1853, duration:  487 },  // 61.766–78.033s  What Creates Them
+  scene6: { start: 2340, duration:  825 },  // 78.033–105.533s The Protocol
+  scene7: { start: 3165, duration:  282 },  // 105.533–114.933s Loop Hook
+  scene8: { start: 3447, duration:  177 },  // 114.933–120.833s CTA
 } as const;
 
-export const ZCR_TOTAL_FRAMES = 2655; // placeholder — update after audio
+export const ZCR_TOTAL_FRAMES = 3654; // 3624f audio + 30f buffer (121.2s)
