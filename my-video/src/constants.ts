@@ -139,16 +139,16 @@ export const ZCR_SCENES = {
 
 export const ZCR_TOTAL_FRAMES = 3654; // 3624f audio + 30f buffer (121.2s)
 
-// ── InflammationRemakeReel — scene timing (frames at 30fps) — PLACEHOLDER until real audio ──
+// ── InflammationRemakeReel — scene timing (frames at 30fps) — from real ElevenLabs audio ──
 export const IR_SCENES = {
-  scene1: { start:    0, duration:  90 },
-  scene2: { start:   90, duration: 160 },
-  scene3: { start:  250, duration: 140 },
-  scene4: { start:  390, duration: 140 },
-  scene5: { start:  530, duration: 140 },
-  scene6: { start:  670, duration: 150 },
-  scene7: { start:  820, duration: 100 },
-  scene8: { start:  920, duration:  90 },
+  scene1: { start:    0, duration:  207 },  // 0.000–6.900s    Hook
+  scene2: { start:  207, duration:  729 },  // 6.900–31.200s   Mechanism
+  scene3: { start:  936, duration:  686 },  // 31.200–54.067s  Diseases
+  scene4: { start: 1622, duration:  644 },  // 54.067–75.533s  Sources
+  scene5: { start: 2266, duration:  641 },  // 75.533–96.900s  The Test
+  scene6: { start: 2907, duration:  784 },  // 96.900–123.033s Protocol
+  scene7: { start: 3691, duration:  259 },  // 123.033–131.667s Loop Hook
+  scene8: { start: 3950, duration:  246 },  // 131.667–139.867s CTA
 } as const;
 
-export const IR_TOTAL_FRAMES = 1040; // placeholder
+export const IR_TOTAL_FRAMES = 4226; // 4196f audio + 30f buffer (140.2s)
