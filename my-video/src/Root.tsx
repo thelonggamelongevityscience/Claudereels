@@ -8,7 +8,8 @@ import { MetabolicReel } from './MetabolicReel';
 import { LiverReel } from './LiverReel';
 import { CholesterolReel } from './CholesterolReel';
 import { BellyFatReel } from './BellyFatReel';
-import { FPS, WIDTH, HEIGHT, ZOMBIE_CELLS_TOTAL_FRAMES, GUT_ANXIETY_TOTAL_FRAMES, BLOOD_SUGAR_TOTAL_FRAMES, HORMONES_TOTAL_FRAMES, METABOLIC_TOTAL_FRAMES, LIVER_TOTAL_FRAMES, CHOLESTEROL_TOTAL_FRAMES, BELLY_FAT_TOTAL_FRAMES } from './constants';
+import { ZombieCellsRemakeReel } from './ZombieCellsRemakeReel';
+import { FPS, WIDTH, HEIGHT, ZOMBIE_CELLS_TOTAL_FRAMES, GUT_ANXIETY_TOTAL_FRAMES, BLOOD_SUGAR_TOTAL_FRAMES, HORMONES_TOTAL_FRAMES, METABOLIC_TOTAL_FRAMES, LIVER_TOTAL_FRAMES, CHOLESTEROL_TOTAL_FRAMES, BELLY_FAT_TOTAL_FRAMES, ZCR_TOTAL_FRAMES } from './constants';
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -73,6 +74,14 @@ export const RemotionRoot: React.FC = () => {
         id="BellyFatReel"
         component={BellyFatReel}
         durationInFrames={BELLY_FAT_TOTAL_FRAMES}
+        fps={FPS}
+        width={WIDTH}
+        height={HEIGHT}
+      />
+      <Composition
+        id="ZombieCellsRemakeReel"
+        component={ZombieCellsRemakeReel}
+        durationInFrames={ZCR_TOTAL_FRAMES}
         fps={FPS}
         width={WIDTH}
         height={HEIGHT}
