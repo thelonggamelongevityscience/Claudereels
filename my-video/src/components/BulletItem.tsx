@@ -1,12 +1,13 @@
 import React from 'react';
 import { COLORS, FONTS } from '../constants';
 
-type BulletColor = 'red' | 'green' | 'gold';
+type BulletColor = 'red' | 'green' | 'gold' | 'orange';
 
 const DOT_MAP: Record<BulletColor, string> = {
   red:   COLORS.red,
   green: COLORS.green,
   gold:  COLORS.gold,
+  orange: COLORS.orange,
 };
 
 interface Props {

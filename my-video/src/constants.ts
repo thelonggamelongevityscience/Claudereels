@@ -11,6 +11,7 @@ export const COLORS = {
   green:  '#00FF85',
   gold:   '#FFD166',
   purple: '#C4A0FF',
+  orange: '#FF6B2B',
 } as const;
 
 export const FONTS = {
@@ -137,3 +138,17 @@ export const ZCR_SCENES = {
 } as const;
 
 export const ZCR_TOTAL_FRAMES = 3654; // 3624f audio + 30f buffer (121.2s)
+
+// ── InflammationRemakeReel — scene timing (frames at 30fps) — PLACEHOLDER until real audio ──
+export const IR_SCENES = {
+  scene1: { start:    0, duration:  90 },
+  scene2: { start:   90, duration: 160 },
+  scene3: { start:  250, duration: 140 },
+  scene4: { start:  390, duration: 140 },
+  scene5: { start:  530, duration: 140 },
+  scene6: { start:  670, duration: 150 },
+  scene7: { start:  820, duration: 100 },
+  scene8: { start:  920, duration:  90 },
+} as const;
+
+export const IR_TOTAL_FRAMES = 1040; // placeholder
