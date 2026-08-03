@@ -12,6 +12,7 @@ export const COLORS = {
   gold:   '#FFD166',
   purple: '#C4A0FF',
   orange: '#FF6B2B',
+  blue:   '#00CFFF',
 } as const;
 
 export const FONTS = {
@@ -152,3 +153,17 @@ export const IR_SCENES = {
 } as const;
 
 export const IR_TOTAL_FRAMES = 4226; // 4196f audio + 30f buffer (140.2s)
+
+// ── AutophagyReel — scene timing (frames at 30fps) — PLACEHOLDER until real audio ──
+export const AR_SCENES = {
+  scene1: { start:    0, duration:  90 },
+  scene2: { start:   90, duration: 160 },
+  scene3: { start:  250, duration: 160 },
+  scene4: { start:  410, duration: 160 },
+  scene5: { start:  570, duration: 160 },
+  scene6: { start:  730, duration: 140 },
+  scene7: { start:  870, duration: 100 },
+  scene8: { start:  970, duration:  90 },
+} as const;
+
+export const AR_TOTAL_FRAMES = 1090; // placeholder
