@@ -154,16 +154,16 @@ export const IR_SCENES = {
 
 export const IR_TOTAL_FRAMES = 4226; // 4196f audio + 30f buffer (140.2s)
 
-// ── AutophagyReel — scene timing (frames at 30fps) — PLACEHOLDER until real audio ──
+// ── AutophagyReel — scene timing (frames at 30fps) — from real ElevenLabs audio ──
 export const AR_SCENES = {
-  scene1: { start:    0, duration:  90 },
-  scene2: { start:   90, duration: 160 },
-  scene3: { start:  250, duration: 160 },
-  scene4: { start:  410, duration: 160 },
-  scene5: { start:  570, duration: 160 },
-  scene6: { start:  730, duration: 140 },
-  scene7: { start:  870, duration: 100 },
-  scene8: { start:  970, duration:  90 },
+  scene1: { start:    0, duration:  155 },  // 0.000–5.167s    Hook
+  scene2: { start:  155, duration:  775 },  // 5.167–30.967s   What Is Autophagy
+  scene3: { start:  930, duration:  671 },  // 30.967–53.333s  Why It Matters
+  scene4: { start: 1601, duration:  774 },  // 53.333–79.133s  What Blocks It
+  scene5: { start: 2375, duration:  778 },  // 79.133–105.100s How To Activate
+  scene6: { start: 3153, duration:  629 },  // 105.100–126.067s The Trilogy
+  scene7: { start: 3782, duration:  295 },  // 126.067–135.900s Loop Hook
+  scene8: { start: 4077, duration:  179 },  // 135.900–141.867s CTA
 } as const;
 
-export const AR_TOTAL_FRAMES = 1090; // placeholder
+export const AR_TOTAL_FRAMES = 4286; // 4256f audio + 30f buffer (142.2s)

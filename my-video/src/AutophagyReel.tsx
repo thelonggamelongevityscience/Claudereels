@@ -24,57 +24,109 @@ const FONT_CSS = `
     src: url('/fonts/DMMono-400.woff2') format('woff2'); }
 `;
 
-// ── Caption chunks — PLACEHOLDER until real ElevenLabs audio timings are uploaded ──
+// ── Caption chunks — sentence-boundary aligned using proportional word timing ──
+// Split points within chunks: frame = chunk_start + (words_before_split / chunk_words) * chunk_duration
+
+// S1: 2 chunks × 8w, audio_frames=155
 const S1_CAPS: CaptionChunk[] = [
-  { text: "Your body has a self-cleaning mode.",  startFrame: 0,  endFrame: 50 },
-  { text: "Most people never activate it.",        startFrame: 58, endFrame: 72 },
-  { text: "Here is how it works.",                 startFrame: 80, endFrame: 90 },
+  // c0 w1-7 "Your body has a self-cleaning mode."
+  { text: "Your body has a self-cleaning mode.",  startFrame: 0,   endFrame: 68  },
+  // c0 w8 + c1 w1-4 "Most people never activate it."
+  { text: "Most people never activate it.",        startFrame: 76,  endFrame: 125 },
+  // c1 w5-8 "Here is how it works."
+  { text: "Here is how it works.",                 startFrame: 133, endFrame: 155 },
 ];
 
+// S2: 8 chunks × 8w, audio_frames=775
 const S2_CAPS: CaptionChunk[] = [
-  { text: "Autophagy — from the Greek for self-eating — is the process by which your cells identify damaged proteins,", startFrame: 0,   endFrame: 70 },
-  { text: "dysfunctional organelles, and cellular debris, and break them down for recycling.",                          startFrame: 78,  endFrame: 120 },
-  { text: "It is your body's built-in quality control system.",                                                         startFrame: 128, endFrame: 160 },
+  // c0 all + c1 all + c2 w1-7 — through "cellular debris,"
+  { text: "Autophagy — from the Greek for self-eating — is the process by which your cells identify damaged proteins, dysfunctional organelles, and cellular debris,", startFrame: 0,   endFrame: 295 },
+  // c2 w8 + c3 w1-5 "and break them down for recycling."
+  { text: "and break them down for recycling.",                                    startFrame: 303, endFrame: 376 },
+  // c3 w6-8 + c4 w1-5 "It is your body's built-in quality control system."
+  { text: "It is your body's built-in quality control system.",                   startFrame: 384, endFrame: 481 },
+  // c4 w6-8 + c5 all + c6 w1 "Yoshinori Ohsumi won the 2016 Nobel Prize in Medicine for mapping it."
+  { text: "Yoshinori Ohsumi won the 2016 Nobel Prize in Medicine for mapping it.", startFrame: 489, endFrame: 642 },
+  // c6 w2-8 + c7 all "The science establishment called it one of the most important biological discoveries of the century."
+  { text: "The science establishment called it one of the most important biological discoveries of the century.", startFrame: 650, endFrame: 775 },
 ];
 
+// S3: 8 chunks (last 5w), audio_frames=671
 const S3_CAPS: CaptionChunk[] = [
-  { text: "Autophagy is the answer to both problems we covered this week.",                    startFrame: 0,   endFrame: 50 },
-  { text: "It clears zombie cells before their inflammatory signals spread.",                   startFrame: 58,  endFrame: 95 },
-  { text: "It resolves chronic inflammation by degrading the proteins that trigger NF-kB.",    startFrame: 103, endFrame: 140 },
-  { text: "And it removes dysfunctional mitochondria before they leak the free radicals that age you.", startFrame: 148, endFrame: 160 },
+  // c0 all + c1 w1-3 "Autophagy is the answer to both problems we covered this week."
+  { text: "Autophagy is the answer to both problems we covered this week.",                                    startFrame: 0,   endFrame: 129 },
+  // c1 w4-8 + c2 w1-4 "It clears zombie cells before their inflammatory signals spread."
+  { text: "It clears zombie cells before their inflammatory signals spread.",                                   startFrame: 137, endFrame: 236 },
+  // c2 w5-8 + c3 all + c4 w1-2 "It resolves chronic inflammation by degrading the very proteins that trigger the inflammatory cascade."
+  { text: "It resolves chronic inflammation by degrading the very proteins that trigger the inflammatory cascade.", startFrame: 244, endFrame: 406 },
+  // c4 w3-8 + c5 w1-4 "It protects brain cells by clearing amyloid and tau proteins."
+  { text: "It protects brain cells by clearing amyloid and tau proteins.",                                     startFrame: 414, endFrame: 524 },
+  // c5 w5-8 + c6 all + c7 all "And it removes dysfunctional mitochondria before they leak the free radicals that age you from the inside."
+  { text: "And it removes dysfunctional mitochondria before they leak the free radicals that age you from the inside.", startFrame: 532, endFrame: 671 },
 ];
 
+// S4: 8 chunks (last 2w), audio_frames=774
 const S4_CAPS: CaptionChunk[] = [
-  { text: "Four things switch your self-cleaning mode off.",                                   startFrame: 0,   endFrame: 40 },
-  { text: "Constant eating — every meal triggers insulin, which directly suppresses autophagy.", startFrame: 48, endFrame: 90 },
-  { text: "Excess protein activates mTOR — autophagy's direct off switch.",                    startFrame: 98,  endFrame: 130 },
-  { text: "Poor sleep halts the brain's overnight cleanup.",                                    startFrame: 138, endFrame: 160 },
+  // c0 w1-7 "Four things switch your self-cleaning mode off."
+  { text: "Four things switch your self-cleaning mode off.",                                           startFrame: 0,   endFrame: 93  },
+  // c0 w8 + c1 all + c2 w1-2 "Constant eating — every meal triggers insulin, which directly suppresses autophagy."
+  { text: "Constant eating — every meal triggers insulin, which directly suppresses autophagy.",       startFrame: 101, endFrame: 257 },
+  // c2 w3-8 + c3 w1-3 "Excess protein activating mTOR — autophagy's direct off switch."
+  { text: "Excess protein activating mTOR — autophagy's direct off switch.",                          startFrame: 265, endFrame: 385 },
+  // c3 w4-8 + c4 w1-3 "Chronic stress impairing the rate of cellular clearance."
+  { text: "Chronic stress impairing the rate of cellular clearance.",                                 startFrame: 393, endFrame: 500 },
+  // c4 w4-8 + c5 all "And poor sleep — the majority of neuronal autophagy happens during deep sleep."
+  { text: "And poor sleep — the majority of neuronal autophagy happens during deep sleep.",            startFrame: 508, endFrame: 682 },
+  // c6 all + c7 all "Cut it short and you halt the brain's overnight cleanup."
+  { text: "Cut it short and you halt the brain's overnight cleanup.",                                 startFrame: 690, endFrame: 774 },
 ];
 
+// S5: 8 chunks (last 7w), audio_frames=778
 const S5_CAPS: CaptionChunk[] = [
-  { text: "Four ways to switch it back on.",                                                      startFrame: 0,   endFrame: 30 },
-  { text: "Fast for 16 to 18 hours — autophagy begins meaningfully around 14 to 16 hours without food.", startFrame: 38, endFrame: 90 },
-  { text: "Zone 2 exercise strongly induces it in muscle, liver, and brain simultaneously.",      startFrame: 98,  endFrame: 130 },
-  { text: "Black coffee and deep sleep complete the protocol.",                                    startFrame: 138, endFrame: 160 },
+  // c0 w1-7 "Four ways to switch it back on."
+  { text: "Four ways to switch it back on.",                                                            startFrame: 0,   endFrame: 87  },
+  // c0 w8 + c1 all + c2 all "Fast for 16 to 18 hours — autophagy begins meaningfully around 14 to 16 hours without food."
+  { text: "Fast for 16 to 18 hours — autophagy begins meaningfully around 14 to 16 hours without food.", startFrame: 95, endFrame: 313 },
+  // c3 all + c4 w1-4 "Zone 2 exercise strongly induces it in muscle, liver, and brain simultaneously."
+  { text: "Zone 2 exercise strongly induces it in muscle, liver, and brain simultaneously.",            startFrame: 321, endFrame: 478 },
+  // c4 w5-8 + c5 all + c6 w1-7 "Black coffee — caffeine and polyphenols independently activate autophagy, which is one of the mechanisms behind coffee's longevity data."
+  { text: "Black coffee — caffeine and polyphenols independently activate autophagy, which is one of the mechanisms behind coffee's longevity data.", startFrame: 486, endFrame: 729 },
+  // c6 w8 + c7 all "And protect your deep sleep at all costs."
+  { text: "And protect your deep sleep at all costs.",                                                  startFrame: 737, endFrame: 778 },
 ];
 
+// S6: 6 chunks (last 5w), audio_frames=629
 const S6_CAPS: CaptionChunk[] = [
-  { text: "This week was a trilogy.",                                                   startFrame: 0,   endFrame: 28 },
-  { text: "Tuesday — zombie cells accumulate when autophagy fails to clear them.",     startFrame: 36,  endFrame: 75 },
-  { text: "Wednesday — chronic inflammation persists when autophagy fails to resolve it.", startFrame: 83, endFrame: 115 },
-  { text: "Friday — autophagy is the mechanism that fixes both.",                      startFrame: 123, endFrame: 140 },
+  // c0 w1-5 "This week was a trilogy."
+  { text: "This week was a trilogy.",                                                   startFrame: 0,   endFrame: 70  },
+  // c0 w6-8 + c1 all "Tuesday — zombie cells accumulate when autophagy fails to clear them."
+  { text: "Tuesday — zombie cells accumulate when autophagy fails to clear them.",     startFrame: 78,  endFrame: 232 },
+  // c2 all + c3 w1-3 "Wednesday — chronic inflammation persists when autophagy fails to resolve it."
+  { text: "Wednesday — chronic inflammation persists when autophagy fails to resolve it.", startFrame: 240, endFrame: 402 },
+  // c3 w4-8 + c4 w1-4 "Friday — autophagy is the mechanism that fixes both."
+  { text: "Friday — autophagy is the mechanism that fixes both.",                      startFrame: 410, endFrame: 536 },
+  // c4 w5-8 + c5 all "Fast. Move. Sleep. Your cells will do the rest."
+  { text: "Fast. Move. Sleep. Your cells will do the rest.",                           startFrame: 544, endFrame: 629 },
 ];
 
+// S7: 3 chunks, audio_frames=295
 const S7_CAPS: CaptionChunk[] = [
-  { text: "Are you accidentally keeping your self-cleaning mode off?", startFrame: 0,  endFrame: 55 },
-  { text: "Constant eating. Poor sleep. No fasting. No Zone 2.",       startFrame: 63, endFrame: 85 },
-  { text: "Drop your honest answer below.",                             startFrame: 93, endFrame: 95 },
+  // c0 all "Are you accidentally keeping your self-cleaning mode off?"
+  { text: "Are you accidentally keeping your self-cleaning mode off?", startFrame: 0,   endFrame: 107 },
+  // c1 all + c2 w1 "Constant eating. Poor sleep. No fasting. No Zone 2."
+  { text: "Constant eating. Poor sleep. No fasting. No Zone 2.",       startFrame: 115, endFrame: 243 },
+  // c2 w2-6 "Drop your honest answer below."
+  { text: "Drop your honest answer below.",                             startFrame: 251, endFrame: 295 },
 ];
 
+// S8: 3 chunks, audio_frames=179
 const S8_CAPS: CaptionChunk[] = [
-  { text: "Follow The Long Game for daily longevity science.", startFrame: 0,  endFrame: 48 },
-  { text: "Save this.",                                         startFrame: 56, endFrame: 66 },
-  { text: "Your cells are waiting for the signal.",            startFrame: 74, endFrame: 90 },
+  // c0 all "Follow The Long Game for daily longevity science."
+  { text: "Follow The Long Game for daily longevity science.", startFrame: 0,   endFrame: 84  },
+  // c1 w1-2 "Save this."
+  { text: "Save this.",                                         startFrame: 92,  endFrame: 113 },
+  // c1 w3-8 + c2 "Your cells are waiting for the signal."
+  { text: "Your cells are waiting for the signal.",            startFrame: 121, endFrame: 179 },
 ];
 
 function getMusicVolume(frame: number): number {
