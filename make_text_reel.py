@@ -17,8 +17,9 @@ OUTPUT    = "/home/user/Claudereels/outputs/post55_doctor_will_not_tell_you.mp4"
 
 W, H     = 1080, 1920
 DURATION = 35
-FONT_SIZE = 72
+FONT_SIZE = 52       # reduced; auto-fit will shrink further if needed
 LINE_SPACING = 1.5  # multiplier on font size
+PADDING = 80        # horizontal safe-zone pixels each side
 
 TEXT = """\
 Your doctor will not tell you
@@ -42,10 +43,20 @@ def make_text_image():
     """Render static text to a transparent PNG at 1080x1920."""
     img = Image.new("RGBA", (W, H), (0, 0, 0, 0))
     draw = ImageDraw.Draw(img)
-    font = ImageFont.truetype(FONT_PATH, FONT_SIZE)
 
+    # Auto-fit: shrink font until the widest line fits within (W - 2*PADDING)
+    max_text_w = W - 2 * PADDING
+    size = FONT_SIZE
+    while size > 20:
+        font = ImageFont.truetype(FONT_PATH, size)
+        widths = [draw.textbbox((0, 0), l, font=font)[2] for l in TEXT.split("\n") if l.strip()]
+        if max(widths) <= max_text_w:
+            break
+        size -= 2
+
+    print(f"Using font size: {size}px")
+    line_height = int(size * LINE_SPACING)
     lines = TEXT.split("\n")
-    line_height = int(FONT_SIZE * LINE_SPACING)
 
     # Measure total text block height
     total_height = len(lines) * line_height
