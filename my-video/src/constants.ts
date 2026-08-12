@@ -167,3 +167,17 @@ export const AR_SCENES = {
 } as const;
 
 export const AR_TOTAL_FRAMES = 4286; // 4256f audio + 30f buffer (142.2s)
+
+// ── MorningLightReel — scene timing (frames at 30fps) — from real ElevenLabs audio ──
+export const ML_SCENES = {
+  scene1: { start:    0, duration:  219 },  // 0.000–7.291s    Hook
+  scene2: { start:  219, duration:  496 },  // 7.291–23.824s   What's Happening
+  scene3: { start:  715, duration:  460 },  // 23.824–39.149s  Why It Matters
+  scene4: { start: 1175, duration:  461 },  // 39.149–54.521s  What Blocks It
+  scene5: { start: 1636, duration:  435 },  // 54.521–69.010s  How To Fix It
+  scene6: { start: 2071, duration:  431 },  // 69.010–83.360s  The Lux Gap
+  scene7: { start: 2502, duration:  198 },  // 83.360–89.954s  Loop Hook
+  scene8: { start: 2700, duration:  141 },  // 89.954–94.644s  CTA
+} as const;
+
+export const ML_TOTAL_FRAMES = 2871; // 2841f audio + 30f buffer (94.6s)
