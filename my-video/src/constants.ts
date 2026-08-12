@@ -181,3 +181,17 @@ export const ML_SCENES = {
 } as const;
 
 export const ML_TOTAL_FRAMES = 2871; // 2841f audio + 30f buffer (94.6s)
+
+// ── NightcapReel — scene timing (frames at 30fps) — from real ElevenLabs audio ──
+export const NC_SCENES = {
+  scene1: { start:    0, duration:  234 },  // 0.000–7.802s    Hook
+  scene2: { start:  234, duration:  483 },  // 7.802–23.917s   What's Happening
+  scene3: { start:  717, duration:  476 },  // 23.917–39.799s  Why It Matters
+  scene4: { start: 1193, duration:  488 },  // 39.799–56.053s  The Myths
+  scene5: { start: 1681, duration:  403 },  // 56.053–69.474s  How To Protect It
+  scene6: { start: 2084, duration:  385 },  // 69.474–82.291s  The Trade
+  scene7: { start: 2469, duration:  173 },  // 82.291–88.050s  Loop Hook
+  scene8: { start: 2642, duration:  163 },  // 88.050–93.483s  CTA
+} as const;
+
+export const NC_TOTAL_FRAMES = 2835; // 2805f audio + 30f buffer (93.5s)
