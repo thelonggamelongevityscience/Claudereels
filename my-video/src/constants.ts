@@ -195,3 +195,17 @@ export const NC_SCENES = {
 } as const;
 
 export const NC_TOTAL_FRAMES = 2835; // 2805f audio + 30f buffer (93.5s)
+
+// ── MelatoninReel — scene timing (frames at 30fps) — from real ElevenLabs audio ──
+export const MEL_SCENES = {
+  scene1: { start:    0, duration:  228 },  // 0.000–7.616s    Hook
+  scene2: { start:  228, duration:  470 },  // 7.616–23.266s   What It Actually Is
+  scene3: { start:  698, duration:  492 },  // 23.266–39.659s  Why It Matters
+  scene4: { start: 1190, duration:  372 },  // 39.659–52.058s  What's Going Wrong
+  scene5: { start: 1562, duration:  443 },  // 52.058–66.826s  How To Use It
+  scene6: { start: 2005, duration:  337 },  // 66.826–78.064s  The Pattern
+  scene7: { start: 2342, duration:  138 },  // 78.064–82.662s  Loop Hook
+  scene8: { start: 2480, duration:  149 },  // 82.662–87.631s  CTA
+} as const;
+
+export const MEL_TOTAL_FRAMES = 2659; // 2629f audio + 30f buffer (87.6s)
