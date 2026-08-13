@@ -209,3 +209,17 @@ export const MEL_SCENES = {
 } as const;
 
 export const MEL_TOTAL_FRAMES = 2659; // 2629f audio + 30f buffer (87.6s)
+
+// ── VO2MaxReel — scene timing (frames at 30fps) — from real ElevenLabs audio ──
+export const VO2_SCENES = {
+  scene1: { start:    0, duration:  147 },  // 0.000–4.898s    Hook
+  scene2: { start:  147, duration:  331 },  // 4.898–15.921s   What Is VO2 Max
+  scene3: { start:  478, duration:  401 },  // 15.921–29.300s  The Mechanism
+  scene4: { start:  879, duration:  298 },  // 29.300–39.234s  The Risk Gap
+  scene5: { start: 1177, duration:  311 },  // 39.234–49.593s  How To Test
+  scene6: { start: 1488, duration:  357 },  // 49.593–61.485s  It's Trainable
+  scene7: { start: 1845, duration:  216 },  // 61.485–68.694s  Loop Hook
+  scene8: { start: 2061, duration:  162 },  // 68.694–74.103s  CTA
+} as const;
+
+export const VO2_TOTAL_FRAMES = 2253; // 2223f audio + 30f buffer (74.1s)
