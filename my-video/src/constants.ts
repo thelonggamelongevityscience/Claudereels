@@ -237,3 +237,17 @@ export const FIBER_SCENES = {
 } as const;
 
 export const FIBER_TOTAL_FRAMES = 2594; // 2564f audio + 30f buffer (85.5s)
+
+// ── GripReel — scene timing (frames at 30fps) — from real ElevenLabs audio ──
+export const GRIP_SCENES = {
+  scene1: { start:    0, duration:  189 },  // 0.000–6.316s    Hook
+  scene2: { start:  189, duration:  386 },  // 6.316–19.180s   What's Happening
+  scene3: { start:  575, duration:  380 },  // 19.180–31.858s  Why It Matters
+  scene4: { start:  955, duration:  322 },  // 31.858–42.586s  What Weakens It
+  scene5: { start: 1277, duration:  305 },  // 42.586–52.756s  How To Build It
+  scene6: { start: 1582, duration:  472 },  // 52.756–68.499s  The Number
+  scene7: { start: 2054, duration:  157 },  // 68.499–73.747s  Loop Hook
+  scene8: { start: 2211, duration:  143 },  // 73.747–78.530s  CTA
+} as const;
+
+export const GRIP_TOTAL_FRAMES = 2384; // 2354f audio + 30f buffer (78.5s)
