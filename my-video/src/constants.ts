@@ -223,3 +223,17 @@ export const VO2_SCENES = {
 } as const;
 
 export const VO2_TOTAL_FRAMES = 2253; // 2223f audio + 30f buffer (74.1s)
+
+// ── FiberReel — scene timing (frames at 30fps) — from real ElevenLabs audio ──
+export const FIBER_SCENES = {
+  scene1: { start:    0, duration:  192 },  // 0.000–6.409s    Hook
+  scene2: { start:  192, duration:  492 },  // 6.409–22.802s   What's Happening
+  scene3: { start:  684, duration:  449 },  // 22.802–37.756s  Why It Matters
+  scene4: { start: 1133, duration:  372 },  // 37.756–50.155s  What's Blocking It
+  scene5: { start: 1505, duration:  290 },  // 50.155–59.814s  How To Close The Gap
+  scene6: { start: 1795, duration:  439 },  // 59.814–74.443s  Fiber By The Numbers
+  scene7: { start: 2234, duration:  173 },  // 74.443–80.202s  Loop Hook
+  scene8: { start: 2407, duration:  157 },  // 80.202–85.450s  CTA
+} as const;
+
+export const FIBER_TOTAL_FRAMES = 2594; // 2564f audio + 30f buffer (85.5s)
