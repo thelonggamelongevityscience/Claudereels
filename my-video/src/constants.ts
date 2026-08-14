@@ -13,6 +13,7 @@ export const COLORS = {
   purple: '#C4A0FF',
   orange: '#FF6B2B',
   blue:   '#00CFFF',
+  indigo: '#7C83FD',
 } as const;
 
 export const FONTS = {
@@ -251,3 +252,17 @@ export const GRIP_SCENES = {
 } as const;
 
 export const GRIP_TOTAL_FRAMES = 2384; // 2354f audio + 30f buffer (78.5s)
+
+// ── HallmarksReel — scene timing (frames at 30fps) — from real ElevenLabs audio ──
+export const HALLMARKS_SCENES = {
+  scene1: { start:    0, duration:  276 },  // 0.000–9.195s    Hook
+  scene2: { start:  276, duration:  379 },  // 9.195–21.827s   What's Happening
+  scene3: { start:  655, duration:  440 },  // 21.827–36.502s  Why It Matters
+  scene4: { start: 1095, duration:  425 },  // 36.502–50.666s  What Accelerates Them
+  scene5: { start: 1520, duration:  428 },  // 50.666–64.923s  What Slows Them Down
+  scene6: { start: 1948, duration:  421 },  // 64.923–78.948s  Why This Matters
+  scene7: { start: 2369, duration:  145 },  // 78.948–83.778s  Loop Hook
+  scene8: { start: 2514, duration:  174 },  // 83.778–89.583s  CTA
+} as const;
+
+export const HALLMARKS_TOTAL_FRAMES = 2718; // 2688f audio + 30f buffer (89.6s)
