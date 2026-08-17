@@ -14,6 +14,7 @@ export const COLORS = {
   orange: '#FF6B2B',
   blue:   '#00CFFF',
   indigo: '#7C83FD',
+  ember:  '#E85D04',
 } as const;
 
 export const FONTS = {
@@ -266,3 +267,17 @@ export const HALLMARKS_SCENES = {
 } as const;
 
 export const HALLMARKS_TOTAL_FRAMES = 2718; // 2688f audio + 30f buffer (89.6s)
+
+// ── SaunaReel — scene timing (frames at 30fps) — from real ElevenLabs audio ──
+export const SAUNA_SCENES = {
+  scene1: { start:    0, duration:  162 },  // 0.000–5.387s    Hook
+  scene2: { start:  162, duration:  470 },  // 5.387–21.037s   What's Happening
+  scene3: { start:  632, duration:  439 },  // 21.037–35.666s  Why It Matters
+  scene4: { start: 1071, duration:  272 },  // 35.666–44.722s  What Blocks It
+  scene5: { start: 1343, duration:  301 },  // 44.722–54.753s  How To Get It
+  scene6: { start: 1644, duration:  425 },  // 54.753–68.917s  The Numbers
+  scene7: { start: 2069, duration:  159 },  // 68.917–74.211s  Loop Hook
+  scene8: { start: 2228, duration:  149 },  // 74.211–79.180s  CTA
+} as const;
+
+export const SAUNA_TOTAL_FRAMES = 2407; // 2377f audio + 30f buffer (79.2s)
