@@ -15,6 +15,7 @@ export const COLORS = {
   blue:   '#00CFFF',
   indigo: '#7C83FD',
   ember:  '#E85D04',
+  sand:   '#D8C4A0',
 } as const;
 
 export const FONTS = {
@@ -281,3 +282,17 @@ export const SAUNA_SCENES = {
 } as const;
 
 export const SAUNA_TOTAL_FRAMES = 2407; // 2377f audio + 30f buffer (79.2s)
+
+// ── BoneReel — scene timing (frames at 30fps) — from real ElevenLabs audio ──
+export const BONE_SCENES = {
+  scene1: { start:    0, duration:  270 },  // 0.000–9.009s    Hook
+  scene2: { start:  270, duration:  368 },  // 9.009–21.269s   What's Happening
+  scene3: { start:  638, duration:  425 },  // 21.269–35.433s  Why It Matters
+  scene4: { start: 1063, duration:  330 },  // 35.433–46.439s  What Accelerates Loss
+  scene5: { start: 1393, duration:  344 },  // 46.439–57.910s  How To Protect It
+  scene6: { start: 1737, duration:  369 },  // 57.910–70.217s  Where You Stand
+  scene7: { start: 2106, duration:  196 },  // 70.217–76.765s  Loop Hook
+  scene8: { start: 2302, duration:  143 },  // 76.765–81.548s  CTA
+} as const;
+
+export const BONE_TOTAL_FRAMES = 2475; // 2445f audio + 30f buffer (81.5s)
