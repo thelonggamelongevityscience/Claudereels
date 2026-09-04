@@ -16,6 +16,7 @@ export const COLORS = {
   indigo: '#7C83FD',
   ember:  '#E85D04',
   sand:   '#D8C4A0',
+  steel:  '#5B8DEF',
 } as const;
 
 export const FONTS = {
@@ -324,3 +325,17 @@ export const LA_SCENES = {
 } as const;
 
 export const LA_TOTAL_FRAMES = 1911; // 1881f audio + 30f buffer (62.7s)
+
+// ── GLP1Reel — scene timing (frames at 30fps) — from real ElevenLabs audio ──
+export const GLP_SCENES = {
+  scene1: { start:    0, duration:  201 },  // 0.000–6.687s    Hook
+  scene2: { start:  201, duration:  337 },  // 6.687–17.925s   Myth 1
+  scene3: { start:  538, duration:  333 },  // 17.925–29.024s  Myth 2
+  scene4: { start:  871, duration:  368 },  // 29.024–41.284s  Myth 3
+  scene5: { start: 1239, duration:  365 },  // 41.284–53.451s  Myth 4
+  scene6: { start: 1604, duration:  326 },  // 53.451–64.318s  Myth 5
+  scene7: { start: 1930, duration:  181 },  // 64.318–70.355s  Send Trigger
+  scene8: { start: 2111, duration:  102 },  // 70.355–73.745s  CTA
+} as const;
+
+export const GLP_TOTAL_FRAMES = 2243; // 2213f audio + 30f buffer (73.7s)
