@@ -116,19 +116,30 @@ def chunk_alignment(char_start_times, char_end_times, chars, words_per_chunk=8):
     return chunks
 
 
-def generate_scene(scene):
+def generate_scene(scene, retries=3):
     print(f"  Generating {scene['title']}...")
-    url  = f"https://api.elevenlabs.io/v1/text-to-speech/{VOICE_ID}/with-timestamps"
-    resp = requests.post(
-        url,
-        headers={"xi-api-key": API_KEY, "Content-Type": "application/json"},
-        json={
-            "text":       scene["text"],
-            "model_id":   MODEL,
-            "voice_settings": {"stability": 0.4, "similarity_boost": 0.8, "style": 0.2},
-        },
-    )
-    resp.raise_for_status()
+    url = f"https://api.elevenlabs.io/v1/text-to-speech/{VOICE_ID}/with-timestamps"
+    payload = {
+        "text":           scene["text"],
+        "model_id":       MODEL,
+        "output_format":  "mp3_44100_128",
+        "voice_settings": {"stability": 0.4, "similarity_boost": 0.8, "style": 0.2},
+    }
+    for attempt in range(1, retries + 1):
+        try:
+            resp = requests.post(
+                url,
+                headers={"xi-api-key": API_KEY, "Content-Type": "application/json"},
+                json=payload,
+                timeout=60,
+            )
+            resp.raise_for_status()
+            break
+        except Exception as e:
+            print(f"    Attempt {attempt} failed: {e}")
+            if attempt == retries:
+                raise
+            import time; time.sleep(3)
     data = resp.json()
     audio_bytes = __import__("base64").b64decode(data["audio_base64"])
     alignment   = data["alignment"]
