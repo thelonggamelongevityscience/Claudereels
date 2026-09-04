@@ -310,3 +310,17 @@ export const HSCRP_SCENES = {
 } as const;
 
 export const HSCRP_TOTAL_FRAMES = 2281; // 2251f audio + 30f buffer (75.0s)
+
+// ── LongevityArchetypeReel — scene timing (frames at 30fps) — from real ElevenLabs audio ──
+export const LA_SCENES = {
+  scene1: { start:    0, duration:  167 },  // 0.000–5.573s    Hook
+  scene2: { start:  167, duration:  244 },  // 5.573–13.700s   How It Works
+  scene3: { start:  411, duration:  270 },  // 13.700–22.709s  Jan–Jun Chart
+  scene4: { start:  681, duration:  327 },  // 22.709–33.622s  Jul–Dec Chart
+  scene5: { start: 1008, duration:  301 },  // 33.622–43.653s  Example Sept
+  scene6: { start: 1309, duration:  227 },  // 43.653–51.223s  Example Jan
+  scene7: { start: 1536, duration:  199 },  // 51.223–57.864s  Comment Trigger
+  scene8: { start: 1735, duration:  146 },  // 57.864–62.740s  CTA
+} as const;
+
+export const LA_TOTAL_FRAMES = 1911; // 1881f audio + 30f buffer (62.7s)
