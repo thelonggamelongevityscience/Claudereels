@@ -296,3 +296,17 @@ export const BONE_SCENES = {
 } as const;
 
 export const BONE_TOTAL_FRAMES = 2475; // 2445f audio + 30f buffer (81.5s)
+
+// ── HsCRPReel — scene timing (frames at 30fps) — from real ElevenLabs audio ──
+export const HSCRP_SCENES = {
+  scene1: { start:    0, duration:  203 },  // 0.000–6.780s    Hook
+  scene2: { start:  203, duration:  344 },  // 6.780–18.251s   What's Happening
+  scene3: { start:  547, duration:  373 },  // 18.251–30.697s  Why It Matters
+  scene4: { start:  920, duration:  323 },  // 30.697–41.471s  What Raises It
+  scene5: { start: 1243, duration:  355 },  // 41.471–53.313s  How To Lower It
+  scene6: { start: 1598, duration:  332 },  // 53.313–64.366s  Where You Stand
+  scene7: { start: 1930, duration:  166 },  // 64.366–69.892s  Loop Hook
+  scene8: { start: 2096, duration:  155 },  // 69.892–75.047s  CTA
+} as const;
+
+export const HSCRP_TOTAL_FRAMES = 2281; // 2251f audio + 30f buffer (75.0s)
