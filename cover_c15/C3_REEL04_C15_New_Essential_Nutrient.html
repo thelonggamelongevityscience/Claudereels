@@ -1,0 +1,192 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Scientists Just Discovered A New Essential Nutrient</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Barlow+Condensed:wght@400;700;800;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--black:#050a09;--teal:#2DD4BF;--teal2:#1fa896;--red:#FF4D6D;--gold:#FFD166;--green:#00FF85;--white:#FFF;--greige:#E8E0D5;--grey:#777;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#040608;display:flex;flex-direction:column;align-items:center;min-height:100vh;font-family:'Barlow Condensed',sans-serif;padding:24px 16px 40px;gap:16px;}
+.rf{width:360px;height:640px;background:var(--black);position:relative;overflow:hidden;border-radius:18px;box-shadow:0 0 0 1px rgba(45,212,191,.16),0 0 60px rgba(45,212,191,.12),0 40px 80px rgba(0,0,0,.7);}
+.rf::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(45,212,191,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(45,212,191,.02) 1px,transparent 1px);background-size:32px 32px;pointer-events:none;z-index:1;}
+.segs{position:absolute;top:12px;left:10px;right:10px;display:flex;gap:3px;z-index:50;}
+.sg{flex:1;height:2px;background:rgba(255,255,255,.15);border-radius:2px;overflow:hidden;}
+.sf{height:100%;background:var(--teal);width:0%;}
+.sg.done .sf{width:100%;}
+.ah{position:absolute;top:28px;left:14px;display:flex;align-items:center;gap:8px;z-index:50;}
+.av{width:28px;height:28px;border-radius:50%;background:var(--teal);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:10px;color:#000;}
+.an{font-size:12px;font-weight:700;color:var(--white);letter-spacing:.04em;}
+.af{font-size:11px;color:var(--teal);font-weight:700;margin-left:6px;}
+.sc{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:80px 28px;opacity:0;pointer-events:none;z-index:2;}
+.sc.active{opacity:1;pointer-events:all;}
+.bb{position:absolute;bottom:0;left:0;right:0;padding:12px 16px 16px;background:linear-gradient(transparent,rgba(0,0,0,.8));z-index:40;}
+.ct{font-family:'DM Mono',monospace;font-size:11px;color:rgba(255,255,255,.7);}
+.au{opacity:0;transform:translateY(16px);transition:opacity .35s ease,transform .35s ease;}
+.al{opacity:0;transform:translateX(-20px);transition:opacity .35s ease,transform .35s ease;}
+.sc.active .au,.sc.active .al{opacity:1;transform:translate(0);}
+.d1{transition-delay:.1s!important}.d2{transition-delay:.25s!important}.d3{transition-delay:.4s!important}.d4{transition-delay:.55s!important}.d5{transition-delay:.7s!important}.d6{transition-delay:.85s!important}
+.lr{width:0;height:2px;background:var(--teal);transition:width .7s ease;}
+.sc.active .lr{width:100%;}
+.tg{font-size:10px;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:var(--teal);margin-bottom:12px;}
+.tg.red{color:var(--red);}
+.tg.green{color:var(--green);}
+.tg.gold{color:var(--gold);}
+.hh{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:50px;color:var(--white);line-height:.88;letter-spacing:-.02em;text-transform:uppercase;}
+.hl{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:38px;color:var(--white);line-height:.9;text-transform:uppercase;}
+.is{font-family:'Playfair Display',serif;font-style:italic;font-size:16px;color:var(--greige);line-height:1.4;}
+.hero{font-size:72px;line-height:1;filter:drop-shadow(0 0 24px rgba(45,212,191,.6));display:block;}
+.db{border-left:2px solid var(--teal);padding-left:12px;margin:8px 0;}
+.db.red{border-color:var(--red);}
+.db.green{border-color:var(--green);}
+.db.gold{border-color:var(--gold);}
+.dl{font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);margin-bottom:3px;}
+.dl.gold{color:var(--gold);}
+.dd{font-family:'DM Mono',monospace;font-size:11px;color:var(--greige);line-height:1.5;margin-top:2px;}
+.li{display:flex;gap:10px;align-items:flex-start;margin-bottom:9px;}
+.ld{width:6px;height:6px;border-radius:50%;background:var(--teal);flex-shrink:0;margin-top:4px;}
+.ld.gold{background:var(--gold);}
+.lt{font-family:'DM Mono',monospace;font-size:11px;color:var(--greige);line-height:1.5;}
+.lt strong{color:var(--white);font-weight:500;}
+.gg{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,rgba(45,212,191,.07) 0%,transparent 65%);pointer-events:none;}
+.cb{border:1.5px solid var(--teal);padding:12px 16px;margin-top:10px;}
+.cbt{font-size:13px;font-weight:700;color:var(--teal);letter-spacing:.1em;text-transform:uppercase;}
+.cw{width:360px;display:flex;flex-direction:column;gap:12px;}
+.cr{display:flex;gap:8px;}
+.bn{flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.7);font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;letter-spacing:.1em;text-transform:uppercase;padding:11px 16px;cursor:pointer;border-radius:6px;text-align:center;}
+.bn.gb{background:var(--green);color:#000;border-color:var(--green);flex:2;}
+.si{display:flex;justify-content:space-between;}
+.sn{font-family:'DM Mono',monospace;font-size:11px;color:rgba(255,255,255,.35);}
+.vb{background:rgba(45,212,191,.04);border:1px solid rgba(45,212,191,.15);border-radius:8px;padding:14px 16px;}
+.vl{font-size:9px;font-weight:700;color:var(--teal);letter-spacing:.2em;text-transform:uppercase;margin-bottom:8px;}
+.vt{font-family:'DM Mono',monospace;font-size:11px;color:rgba(255,255,255,.6);line-height:1.7;}
+.vt em{color:var(--teal);font-style:normal;}
+.in{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.2);text-align:center;line-height:1.6;}
+.namebadge{display:inline-flex;flex-direction:column;align-items:center;border:2px solid var(--teal);padding:16px 28px;margin-top:10px;background:rgba(45,212,191,.06);}
+.namebadge-label{font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,.4);letter-spacing:.2em;text-transform:uppercase;margin-bottom:6px;}
+.namebadge-name{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:44px;color:var(--teal);letter-spacing:-.01em;}
+.sendbadge{display:inline-flex;align-items:center;gap:6px;background:rgba(0,255,133,.1);border:1px solid rgba(0,255,133,.35);padding:6px 12px;margin-top:14px;}
+.sendbadge-t{font-family:'DM Mono',monospace;font-size:11px;color:var(--green);font-weight:700;letter-spacing:.05em;text-transform:uppercase;}
+</style></head>
+<body>
+<div class="rf" id="reel" onclick="nextScene()">
+<div class="segs" id="segs"></div>
+<div class="ah"><div class="av">TLG</div><div><span class="an">thelonggame</span><span class="af">• Follow</span></div></div>
+
+<!-- S1 HOOK -->
+<div class="sc active" id="s1">
+  <div class="gg"></div>
+  <div class="hero au d1">🔬</div>
+  <div class="hh au d2" style="margin-top:12px;">SCIENTISTS<br>JUST FOUND A<br>NEW ESSENTIAL<br>NUTRIENT.</div>
+  <div class="is au d3" style="margin-top:10px;">The first one in over 90 years.<br><strong style="color:white;">Almost nobody's heard of it yet.</strong></div>
+</div>
+
+<!-- S2: BUILD-UP -->
+<div class="sc" id="s2">
+  <div class="tg au d1">What "Essential" Actually Means</div>
+  <div class="hl au d2" style="margin-bottom:14px;">Your Body Can't<br>Make It. You Have<br>To Eat It.</div>
+  <div class="db au d3"><div class="dl">The short list</div><div class="dd">Only a small number of nutrients qualify as truly "essential" — certain amino acids, a couple of fatty acids, and a handful of vitamins. That list has barely changed in nearly a century.</div></div>
+  <div class="db au d4"><div class="dl" style="color:var(--gold);">Until now</div><div class="dd">A new candidate has entered the conversation — one that was hiding in plain sight, dismissed for decades as "just saturated fat."</div></div>
+</div>
+
+<!-- S3: THE REVEAL -->
+<div class="sc" id="s3">
+  <div class="gg"></div>
+  <div class="tg au d1">The Reveal</div>
+  <div class="is au d2" style="margin-bottom:14px;font-size:15px;">Meet the newest name on the list.</div>
+  <div class="namebadge au d3">
+    <div class="namebadge-label">Also known as</div>
+    <div class="namebadge-name">C15:0</div>
+  </div>
+  <div class="is au d4" style="margin-top:16px;font-size:13px;">Pentadecanoic acid. A saturated fatty acid found naturally in whole-fat dairy and some fish.</div>
+</div>
+
+<!-- S4: WHY IT MATTERS -->
+<div class="sc" id="s4">
+  <div class="tg au d1">What Early Research Shows</div>
+  <div class="hl au d2" style="margin-bottom:12px;">Linked To Cell<br>Health. Not<br>A Miracle Cure.</div>
+  <div class="li al d3"><div class="ld"></div><div class="lt">Early research links C15:0 to <strong>cell membrane integrity and mitochondrial function</strong> — the structures your cells use to produce energy.</div></div>
+  <div class="li al d4"><div class="ld"></div><div class="lt">Some studies associate <strong>lower C15:0 levels</strong> with markers of metabolic dysfunction and inflammation.</div></div>
+  <div class="li al d5"><div class="ld"></div><div class="lt">It was dismissed for decades simply because it's a <strong>saturated fat</strong> — and saturated fat became a blanket villain in nutrition science, deserved or not.</div></div>
+</div>
+
+<!-- S5: WHERE TO FIND IT -->
+<div class="sc" id="s5">
+  <div class="tg au d1">Where It's Found</div>
+  <div class="hl au d2" style="margin-bottom:12px;">Foods You Already<br>Have An Opinion<br>About.</div>
+  <div class="li al d3"><div class="ld"></div><div class="lt"><strong>Whole-fat dairy</strong> — milk, cheese, and butter naturally contain it. Skim and low-fat versions largely strip it out.</div></div>
+  <div class="li al d4"><div class="ld"></div><div class="lt"><strong>Certain fish</strong> — trace amounts show up in some fatty fish alongside the omega-3s already covered this cycle.</div></div>
+  <div class="li al d5"><div class="ld"></div><div class="lt">This is likely part of why <strong>full-fat dairy research</strong> has looked more favorable in recent years than decades-old guidance assumed.</div></div>
+</div>
+
+<!-- S6: THE CAUTION -->
+<div class="sc" id="s6">
+  <div class="gg"></div>
+  <div class="tg red au d1">The Catch</div>
+  <div class="hl au d2" style="margin-bottom:14px;">A Supplement<br>Industry Is Already<br>Forming.</div>
+  <div class="db red au d3"><div class="dl" style="color:var(--red);">Move slower than the hype</div><div class="dd">The moment a nutrient gets buzz, supplements appear. The research on C15:0 is genuinely early — promising, but nowhere near the level of evidence behind vitamin D or omega-3s.</div></div>
+  <div class="is au d4" style="margin-top:12px;font-size:13px;">Whole-fat dairy has existed the whole time.<br><strong style="color:white;">You don't need a bottle to try it.</strong></div>
+</div>
+
+<!-- S7: SEND TRIGGER -->
+<div class="sc" id="s7">
+  <div class="gg"></div>
+  <div class="tg au d1">Before You Scroll On</div>
+  <div class="hh au d2" style="font-size:38px;margin-bottom:10px;">Send This To<br>Someone Who Thinks<br>They Know Every<br>Nutrient There Is.</div>
+  <div class="sendbadge au d3"><div class="sendbadge-t">📤 Tap Send</div></div>
+</div>
+
+<!-- S8: CTA -->
+<div class="sc" id="s8">
+  <div class="gg"></div>
+  <div class="au d1" style="margin-bottom:20px;">
+    <div class="is" style="font-size:22px;color:var(--greige);">the</div>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:76px;color:var(--white);line-height:.85;text-transform:uppercase;">LONG<br>GAME</div>
+    <div class="lr" style="transition-delay:.5s;"></div>
+    <div class="tg" style="margin-top:8px;margin-bottom:0;">Longevity Science</div>
+  </div>
+  <div class="cb au d3"><div class="cbt">→ Save this before it's mainstream</div></div>
+  <div class="cb au d4" style="border-color:rgba(255,255,255,.15);margin-top:6px;"><div class="cbt" style="color:rgba(255,255,255,.5);">→ Follow for more</div></div>
+  <div class="au d5" style="margin-top:12px;font-family:'DM Mono',monospace;font-size:10px;color:rgba(45,212,191,.6);">#c15 #pentadecanoicacid #nutritionscience #longevity #newscience</div>
+</div>
+
+<div class="bb"><div class="ct" id="sct">▶ Tap to advance</div></div>
+</div>
+
+<div class="cw">
+<div class="si"><div class="sn" id="snum">Scene 1 of 8</div><div class="sn" id="stit">Hook</div></div>
+<div class="cr">
+  <div class="bn" onclick="prev()">← Prev</div>
+  <div class="bn gb" id="pb" onclick="tog()">▶ Auto Play</div>
+  <div class="bn" onclick="next()">Next →</div>
+</div>
+<div class="vb"><div class="vl">🎙 Voiceover Script</div><div class="vt" id="vos"><em>"Scientists just found a new essential nutrient. The first one in over 90 years. Almost nobody's heard of it yet."</em></div></div>
+<div class="in">C15:0 Reel · C3_REEL04 · W18 Wed Sep 9 · ~27 seconds</div>
+</div>
+
+<script>
+const SC=[
+{id:'s1',title:'Hook',duration:2800,vo:'<em>"Scientists just found a new essential nutrient. The first one in over 90 years. Almost nobody\'s heard of it yet."</em>'},
+{id:'s2',title:'Build-Up',duration:3800,vo:'<em>"Only a small number of nutrients qualify as truly essential. That list has barely changed in nearly a century. Until now — a new candidate was hiding in plain sight, dismissed for decades as just saturated fat."</em>'},
+{id:'s3',title:'The Reveal',duration:3400,vo:'<em>"Meet C15:0. Pentadecanoic acid. A saturated fatty acid found naturally in whole-fat dairy and some fish."</em>'},
+{id:'s4',title:'Why It Matters',duration:3600,vo:'<em>"Early research links it to cell membrane integrity and mitochondrial function. Lower levels are associated with markers of metabolic dysfunction and inflammation. It was dismissed simply for being a saturated fat."</em>'},
+{id:'s5',title:'Where To Find It',duration:3400,vo:'<em>"Whole-fat dairy naturally contains it — skim versions largely strip it out. Trace amounts show up in some fatty fish too."</em>'},
+{id:'s6',title:'The Catch',duration:3400,vo:'<em>"A supplement industry is already forming around this. The research is genuinely early. Whole-fat dairy has existed the whole time — you don\'t need a bottle to try it."</em>'},
+{id:'s7',title:'Send Trigger',duration:2800,vo:'<em>"Send this to someone who thinks they know every nutrient there is."</em>'},
+{id:'s8',title:'CTA',duration:2400,vo:'<em>"Follow The Long Game. Save this before it\'s mainstream."</em>'},
+];
+const CP=['🔬 HOOK','📋 BUILD-UP','✨ THE REVEAL','🔗 WHY IT MATTERS','🥛 WHERE TO FIND IT','⚠️ THE CATCH','📤 SEND THIS','📲 CTA'];
+let cur=0,pl=false,tm=null;const T=SC.length;
+const sg=document.getElementById('segs');
+SC.forEach((_,i)=>{const s=document.createElement('div');s.className='sg';s.id='g'+i;s.innerHTML='<div class="sf" id="f'+i+'"></div>';sg.appendChild(s);});
+function show(n){SC.forEach(s=>{const el=document.getElementById(s.id);if(el)el.classList.remove('active');});const el=document.getElementById(SC[n].id);if(el)el.classList.add('active');SC.forEach((_,i)=>{const f=document.getElementById('f'+i);const s=document.getElementById('g'+i);if(!f||!s)return;s.classList.remove('done');f.style.transition='none';f.style.width=i<n?'100%':'0%';if(i<n)s.classList.add('done');});document.getElementById('snum').textContent='Scene '+(n+1)+' of '+T;document.getElementById('stit').textContent=SC[n].title||'';document.getElementById('vos').innerHTML=SC[n].vo||'';document.getElementById('sct').textContent=CP[n]||'';cur=n;}
+function aseg(n,d){const f=document.getElementById('f'+n);if(!f)return;f.style.transition='none';f.style.width='0%';requestAnimationFrame(()=>requestAnimationFrame(()=>{f.style.transition='width '+d+'ms linear';f.style.width='100%';}));}
+function next(){if(cur<T-1)show(cur+1);else show(0);}
+function prev(){if(cur>0)show(cur-1);}
+function tog(){pl?stp():sta();}
+function sta(){pl=true;document.getElementById('pb').textContent='⏸ Pause';run();}
+function stp(){pl=false;clearTimeout(tm);document.getElementById('pb').textContent='▶ Auto Play';}
+function run(){if(!pl)return;const d=SC[cur].duration||3200;aseg(cur,d);tm=setTimeout(()=>{if(!pl)return;if(cur<T-1){show(cur+1);run();}else{show(0);run();}},d);}
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();next();}if(e.key==='ArrowLeft'){e.preventDefault();prev();}});
+let tx=0;
+document.getElementById('reel').addEventListener('touchstart',e=>tx=e.touches[0].clientX);
+document.getElementById('reel').addEventListener('touchend',e=>{const d=tx-e.changedTouches[0].clientX;if(Math.abs(d)>40)d>0?next():prev();});
+show(0);
+</script>
+</body></html>
