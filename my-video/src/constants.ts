@@ -17,6 +17,7 @@ export const COLORS = {
   ember:  '#E85D04',
   sand:   '#D8C4A0',
   steel:  '#5B8DEF',
+  teal:   '#2DD4BF',
 } as const;
 
 export const FONTS = {
@@ -339,3 +340,17 @@ export const GLP_SCENES = {
 } as const;
 
 export const GLP_TOTAL_FRAMES = 2243; // 2213f audio + 30f buffer (73.7s)
+
+// ── C15Reel — scene timing (frames at 30fps) — from real ElevenLabs audio ──
+export const C15_SCENES = {
+  scene1: { start:    0, duration:  167 },  // 0.000–5.573s    Hook
+  scene2: { start:  167, duration:  371 },  // 5.573–17.926s   Build-Up
+  scene3: { start:  538, duration:  228 },  // 17.926–25.542s  The Reveal
+  scene4: { start:  766, duration:  372 },  // 25.542–37.941s  Why It Matters
+  scene5: { start: 1138, duration:  223 },  // 37.941–45.371s  Where To Find It
+  scene6: { start: 1361, duration:  318 },  // 45.371–55.959s  The Catch
+  scene7: { start: 1679, duration:  106 },  // 55.959–59.488s  Send Trigger
+  scene8: { start: 1785, duration:   99 },  // 59.488–62.785s  CTA
+} as const;
+
+export const C15_TOTAL_FRAMES = 1914; // 1884f audio + 30f buffer (62.8s)
