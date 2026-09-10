@@ -354,3 +354,16 @@ export const C15_SCENES = {
 } as const;
 
 export const C15_TOTAL_FRAMES = 1914; // 1884f audio + 30f buffer (62.8s)
+
+// ── BedroomTempReel — scene timing (frames at 30fps) — from real ElevenLabs audio ──
+export const BT_SCENES = {
+  scene1: { start:    0, duration:  172 },  // 0.000–5.735s    Hook
+  scene2: { start:  172, duration:  394 },  // 5.979–19.121s   What's Happening
+  scene3: { start:  566, duration:  388 },  // 19.504–32.427s  Why It Matters
+  scene4: { start:  954, duration:  284 },  // 32.810–42.284s  What Keeps It Warm
+  scene5: { start: 1238, duration:  396 },  // 42.980–56.169s  The Fix
+  scene6: { start: 1634, duration:  287 },  // 56.552–66.108s  Tonight
+  scene7: { start: 1921, duration:   91 },  // 66.804–69.846s  CTA
+} as const;
+
+export const BT_TOTAL_FRAMES = 2042; // 2012f audio + 30f buffer (69.8s)
