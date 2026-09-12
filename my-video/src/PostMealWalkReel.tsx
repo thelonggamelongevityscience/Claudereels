@@ -23,58 +23,58 @@ const FONT_CSS = `
     src: url('/fonts/DMMono-400.woff2') format('woff2'); }
 `;
 
-// S1: Hook — 166f
+// S1: Hook — 176f
 const S1_CAPS: CaptionChunk[] = [
   { text: "Two people. Same meal. Different blood", startFrame:   0, endFrame: 111 },
-  { text: "sugar. The difference is two minutes.", startFrame: 112, endFrame: 180 },
+  { text: "sugar. The difference is two minutes.", startFrame: 112, endFrame: 175 },
 ];
 
-// S2: Mechanism — 320f
+// S2: Mechanism — 334f
 const S2_CAPS: CaptionChunk[] = [
-  { text: "When your muscles contract during light",       startFrame:   0, endFrame:  80 },
-  { text: "movement, they pull glucose out of",            startFrame:  81, endFrame: 145 },
-  { text: "your bloodstream directly, independent of insulin.", startFrame: 146, endFrame: 225 },
-  { text: "Right after eating is exactly when",            startFrame: 233, endFrame: 315 },
-  { text: "that matters most.",                            startFrame: 316, endFrame: 338 },
+  { text: "When your muscles contract during light",          startFrame:   0, endFrame:  80 },
+  { text: "movement, they pull glucose out of",               startFrame:  81, endFrame: 145 },
+  { text: "your bloodstream directly, independent of insulin.", startFrame: 146, endFrame: 226 },
+  { text: "Right after eating is exactly when",               startFrame: 233, endFrame: 315 },
+  { text: "that matters most.",                               startFrame: 316, endFrame: 333 },
 ];
 
-// S3: Comparison — 248f
+// S3: Comparison — 266f
 const S3_CAPS: CaptionChunk[] = [
-  { text: "Sitting after a meal lets the",      startFrame:   0, endFrame:  72 },
+  { text: "Sitting after a meal lets the",        startFrame:   0, endFrame:  72 },
   { text: "full blood sugar spike happen. Walking", startFrame:  73, endFrame: 148 },
-  { text: "just 2 to 5 minutes afterward",      startFrame: 149, endFrame: 193 },
-  { text: "blunts that spike by roughly 30",    startFrame: 194, endFrame: 255 },
-  { text: "percent.",                           startFrame: 256, endFrame: 263 },
+  { text: "just 2 to 5 minutes afterward",        startFrame: 149, endFrame: 193 },
+  { text: "blunts that spike by roughly 30",      startFrame: 194, endFrame: 255 },
+  { text: "percent.",                             startFrame: 256, endFrame: 263 },
 ];
 
-// S4: Why It Matters — 304f
+// S4: Why It Matters — 317f
 const S4_CAPS: CaptionChunk[] = [
-  { text: "Repeated post-meal spikes are linked to",   startFrame:   0, endFrame:  80 },
-  { text: "long-term metabolic and cardiovascular risk, even", startFrame:  81, endFrame: 162 },
-  { text: "in people without diabetes. This works",    startFrame: 163, endFrame: 242 },
-  { text: "whether or not you already exercise",       startFrame: 243, endFrame: 287 },
-  { text: "elsewhere in your day.",                    startFrame: 288, endFrame: 321 },
+  { text: "Repeated post-meal spikes are linked to",        startFrame:   0, endFrame:  81 },
+  { text: "long-term metabolic and cardiovascular risk, even", startFrame:  82, endFrame: 163 },
+  { text: "in people without diabetes. This works",         startFrame: 164, endFrame: 242 },
+  { text: "whether or not you already exercise",            startFrame: 243, endFrame: 287 },
+  { text: "elsewhere in your day.",                         startFrame: 288, endFrame: 316 },
 ];
 
-// S5: Protocol — 258f
+// S5: Protocol — 271f
 const S5_CAPS: CaptionChunk[] = [
   { text: "You don't need a real walk.", startFrame:   0, endFrame:  62 },
-  { text: "Pace during a phone call. Do", startFrame:  66, endFrame: 159 },
-  { text: "the dishes standing. Take a short", startFrame: 160, endFrame: 221 },
-  { text: "walk to get water right after", startFrame: 222, endFrame: 267 },
-  { text: "eating.",                      startFrame: 268, endFrame: 276 },
+  { text: "Pace during a phone call. Do", startFrame:  65, endFrame: 159 },
+  { text: "the dishes standing. Take a short", startFrame: 160, endFrame: 220 },
+  { text: "walk to get water right after", startFrame: 221, endFrame: 267 },
+  { text: "eating.",                      startFrame: 268, endFrame: 270 },
 ];
 
-// S6: Send This — 72f
+// S6: Send This — 90f
 const S6_CAPS: CaptionChunk[] = [
-  { text: "Send this to someone who sits", startFrame:  0, endFrame: 66 },
-  { text: "right after dinner.",           startFrame: 67, endFrame: 91 },
+  { text: "Send this to someone who sits", startFrame:  0, endFrame: 65 },
+  { text: "right after dinner.",           startFrame: 66, endFrame: 89 },
 ];
 
 // S7: CTA — 103f
 const S7_CAPS: CaptionChunk[] = [
   { text: "Follow The Long Game. Save this", startFrame:  0, endFrame:  85 },
-  { text: "for after dinner tonight.",       startFrame: 86, endFrame: 111 },
+  { text: "for after dinner tonight.",       startFrame: 86, endFrame: 102 },
 ];
 
 function getMusicVolume(frame: number): number {

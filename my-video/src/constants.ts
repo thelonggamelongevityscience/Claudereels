@@ -369,14 +369,16 @@ export const BT_SCENES = {
 export const BT_TOTAL_FRAMES = 2042; // 2012f audio + 30f buffer (69.8s)
 
 // ── PostMealWalkReel — scene timing (frames at 30fps) — from real ElevenLabs audio ──
+// Each scene duration includes the gap to the next paragraph so scenes start
+// exactly when their voiceover begins (no caption offset drift).
 export const PMW_SCENES = {
-  scene1: { start:    0, duration:  166 },  // 0.000–5.550s    Hook
-  scene2: { start:  166, duration:  320 },  // 5.875–16.556s   Mechanism
-  scene3: { start:  486, duration:  248 },  // 16.997–25.275s  The Comparison
-  scene4: { start:  734, duration:  304 },  // 25.879–36.014s  Why It Matters
-  scene5: { start: 1038, duration:  258 },  // 36.455–45.047s  The Protocol
-  scene6: { start: 1296, duration:   72 },  // 45.488–47.892s  Send Trigger
-  scene7: { start: 1368, duration:  103 },  // 48.495–51.920s  CTA
+  scene1: { start:    0, duration:  176 },  // 0.000–5.875s    Hook
+  scene2: { start:  176, duration:  334 },  // 5.875–16.997s   Mechanism
+  scene3: { start:  510, duration:  266 },  // 16.997–25.879s  The Comparison
+  scene4: { start:  776, duration:  317 },  // 25.879–36.455s  Why It Matters
+  scene5: { start: 1094, duration:  271 },  // 36.455–45.488s  The Protocol
+  scene6: { start: 1365, duration:   90 },  // 45.488–48.495s  Send Trigger
+  scene7: { start: 1455, duration:  103 },  // 48.495–51.920s  CTA
 } as const;
 
-export const PMW_TOTAL_FRAMES = 1501; // 1471f audio + 30f buffer (51.9s)
+export const PMW_TOTAL_FRAMES = 1588; // 1558f audio + 30f buffer (52.9s)
