@@ -382,3 +382,17 @@ export const PMW_SCENES = {
 } as const;
 
 export const PMW_TOTAL_FRAMES = 1588; // 1558f audio + 30f buffer (52.9s)
+
+// ── SocialConnectionReel — scene timing (frames at 30fps) — from real ElevenLabs audio ──
+export const SC_SCENES = {
+  scene1: { start:    0, duration:  261 },  // 0.000–8.707s    Hook
+  scene2: { start:  261, duration:  272 },  // 8.707–17.775s   The Study
+  scene3: { start:  533, duration:  350 },  // 17.775–29.455s  The Finding
+  scene4: { start:  884, duration:  234 },  // 29.455–37.257s  The Risk
+  scene5: { start: 1118, duration:  298 },  // 37.257–47.195s  The Protective Side
+  scene6: { start: 1416, duration:  413 },  // 47.195–60.953s  The Protocol
+  scene7: { start: 1829, duration:   78 },  // 60.953–63.554s  Send Trigger
+  scene8: { start: 1907, duration:   94 },  // 63.554–67.431s  CTA
+} as const;
+
+export const SC_TOTAL_FRAMES = 2031; // 2001f audio + 30f buffer (67.4s)
