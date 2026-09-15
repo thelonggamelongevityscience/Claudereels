@@ -396,3 +396,17 @@ export const SC_SCENES = {
 } as const;
 
 export const SC_TOTAL_FRAMES = 2031; // 2001f audio + 30f buffer (67.4s)
+
+// ── AutophagyRemakeReel — scene timing (frames at 30fps) — from real ElevenLabs audio ──
+export const ARR_SCENES = {
+  scene1: { start:    0, duration:  248 },  // 0.000–8.255s    Hook
+  scene2: { start:  248, duration:  441 },  // 8.255–22.952s   The Mechanism
+  scene3: { start:  689, duration:  359 },  // 22.952–34.934s  The Timeline
+  scene4: { start: 1048, duration:  335 },  // 34.934–46.114s  Why It Matters
+  scene5: { start: 1383, duration:  346 },  // 46.114–57.655s  The Protocol
+  scene6: { start: 1730, duration:  294 },  // 57.655–67.465s  Worth Knowing
+  scene7: { start: 2024, duration:   95 },  // 67.465–70.634s  Send Trigger
+  scene8: { start: 2119, duration:  120 },  // 70.634–74.628s  CTA
+} as const;
+
+export const ARR_TOTAL_FRAMES = 2269; // 2239f audio + 30f buffer (74.6s)
