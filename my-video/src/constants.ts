@@ -410,3 +410,16 @@ export const ARR_SCENES = {
 } as const;
 
 export const ARR_TOTAL_FRAMES = 2269; // 2239f audio + 30f buffer (74.6s)
+
+// ── ColdExposureReel — scene timing (frames at 30fps) — from real ElevenLabs audio ──
+export const CE_SCENES = {
+  scene1: { start:    0, duration:  167 },  // 0.000–5.561s    Hook
+  scene2: { start:  167, duration:  346 },  // 5.561–17.090s   The Mechanism
+  scene3: { start:  513, duration:  430 },  // 17.090–31.428s  The Claims Rated
+  scene4: { start:  943, duration:  311 },  // 31.428–41.784s  The Protocol
+  scene5: { start: 1254, duration:  250 },  // 41.784–50.143s  Worth Knowing
+  scene6: { start: 1504, duration:   83 },  // 50.143–52.906s  Send Trigger
+  scene7: { start: 1587, duration:  104 },  // 52.906–56.377s  CTA
+} as const;
+
+export const CE_TOTAL_FRAMES = 1691; // 1661f audio + 30f buffer (56.4s)
