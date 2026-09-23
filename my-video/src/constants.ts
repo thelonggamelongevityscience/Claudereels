@@ -423,3 +423,17 @@ export const CE_SCENES = {
 } as const;
 
 export const CE_TOTAL_FRAMES = 1691; // 1661f audio + 30f buffer (56.4s)
+
+// ── VitaminDReel — scene timing (frames at 30fps) — from real ElevenLabs audio ──
+export const VD_SCENES = {
+  scene1: { start:    0, duration:  212 },  // 0.000–7.082s    Hook
+  scene2: { start:  212, duration:  453 },  // 7.082–22.175s   Myth 1
+  scene3: { start:  665, duration:  330 },  // 22.175–33.181s  Myth 2
+  scene4: { start:  995, duration:  270 },  // 33.181–42.179s  Myth 3
+  scene5: { start: 1265, duration:  384 },  // 42.179–54.973s  Myth 4
+  scene6: { start: 1649, duration:  309 },  // 54.973–65.283s  Myth 5
+  scene7: { start: 1958, duration:   92 },  // 65.283–68.336s  Send Trigger
+  scene8: { start: 2050, duration:  114 },  // 68.336–72.121s  CTA
+} as const;
+
+export const VD_TOTAL_FRAMES = 2164; // 2134f audio + 30f buffer (72.1s)
