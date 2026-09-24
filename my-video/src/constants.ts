@@ -437,3 +437,16 @@ export const VD_SCENES = {
 } as const;
 
 export const VD_TOTAL_FRAMES = 2164; // 2134f audio + 30f buffer (72.1s)
+
+// ── TRIIMReel — scene timing (frames at 30fps) — from real ElevenLabs audio ──
+export const TRIIM_SCENES = {
+  scene1: { start:    0, duration:  212 },  // 0.000–7.082s    Hook
+  scene2: { start:  212, duration:  490 },  // 7.082–23.394s   The Study
+  scene3: { start:  702, duration:  213 },  // 23.394–30.499s  The Result
+  scene4: { start:  915, duration:  344 },  // 30.499–41.970s  Why It Matters
+  scene5: { start: 1259, duration:  318 },  // 41.970–52.558s  Worth Knowing
+  scene6: { start: 1577, duration:  195 },  // 52.558–59.059s  The Question
+  scene7: { start: 1772, duration:  109 },  // 59.059–62.693s  CTA
+} as const;
+
+export const TRIIM_TOTAL_FRAMES = 1881; // 1851f audio + 30f buffer (62.7s)
