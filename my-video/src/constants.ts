@@ -450,3 +450,16 @@ export const TRIIM_SCENES = {
 } as const;
 
 export const TRIIM_TOTAL_FRAMES = 1881; // 1851f audio + 30f buffer (62.7s)
+
+// ── NADReel — scene timing (frames at 30fps) — from real ElevenLabs audio ──
+export const NAD_SCENES = {
+  scene1: { start:    0, duration:  145 },  // 0.000–4.818s    Hook
+  scene2: { start:  145, duration:  417 },  // 4.818–18.727s   The Basics
+  scene3: { start:  562, duration:  438 },  // 18.727–33.344s  Claims Rated
+  scene4: { start: 1000, duration:  606 },  // 33.344–53.534s  The Fine Print
+  scene5: { start: 1606, duration:  324 },  // 53.534–64.320s  Worth Knowing
+  scene6: { start: 1930, duration:  204 },  // 64.320–71.135s  The Question
+  scene7: { start: 2134, duration:  150 },  // 71.135–76.150s  CTA
+} as const;
+
+export const NAD_TOTAL_FRAMES = 2284; // 2134+150f audio (76.2s)
