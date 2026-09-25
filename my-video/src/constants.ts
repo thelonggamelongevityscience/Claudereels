@@ -463,3 +463,16 @@ export const NAD_SCENES = {
 } as const;
 
 export const NAD_TOTAL_FRAMES = 2284; // 2134+150f audio (76.2s)
+
+// ── RapamycinReel — scene timing (frames at 30fps) — from real ElevenLabs audio ──
+export const RAP_SCENES = {
+  scene1: { start:    0, duration:  148 },  // 0.000–4.934s    Hook
+  scene2: { start:  148, duration:  534 },  // 4.934–22.720s   The Basics
+  scene3: { start:  682, duration:  608 },  // 22.720–43.015s  Claims Rated
+  scene4: { start: 1290, duration:  556 },  // 43.015–61.521s  The Fine Print
+  scene5: { start: 1846, duration:  309 },  // 61.521–71.818s  Worth Knowing
+  scene6: { start: 2155, duration:  235 },  // 71.818–79.667s  The Question
+  scene7: { start: 2390, duration:  172 },  // 79.667–85.414s  CTA
+} as const;
+
+export const RAP_TOTAL_FRAMES = 2562; // 2390+172f audio (85.4s)
