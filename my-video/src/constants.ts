@@ -476,3 +476,15 @@ export const RAP_SCENES = {
 } as const;
 
 export const RAP_TOTAL_FRAMES = 2562; // 2390+172f audio (85.4s)
+
+export const MOV_SCENES = {
+  scene1: { start:    0, duration:  164 },
+  scene2: { start:  164, duration:  222 },
+  scene3: { start:  386, duration:  275 },
+  scene4: { start:  661, duration:  215 },
+  scene5: { start:  876, duration:  236 },
+  scene6: { start: 1112, duration:  227 },
+  scene7: { start: 1339, duration:  199 },
+  scene8: { start: 1538, duration:  144 },
+} as const;
+export const MOV_TOTAL_FRAMES = 1682;
