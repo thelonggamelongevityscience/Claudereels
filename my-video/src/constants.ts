@@ -488,3 +488,14 @@ export const MOV_SCENES = {
   scene8: { start: 1538, duration:  144 },
 } as const;
 export const MOV_TOTAL_FRAMES = 1682;
+
+export const LIT_SCENES = {
+  scene1: { start:    0, duration:  182 },
+  scene2: { start:  182, duration:  570 },
+  scene3: { start:  752, duration:  302 },
+  scene4: { start: 1054, duration:  401 },
+  scene5: { start: 1455, duration:  348 },
+  scene6: { start: 1803, duration:  228 },
+  scene7: { start: 2031, duration:  111 },
+} as const;
+export const LIT_TOTAL_FRAMES = 2142;
