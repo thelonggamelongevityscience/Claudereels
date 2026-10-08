@@ -499,3 +499,14 @@ export const LIT_SCENES = {
   scene7: { start: 2031, duration:  111 },
 } as const;
 export const LIT_TOTAL_FRAMES = 2142;
+
+export const INFL_SCENES = {
+  scene1: { start:    0, duration:   92 },
+  scene2: { start:   92, duration:  229 },
+  scene3: { start:  321, duration:  240 },
+  scene4: { start:  561, duration:  232 },
+  scene5: { start:  793, duration:  215 },
+  scene6: { start: 1008, duration:  217 },
+  scene7: { start: 1225, duration:  176 },
+} as const;
+export const INFL_TOTAL_FRAMES = 1401;
