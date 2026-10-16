@@ -510,3 +510,13 @@ export const INFL_SCENES = {
   scene7: { start: 1225, duration:  176 },
 } as const;
 export const INFL_TOTAL_FRAMES = 1401;
+
+export const IP1_SCENES = {
+  scene1: { start:    0, duration:  178 },
+  scene2: { start:  178, duration:  373 },
+  scene3: { start:  551, duration:  220 },
+  scene4: { start:  771, duration:  347 },
+  scene5: { start: 1118, duration:  307 },
+  scene6: { start: 1425, duration:  234 },
+} as const;
+export const IP1_TOTAL_FRAMES = 1659;
